@@ -1,0 +1,953 @@
+.. -*- coding: utf-8 -*-
+
+.. _python_console:
+
+=================
+La console Python
+=================
+
+Comme tout langage, Python permet de manipuler des données grâce à un
+vocabulaire de mots réservés et grâce à des types de données - approximation
+des ensembles définis en mathématique.
+
+Ce chapitre présente les règles de construction des identifiants, les types de
+données simples (les conteneurs seront examinés au chapitre
+:ref:`python_conteneurs_standard`) ainsi que les types chaîne de caractères
+(Unicode et binaires).
+
+Enfin, last but not the least, ce chapitre s'étend sur les notions non triviales
+de variables, de références d'objet et d'affectation.
+
+Les modes d'exécution
+=====================
+
+Les deux modes d'exécution d'un code Python
+-------------------------------------------
+
+* Soit on enregistre un ensemble de commandes Python dans un fichier grâce à un
+  éditeur (on parle alors d'un script Python) que l'on exécute par une touche
+  du menu de l'éditeur ;
+* soit on utilise un interpréteur (par exemple IDLE) pour obtenir un résultat
+  immédiat grâce à l'interpréteur Python embarqué dans IDLE qui exécute la
+  boucle d'évaluation (cf. Fig. 2.1)
+
+.. figure:: LaBoucleDEvaluationDeIDLE.jpg
+   :align: center
+
+   La boucle d'évaluation de IDLE
+
+Identifiants et mots clés
+=========================
+
+Identifiants
+------------
+
+Comme tout langage, Python utilise un :term:`identifiant` pour nommer chaque
+objet.
+
+Sachant que :
+
+* un caractère de début peut être n'importe quelle lettre UNICODE.
+* un caractère de continuation est une lettre UNICODE, un chiffre, un
+  point ou un tiret bas `_`.
+
+.. note::
+
+   En python 2.6, les caractères ne peuvent être que des lettres ASCII, c'est à
+   dire sans accent
+
+.. warning::
+
+   Les identifiants sont sensibles à la casse et ne doivent pas être un mot clé.
+
+.. tip::
+
+   Pour être certain de ne pas empiéter sur le vocabulaire (mot clés et
+   bibliothèque standard de Python), essayez ceci en mode interactif :
+
+   .. code-block:: pycon
+
+      >>> # Un symbole valable doit produire les erreurs suivantes
+      >>> symbole
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      NameError: name 'symbole' is not defined
+      >>> import symbole
+      Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+      ImportError: No module named symbole
+      >>> # Un symbole non valable doit produire Une erreur de syntaxe
+      >>> with
+      File "<stdin>", line 1
+        with
+            ^
+      SyntaxError: invalid syntax
+      >>> # Un import de symbole non valable ne produit pas d'erreur
+      >>> import calendar
+
+Styles de nommage
+-----------------
+
+Il est important d'utiliser une politique cohérente de nommage des identifiants.
+
+Voici les styles préconisés :
+
+* ``UPPERCASE`` ou ``UPPER_CASE`` pour les constantes ;
+* ``TitleCase`` pour les classes ;
+* ``camelCase`` pour les fonctions, les méthodes et les interfaces graphiques ;
+* ``lowercase`` ou ``lower_case`` pour tous les autres identifiants.
+
+Exemples :
+
+.. code-block:: python
+
+    NB_ITEMS = 12 # UPPER_CASE
+    class MaClasse: pass # TitleCase
+    def maFonction(): pass # camelCase
+    mon_id = 5 # lower_case
+
+Les mots réservés de Python 3
+-----------------------------
+
+La version 3.1.1 de Python compte 33 mots clés :
+
+.. hlist::
+   :columns: 4
+
+   * False
+   * None
+   * True
+   * and
+   * as
+   * assert
+   * break
+   * class
+   * continue
+   * def
+   * del
+   * elif
+   * else
+   * except
+   * finally
+   * for
+   * from
+   * global
+   * if
+   * import
+   * in
+   * is
+   * lambda
+   * nonlocal [#notpy2]_
+   * not
+   * or
+   * pass
+   * print [#onlypy2]_
+   * raise
+   * return
+   * try
+   * while
+   * with
+   * yield
+
+.. [#notpy2] N'est pas supporté par Python 2.x.
+.. [#onlypy2] N'est supporté que par Python 2.x en tant que mot clé.
+
+Notion d'expression
+===================
+
+Exemples de deux expressions simples et d'une :term:`expression` complexe :
+
+.. code-block:: python
+
+    id1 = 15.3
+    id2 = maFonction(id1)
+    if id2 > 0:
+        id3 = math.sqrt(id2)
+    else:
+        id4 = id1 - 5.5*id2
+
+
+Les types de données entiers
+============================
+
+Python 3 offre deux types entiers standard : :term:`int` et :term:`bool`.
+
+Le type int
+-----------
+
+Le type int n'est limité en taille que par la mémoire de la machine.
+
+Les entiers littéraux sont décimaux par défaut, mais on peut aussi utiliser les
+bases suivantes :
+
+.. code-block:: pycon
+
+    >>> 2009 # décimal
+    2009
+    >>> 0b11111011001 # binaire
+    2009
+    >>> 0o3731 # octal
+    2009
+    >>> 0x7d9 # hexadecimal
+    2009
+
+**Opérations arithmétiques**
+
+Les principales opérations :
+
+.. code-block:: pycon
+
+    >>> 20 + 3
+    23
+    >>> 20 - 3
+    17
+    >>> 20 * 3
+    60
+    >>> 20 ** 3
+    8000
+    >>> 20 / 3
+    6.666666666666667
+    >>> 20 // 3 # division entière
+    6
+    >>> 20 % 3 # modulo
+    2
+    >>> abs(3 - 20) # valeur absolue
+    17
+
+Bien remarquer le rôle des deux opérateurs de division :
+
+- :samp:`/` : produit une division flottante ;
+- :samp:`//` : produit une division entière.
+
+.. note::
+
+   En python 2.6, les nombres dépassants 2 puissance 63 - 1 étaient des
+   :samp:`long`.  La notation des longs est marquée par un `L` ex :
+   9223372036854775808L
+
+Le type bool
+------------
+
+* **Deux valeurs possibles** : :samp:`False`, :samp:`True`.
+
+* **Opérateurs de comparaison** : :samp:`==`, :samp:`!=`, :samp:`>`, :samp:`>=`,
+  :samp:`<` et :samp:`<=` :
+
+.. code-block:: pycon
+
+   >>> 2 > 8
+   False
+   >>> 2 <= 8 < 15
+   True
+
+* **Opérateurs logiques** (concept de shortcut) : :samp:`not`, :samp:`or` et
+  :samp:`and`.
+
+  En observant les tables de vérité des opérateurs and et or
+  (cf. p. 108), on remarque que :
+
+   - dès qu'un premier membre à la valeur :samp:`False`, l'expression
+     :samp:`False and expression2` vaudra :samp:`False`. On n'a donc pas besoin
+     de l'évaluer ;
+   - de même dès qu'un premier membre à la valeur :samp:`True`, l'expression
+     :samp:`True or expression2` vaudra :samp:`True`.
+
+Cette optimisation est appelée "principe du shortcut" :
+
+.. code-block:: pycon
+
+   >>> (3 == 3) or (9 > 24) # True (dès le premier membre)
+   True
+   >>> (9 > 24) and (3 == 3) # False (dès le premier membre)
+   False
+
+* Les opérations logiques et de comparaisons sont évaluées afin de donner des
+  résultats booléens dans :samp:`False`, :samp:`True`.
+
+**Les expressions booléennes**
+
+Une expression booléenne a deux valeurs possibles : :samp:`False` ou
+:samp:`True`.
+
+Python attribut à une expression booléennes la valeur :samp:`False` si c'est :
+
+* la constante :samp:`False` ;
+* la constante :samp:`None` ;
+* une séquence ou une collection vide ;
+* une donnée numérique de valeur 0.
+
+Tout le reste vaut :samp:`True`.
+
+Exemple :
+
+.. code-block:: pycon
+
+   >>> l = ( None, "N'est pas False", "", (), (1), [], [1] , {}, {'a':'A'},
+   ...       True, False, 0, 1)
+   >>> for e in l:
+   ...   print("{!r} est {}".format(e, e and "VRAI" or "FAUX"))
+   ...
+   None est FAUX
+   "N'est pas False" est VRAI
+   '' est FAUX
+   () est FAUX
+   1 est VRAI
+   [] est FAUX
+   [1] est VRAI
+   {} est FAUX
+   {'a': 'A'} est VRAI
+   True est VRAI
+   False est FAUX
+   0 est FAUX
+   1 est VRAI
+
+Les types de données flottants
+==============================
+
+Le type float
+-------------
+
+* Un :samp:`float` est noté avec un point décimal ou en notation exponentielle :
+
+.. code-block:: pycon
+
+   >>> float()
+   0.0
+   >>> float(1) # Construit avec un entier = conversion
+   1.0
+   >>> 2.718
+   2.718
+   >>> .02
+   0.02
+   >>> 3e8
+   300000000.0
+   >>> 6.023e23
+   6.0229999999999998e+23
+
+* Les flottants (:samp:`float`) supportent les mêmes opérations que les entiers.
+* Les float ont une précision finie indiquée dans
+  :samp:`sys.float_info.epsilon`.
+* L'import du module :mod:`math` autorise toutes les opérations mathématiques
+  usuelles :
+
+.. code-block:: pycon
+
+   >>> import math
+   >>> math.sin(math.pi/4)
+   0.70710678118654746
+   >>> math.degrees(math.pi)
+   180.0
+   >>> math.factorial(9)
+   362880
+   >>> math.log(1024, 2)
+   10.0
+
+Le type complex
+===============
+
+* Les complexes sont écrits en notation cartésienne formée de deux flottants.
+* La partie imaginaire est suffixée par :samp:`j` :
+
+.. code-block:: pycon
+
+   >>> 1j
+   1j
+   >>> (2+3j) + (4-7j)
+   (6-4j)
+   >>> (9+5j).real
+   9.0
+   >>> (9+5j).imag
+   5.0
+   >>> abs(3+4j)
+   5.0
+
+* Un module mathématique spécifique (:mod:`cmath`) leur est réservé :
+
+.. code-block:: pycon
+
+   >>> import cmath
+   >>> cmath.phase(-1 + 0j)
+   3.1415926535897931
+   >>> cmath.polar(3 + 4j)
+   (5.0, 0.92729521800161219)
+   >>> cmath.rect(1., cmath.pi/4)
+   (0.70710678118654757+0.70710678118654746j)
+
+Variables et affectation
+========================
+
+Les variables
+-------------
+
+Dès que l'on possède des types de données, on a besoin des :term:`variables`
+pour stocker les données.
+
+En réalité, Python n'offre pas la notion de variable, mais plutôt celle de
+**référence d'objet**. Tant que l'objet n'est pas modifiable (comme les entiers,
+les flottants, etc.), il n'y a pas de différence notable. On verra que la
+situation change dans le cas des objets modifiables...
+
+L'affectation
+-------------
+
+La valeur d'une variable, comme son nom l'indique, peut évoluer au cours de chaque :term:`affectation` (la valeur antérieure est perdue) :
+
+.. code-block:: pycon
+
+   >>> a = a + 1 # 3 (incrémentation)
+   >>> a = a - 1 # 2 (décrémentation)
+
+Affecter n'est pas comparer !
+-----------------------------
+
+.. rubric:: Affectation
+
+L' :term:`affectation` a un effet (elle modifie l'état interne du programme
+en cours d'exécution) mais n'a pas de valeur (on ne peut pas l'utiliser dans une
+expression) :
+
+.. code-block:: python
+
+   >>> a = 2
+   >>> x = (a = 3) + 2
+   SyntaxError: invalid syntax
+
+.. rubric:: Comparaison
+
+La comparaison a une valeur utilisable dans une expression mais n'a pas d'effet
+(l'automate interne représentant l'évolution du programme n'est pas modifié) :
+
+.. code-block:: python
+
+   >>> x = (a == 3) + 2
+   >>> x
+   2
+
+Les variantes de l'affectation
+------------------------------
+
+Outre l'affectation simple, on peut aussi utiliser les formes suivantes :
+
+.. code-block:: python
+
+   # affectation simple
+   v = 4
+
+   # affectation augmentée
+   v += 2 # idem à : v = v + 2 si v est déjà référencé
+
+   # affectation de droite à gauche
+   c = d = 8 # cibles multiples
+
+   # affectations parallèles d'une séquence
+   e, f = 2.7, 5.1 # tuple
+   g, h, i = ['G', 'H', 'I'] # liste
+   x, y = coordonneesSouris() # retour multiple d'une fonction
+
+Les affectations (explications graphiques)
+------------------------------------------
+
+Dans les schémas des figures ci-dessous, les cercles représentent les
+identificateurs alors que les rectangles représentent les données.
+
+**Les affectations** relient les identificateurs aux données : si une donnée en
+mémoire n'est plus reliée, le ramasse-miettes *(garbage collector)* de Python la
+supprime automatiquement :
+
+
+
+.. figure:: TroisAffectations.jpg
+    :align: center
+
+    Exemple (a) : Trois affectations
+
+.. figure:: LaDonneeCEstSupprimee.jpg
+    :align: center
+
+    Exemple (b) : La donnée 'c' est supprimée
+
+.. figure:: LaDonneeAEstSupprimee.jpg
+    :align: center
+
+    Exemple (c) : La donnée 'a' est supprimée
+
+Les chaînes de caractères
+=========================
+
+Les chaînes de caractères : présentation
+----------------------------------------
+
+.. glossary::
+
+  Chaîne de caractères
+    Le type de données non modifiable str représente une séquence de caractères
+    Unicode.
+    Non modifiable signifie qu'une donnée, une fois crée en mémoire, ne pourra
+    plus être changée.
+
+Trois syntaxes de chaînes sont disponibles.
+
+Remarquez que l'on peut aussi utiliser le ' à la place de ", ce qui permet
+d'inclure une notation dans l'autre :
+
+.. code-block:: python
+
+    syntaxe1 = "Première forme avec un retour à la ligne \n"
+    syntaxe2 = r"Deuxième forme sans retour à la ligne \n"
+    syntaxe3 = """
+    Troisième forme multi-ligne
+    """
+    guillemets = "L'eau vive"
+    apostrophes = 'Forme "avec des apostrophes"'
+
+.. note::
+
+  En python 2.6 "une chaine" est en faite une suite d'octets, contrairement à
+  la chaîne unicode u"Avec un é" qui correspond à la chaine de caractères de
+  python 3.
+
+  Il faut passer de la chaine d'octets vers l'unicode en utilisant la méthode
+  decode et en précisant l'encodage exemple :
+
+  .. code-block:: pycon
+
+     >>> print "Le \xc3\xa9 en utf8 est cod\xc3\xa9 sur 2 octets".decode("utf-8")
+     Le é en utf8 est codé sur 2 octets
+     >>> print "Le \xe9 en iso 8859-15 est cod\xe9 sur 1 octet".decode("iso 8859-15")
+     Le é en iso 8859-15 est codé sur 1 octet
+
+  Pour passer d'un encodage à un autre directement depuis une chaine d'octets, on
+  utilise la méthode encode en lui précisant en paramètre l'encodage de
+  destination et l'encodage source :
+
+  .. code-block:: pycon
+
+     >>> 'le symbole euro \xe2\x82\xac'.encode("iso 8859-15", "utf8")
+     'le symbole euro \xa4'
+
+.. attention::
+
+   Un caractère unicode occupe 4 octets en mémoire, il s'agit d'un chiffre dont
+   la valeur numérique correspond au symbole a représenter. Ainsi le `é` a pour
+   valeur 233 (e9) soit en mémoire "00 00 00 E9", or en iso 8859-15 le `é` a
+   aussi pour valeur 233 (e9), mais en mémoire il prendra simplement un octet
+   soit "E9".
+
+   Beaucoup d'erreurs de compréhension viennent de cette intersection dans la
+   représentation des unicodes et des iso 8859-15.
+
+
+Les chaînes de caractères : opérations
+--------------------------------------
+
+* Longueur :
+
+.. code-block:: pycon
+
+   >>> s = "abcde"
+   >>> len(s)
+   5
+
+* Concaténation :
+
+.. code-block:: pycon
+
+   >>> s1 = "abc"
+   >>> s2 = "defg"
+   >>> s3 = s1 + s2
+   >>> s3
+   abcdefg
+
+* Répétition :
+
+.. code-block:: pycon
+
+   >>> s4 = "Fi! "
+   >>> s5 = s4 * 3
+   >>> s5
+   Fi! Fi! Fi!
+
+Les chaînes de caractères : fonctions vs méthodes
+-------------------------------------------------
+
+On peut agir sur une chaîne (et plus généralement sur une séquence) en
+utilisant des fonctions (notion procédurale) ou des méthodes (notion objet).
+
+* Pour appliquer une fonction, on utilise l'opérateur () appliqué à la fonction
+  :
+
+.. code-block:: pycon
+
+   >>> ch1 = "abc"
+   >>> long = len(ch1)
+   3
+
+* On applique une méthode à un objet en utilisant la notation pointée entre la
+  donnée/variable à laquelle on applique la méthode, et le nom de la méthode
+  suivi de l'opérateur ``()`` appliqué à la méthode :
+
+.. code-block:: pycon
+
+   >>> ch2 = "abracadabra"
+   >>> ch3 = ch2.upper()
+   ABRACADABRA
+
+Méthodes de test de l'état d'une chaîne ch
+------------------------------------------
+
+Les méthodes suivantes sont à valeur booléennes, c'est-à-dire qu'elles
+retournent la valeur ``True`` ou ``False``.
+
+La notation :samp:`[{xxx}]` indique un élément optionnel que l'on peut donc
+omettre lors de l'utilisation de la méthode.
+
+* :samp:`isupper()` et :samp:`islower()` : retournent ``True`` si ``ch`` ne
+  contient respectivement que des majuscules/minuscules :
+
+.. code-block:: pycon
+
+   >>> print("cHAise basSe".isupper())
+   False
+
+* :samp:`istitle()` : retourne ``True`` si seule la première lettre de chaque
+  mot de ``ch`` est en majuscule :
+
+.. code-block:: pycon
+
+   >>> print("Chaise Basse".istitle())
+   True
+
+* :samp:`isalnum()`, :samp:`isalpha()`, :samp:`isdigit()` et :samp:`isspace()` :
+  retournent ``True`` si ``ch`` ne contient respectivement que des caractères
+  alphanumériques, alphabétiques, numériques ou des espaces :
+
+.. code-block:: pycon
+
+   >>> print("3 chaises basses".isalpha())
+   False
+   >>> print("54762".isdigit())
+   True
+
+* :samp:`startswith({prefix}[, {start}[, {stop}]])` et :samp:`endswith({suffix}[,
+  {start}[, {stop}]])` testent si la sous-chaîne définie par ``start`` et ``stop``
+  commence respectivement par ``prefix`` ou finit par ``suffix`` :
+
+.. code-block:: pycon
+
+   >>> print("abracadabra".startswith('ab'))
+   True
+   >>> print("abracadabra".endswith('ara'))
+   False
+
+Méthodes retournant une nouvelle chaîne
+---------------------------------------
+
+* :samp:`lower()`, :samp:`upper()`, :samp:`capitalize()` et
+  :samp:`swapcase()` : retournent respectivement une chaîne en minuscule, en
+  majuscule, en minuscule commençant par une majuscule, ou en casse inversée :
+
+.. code-block:: pycon
+
+   >>> # s sera notre chaîne de test pour toutes les méthodes
+   >>> s = "cHAise basSe"
+   >>> print(s.lower())
+   chaise basse
+   >>> print(s.upper())
+   CHAISE BASSE
+   >>> print(s.capitalize())
+   Chaise basse
+   >>> print(s.swapcase())
+   ChaISE BASsE
+
+* :samp:`expandtabs([{tabsize}])` : remplace les tabulations par tabsize
+  espaces (8 par défaut).
+
+* :samp:`center({width}[, {fillchar}])`, :samp:`ljust({width}[, {fillchar}])` et
+  :samp:`rjust({width}[, {fillchar}])` : retournent respectivement une chaîne
+  centrée, justifiée à gauche ou à droite, de largeur maximale fixée par le
+  paramètre ``width`` complétée par le caractère ``fillchar`` (ou par l'espace
+  par défaut) :
+
+.. code-block:: pycon
+
+   >>> print(s.center(20, '-'))
+   ----cHAise basSe----
+   >>> print(s.rjust(20, '@'))
+   @@@@@@@@cHAise basSe
+
+* :samp:`zfill({width})` : complète ``ch`` à gauche avec des 0 jusqu'à une
+  longueur maximale de ``width`` :
+
+.. code-block:: pycon
+
+   >>> print(s.zfill(20))
+   00000000cHAise basSe
+
+* :samp:`strip([{chars}])`, :samp:`lstrip([{chars}])` et
+  :samp:`rstrip([{chars}])` : suppriment toute les combinaisons de ``chars`` (ou
+  l'espace par défaut) respectivement au début et en fin, au début, ou en fin
+  d'une chaîne :
+
+.. code-block:: pycon
+
+   >>> print(s.strip('ce'))
+   HAise basS
+
+* :samp:`find({sub}[, {start}[, {stop}]])` : renvoie l'indice de la chaîne
+  ``sub`` dans la sous-chaîne ``start`` à ``stop``, sinon renvoie
+  ``-1``. :samp:`rfind()` effectue le même travail en commençant par la
+  fin. :samp:`index()` et :samp:`rindex()` font de même mais produisent une
+  erreur (exception) si la chaîne n'est pas trouvée :
+
+.. code-block:: pycon
+
+   >>> print(s.find('se b'))
+   4
+
+* :samp:`replace({old}[, {new}[, {count}]])` : remplace *count* instances (toutes
+  pas défaut) de ``old`` par ``new`` :
+
+.. code-block:: pycon
+
+   >>> print(s.replace('HA', 'ha'))
+   chaise basSe
+
+* :samp:`split({seps}[, {maxsplit}])` : découpe la chaîne en ``maxsplit``
+  morceaux (tous par défaut). :samp:`rsplit()` effectue la même chose en
+  commençant par la fin et :samp:`striplines()` effectue ce travail avec les
+  caractères de fin de ligne :
+
+.. code-block:: pycon
+
+   >>> print(s.split())
+   ['cHAise', 'basSe']
+
+* :samp:`join({seq})` : concatène les chaînes du conteneur ``seq`` en
+  intercalant la chaîne sur laquelle la méthode est appliquée :
+
+.. code-block:: pycon
+
+   >>> print("**".join(['cHAise', 'basSe']))
+   cHAise**basSe
+
+Les chaînes de caractères : indiçage simple
+-------------------------------------------
+
+Pour indicer une chaîne, on utilise l'opérateur :samp:`[{x}]` dans lequel
+l'indice ``x``, un entier signé qui commence à 0 indique la position d'un
+caractère :
+
+.. code-block:: pycon
+
+   >>> s = "Rayon X"
+   >>> len(s)
+   7
+   >>> print(s[0])
+   R
+   >>>>> print(s[2])
+   y
+   >>> print(s[-1])
+   X
+   >>> print(s[-3])
+   n
+
+.. figure:: LIndicageDUneChaine.jpg
+   :align: center
+
+   L'indiçage d'une chaîne
+
+Extraction de sous-chaînes
+--------------------------
+
+L'opérateur :samp:`[ ]` avec 2 ou 3 indices séparés par le caractère permet
+d'extraire des sous-chaînes (ou tranches) d'une chaîne. La littérrature
+anglophone appelle cette notation le "slice" :
+
+.. code-block:: pycon
+
+   >>> s = "Rayon X"
+   >>> len(s)
+   7
+   >>> s[1:4] # (de l'indice 1 compris à 4 non compris)
+   'ayo'
+   >>> s[-2:] # (de l'indice -2 compris à la fin)
+   ' X'
+   >>> s[:3] # (du début à 3 non compris)
+   'Ray'
+   >>> s[3:] # (de l'indice 3 compris à la fin)
+   'on X'
+   >>> s[::2] # (du début à la fin, de 2 en 2)
+   'RynX'
+
+.. figure:: LExtractionDeSousChaines.jpg
+   :align: center
+
+   L'extraction de sous-chaînes.
+
+Les données binaires
+====================
+
+.. glossary::
+
+  Les types binaires
+    Python 3 propose deux types de données binaires : ``byte`` (non
+    modifiable) et ``bytearray`` (modifiable).
+
+Une donnée binaire contient une suite de zéro ou plusieurs octets, c'est-à-dire
+d'entiers non-signés sur 8 bits (compris dans l'intervalle [0...255]). Ces
+types *à la C* sont bien adaptés pour stocker de grandes quantités de données.
+De plus Python fournit des moyens de manipulation efficaces de ces types.
+
+Les deux types sont assez semblables au type str et possèdent la plupart de ses
+méthodes. Le type modifiable ``bytearray`` possède des méthodes communes au type
+list.
+
+Exemples de données binaires et de méthodes :
+
+.. code-block:: pycon
+
+   >>> b_mot = b"Animal" # chaîne préfixée par b : type byte
+   >>> print(b_mot)
+   b'Animal'
+   >>> for b in b_mot:
+   ...     print(b, end=" ") # (cf. table ASCII)
+   ...
+   65 110 105 109 97 108
+   >>> bMot = bytearray(b_mot) # retourne un nouveau tableau de bytes...
+   >>> bMot.pop() # ...qui possède les méthodes usuelles
+   108
+   >>> bMot
+   bytearray(b'Anima')
+   >>> data = b"5 Hills \x35\x20\x48\x69\x6C\x6C\x73"
+   >>> data.upper()
+   b'5 HILLS 5 HILLS'
+   >>> data.replace(b"ill", b"at")
+   b'5 Hats 5 Hats'
+
+Bien différencier les codes, glyphes, caractères et octets !
+
+.. figure:: CodeGlyphesCaracteresEtOctets.jpg
+   :align: center
+
+   Codes, glyphes, caractères et octets.
+
+Les entrées-sorties
+===================
+
+L'utilisateur à besoin d'interagir avec le programme. En mode "console", on
+doit pouvoir saisir ou entrer des informations, ce qui est généralement fait
+depuis une lecture au clavier. Inversement, on doit pouvoir afficher ou sortir
+des informations, ce qui correspond généralement à une écriture sur l'écran.
+
+.. figure:: LesEntreesSorties.jpg
+   :align: center
+
+   Les entrées-sorties.
+
+Les entrées
+-----------
+
+
+Il s'agit de réaliser une saisie à l'écran : la fonction standard
+:command:`input()` interrompt le programme, afficher une éventuelle invite et
+attend que l'utilisateur entre une donnée et la valide par Entrée.
+La fonction standard :command:`input()` effectue toujours une saisie en mode
+texte (la saisie est une chaîne) dont on peut ensuite changer le type (on dit
+aussi transtyper) :
+
+.. code-block:: pycon
+
+   >>> nb_etudiant = input("Entrez le nombre d'étudiants : ")
+   >>> type(nb_etudiant) # (c'est une chaîne)
+   <class 'str'>
+   >>> f1 = input("\nEntrez un flottant : ")
+   >>> f1 = float(f1) # transtypage en flottant
+   >>> # ou plus brièvement :
+   >>> f2 = float(input("Entrez un autre flottant : "))
+   >>> type(f2))
+   <class 'float'>
+
+Les sorties
+-----------
+
+En mode "Console", Python lit-évalue-affiche, mais la fonction
+:command:`print()` reste indispensable aux affichages dans les scripts :
+
+.. code-block:: pycon
+
+   >>> import sys
+   >>> a, b = 2, 5
+   >>> print(a, b)
+   2 5
+   >>> print("Somme :", a + b)
+   Somme : 7
+   >>> print(a - b, "est la différence")
+   -3 est la différence
+   >>> print("Le produit de", a, "par", b, "vaut :", a * b)
+   Le produit de 2 par 5 vaut : 10
+   >>> print() # affiche une nouvelle ligne
+   >>> # pour afficher un espace à la place de la nouvelle ligne:
+   >>> print(a, end=" ")
+   2 # (et ne va pas à la ligne)
+   >>> print("\nErreur fatale !", file=sys.stderr) # dans un fichier
+   >>> print("On a <", 2**32, "> cas !", sep="###")
+   On a <###4294967296###> cas !
+
+.. attention::
+   La fonction ``print`` n'est pas active par défaut en Python 2.6. Voir la note
+   à cette adresse : http://docs.python.org/library/functions.html#print
+
+Les séquences d'échappement
+---------------------------
+
+À l'intérieur d'une chaîne, le caractère antislash ``\`` permet de donner
+une signification spéciale à certaines séquences :
+
+.. list-table::
+   :widths: 30 70
+
+   * - Séquence
+     - Signification
+   * - :samp:`\\`
+     - saut_ligne saut de ligne ignoré
+   * - :samp:`\\\\`
+     - affiche un antislash
+   * - :samp:`\\'`
+     - apostrophe
+   * - :samp:`\\"`
+     - guillemet
+   * - :samp:`\\a`
+     - sonnerie (bip)
+   * - :samp:`\\b`
+     - retour arrière
+   * - :samp:`\\f`
+     - saut de page
+   * - :samp:`\\n`
+     - saut de ligne
+   * - :samp:`\\r`
+     - retour en début de ligne
+   * - :samp:`\\t`
+     - tabulation horizontale
+   * - :samp:`\\v`
+     - tabulation verticale
+   * - :samp:`\\N{nom}`
+     - caractère sous forme de code Unicode nommé
+   * - :samp:`\\u{hhhh}`
+     - caractère sous forme de code Unicode 16 bits
+   * - :samp:`\\U{hhhhhhhh}`
+     - caractère sous forme de code Unicode 32 bits
+   * - :samp:`\\{ooo}`
+     - caractère sous forme de code octal
+   * - :samp:`\\x{hh}`
+     - caractère sous forme de code hexadécimal
+
+Exemples :
+
+.. code-block:: pycon
+
+   >>> print("\N{pound sign} \u00A3 \U000000A3")
+   £ £ £
+   >>> print("d \144 \x64")
+   d d d
+   >>> print("d \144 \x64") #séquence d'échapement inactive dans les chaînes brutes
+   d \144 \x64

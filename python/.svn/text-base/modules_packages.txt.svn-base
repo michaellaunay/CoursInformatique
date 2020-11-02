@@ -1,0 +1,372 @@
+.. -*- coding: utf-8 -*-
+
+.. _python_modules_packages:
+
+===================
+Modules et packages
+===================
+
+Un programme Python est généralement composé de plusieurs fichiers sources,
+appelés modules. Leur nom est suffixé :samp`.py`.
+
+S'ils sont correctement codés les modules doivent être indépendants les uns
+des autres pour être réutilisés à la demande dans d'autres programmes.
+
+Ce chapitre explique comment coder et importer des modules dans un autre.
+
+Nous verrons également la notion de package qui permet de grouper plusieurs
+modules.
+
+Modules
+=======
+
+.. glossary::
+
+  Module
+   Fichier indépendant permettant de scinder un programme en plusieurs scripts.
+   Ce mécanisme permet d'élaborer efficacement des bibliothèques de fonctions
+   ou de classes.
+
+Avantages des modules :
+
+* réutilisation du code ;
+* la documentation et les tests peuvent être intégrés au module ;
+* réalisation de services ou de données partagés ;
+* partition de l'espace de noms du système.
+
+Import d'un module
+------------------
+
+Deux syntaxes possibles :
+
+* la commande :samp:`import {nom_module}` importe la totalité des objets
+  du module :
+
+.. code-block:: python
+
+    import tkinter
+
+* la commande :samp:`from {nom_module} import obj1, obj2...` n'importe que
+  les objets :samp:`obj1`, :samp:`obj2`... du module :
+
+.. code-block:: python
+
+    from math import pi, sin, log
+
+Il est conseillé d'importer dans l'ordre :
+
+* les modules de la bibliothèque standard ;
+* les modules des bibliothèques tierces ;
+* Les modules personnels.
+
+Exemples
+--------
+
+Notion d'auto-test
+
+Un module :file:`cube_m.py`. Remarquez l'utilisation de **l'auto-test** qui permet de
+tester le module seul :
+
+.. code-block:: python
+
+   def cube(y):
+       """Calcule le cube du paramètre <y>."""
+       return y**3
+   # Auto-test ----------------------------------------------------
+   if __name__ == "__main__": # False lors d'un import ==> ignoré
+       help(cube) # affiche le docstring de la fonction
+       print("cube de 9 :", cube(9)) # cube de 9 : 729
+
+Utilisation de ce module. On importe la fonction cube() incluse dans le fichier
+:file:`cube_m.py` :
+
+.. code-block:: python
+
+   from cube_m import cube
+   for i in range(1, 4):
+       print("cube de", i, "=", cube(i), end=" ")
+   # cube de 1 = 1 cube de 2 = 8 cube de 3 = 27
+
+.. rubric:: Une interface à gnuplot
+
+L'application libre gnuplot permet d'afficher des courbes.  La fonction suivante
+est une interface d'appel qui permet d'afficher des données issues de fichiers :
+
+.. code-block:: python
+
+   import os
+   def plotFic(courbes):
+       dem = open("_.dem", "w") # fichier réutilisé à chaque tracé
+       dem.write("set grid\n")
+       plot_data = ["'%s' with %s" % (c[0], c[1]) for c in courbes]
+       dem.write("plot " + ','.join(plot_data))
+       dem.write('\npause -1 "\'Entrée\' pour continuer"\n')
+       dem.write("reset")
+       dem.close()
+       os.system("wgnuplot _.dem")
+
+L'auto-test suivant illustre son utilisation :
+
+.. code-block:: python
+
+   if __name__ == '__main__':
+       f, g, h = open("d1.dat", "w"), open("d2.dat", "w"), open("d3.dat", "w")
+       for i in range(201):
+           x = 0.1*i - 5.0
+           y = x**3 - 20*x**2
+           f.write("%g %g\n" %(x, y))
+           y = x**3 - 30*x**2
+           g.write("%g %g\n" %(x, y))
+           y = x**3 - 40*x**2
+           h.write("%g %g\n" %(x, y))
+       h.close(); g.close(); f.close()
+       plotFic([('d1.dat', 'points')])
+       plotFic([('d1.dat', 'lines'), ('d2.dat', 'points'), ('d3.dat', 'lines')])
+
+Bibliothèque standard
+=====================
+
+La bibliothèque standard
+------------------------
+
+On dit souvent que Python est livré **piles comprises** (batteries included)
+tant sa bibliothèque standard, riche de plus de 200 packages et modules, répond
+aux problèmes courants les plus variés.
+
+Ce survol présente quelques fonctionnalités utiles.
+
+.. rubric:: La gestion des chaînes
+
+Le module :mod:`string` fournit des constantes comme :samp:`ascii_lowercase`,
+:samp:`digits`...et la classe :samp:`Formatter` qui peut être spécialisée en
+sous-classes spécialisées de formateurs de chaînes.
+
+Le module :mod:`textwrap` est utilisé pour formater un texte : longueur de
+chaque ligne, contrôle de l'indentation.
+
+Le module :mod:`struct` permet de convertir des nombres, booléens et des chaînes
+en leur représentation binaire afin de communiquer avec des bibliothèques de bas
+niveau (souvent en C).
+
+Le module :mod:`difflib` permet la comparaison de séquences et fournit des
+sorties au format standard :command:`diff` ou en HTML.
+
+Enfin on ne peut oublier le module :mod:`re` qui offre à Python la puissance des
+expressions régulières.
+
+**Exemple : le module io.StringIO**
+
+Ce module fournit des objets compatibles avec l'interface des objets fichiers.
+
+Exemple de gestion ligne à ligne d'un fichier ou d'une chaîne avec la même
+fonction :func:`scanner()` utilisant le même traitement :
+
+.. code-block:: python
+
+   def scanner(objet_fichier, gestionnaire_ligne):
+       for ligne in objet_fichier:
+           gestionnaire_ligne(ligne)
+
+   if __name__=='__main__':
+       def premierMot(ligne): print(ligne.split()[0])
+       fic = open("data.dat")
+       scanner(fic, premierMot)
+       import io
+       chaine = io.StringIO("un\ndeux xxx\ntrois\n")
+       scanner(chaine, premierMot)
+
+.. rubric:: La gestion de la ligne de commande
+
+La gestion est assurée par deux modules : :mod:`getopt`, le module historique
+hérité du C et :mod:`optparse`, un module récent beaucoup plus puissant :
+
+.. code-block:: python
+
+   from optparse import OptionParser
+   parser = OptionParser()
+   parser.add_option("-f", "--file", dest="filename",
+       help="write report to FILE", metavar="FILE")
+   parser.add_option("-q", "--quiet",
+       action="store_false", dest="verbose", default=True,
+       help="don't print status messages to stdout")
+   (options, args) = parser.parse_args()
+
+Les lignes de commande :
+
+.. code-block:: sh
+
+   $ python 6_025.py -h
+
+ou :
+
+.. code-block:: sh
+
+   $ python 6_025.py --help
+
+produisent la même documentation : ::
+
+    Usage: 6_025.py [options]
+
+    Options:
+      -h, --help show this help message and exit
+      -f FILE, --file=FILE write report to FILE
+      -q, --quiet don't print status messages to stdout
+
+.. rubric:: Bibliothèques mathématiques et types numériques
+
+En standard, Python propose les modules :mod:`fraction` et :mod:`decimal` :
+
+.. code-block:: python
+
+   >>> from fractions import Fraction
+   >>> import decimal as d
+   >>> print(Fraction(16, -10))
+   -8/5
+   >>> print(Fraction(123))
+   123
+   >>> print(Fraction(' -3/7 '))
+   -3/7
+   >>> print(Fraction('-.125'))
+   -1/8
+   >>> print(Fraction('7e-6'))
+   7/1000000
+   >>> d.getcontext().prec = 6
+   >>> print(d.Decimal(1) / d.Decimal(7))
+   0.142857
+   >>> d.getcontext().prec = 18
+   >>> print(d.Decimal(1) / d.Decimal(7))
+   0.142857142857142857
+
+En plus des bibliothèques :mod:`math` et :mod:`cmath` déjà vues, la bibliothèque
+:mod:`random` propose plusieurs fonctions de nombres aléatoires.
+
+.. rubric:: La gestion du temps et des dates
+
+Les modules :mod:`calendar`, :mod:`time` et :mod:`datetime` fournissent les
+fonctions courantes de gestion du temps et des durées :
+
+.. code-block:: pycon
+
+   >>> import calendar, datetime, time
+   >>> moon_apollo11 = datetime.datetime(1969, 7, 20, 20, 17, 40)
+   >>> print(moon_apollo11)
+   >>> print(time.asctime(time.gmtime(0)))
+   Thu Jan 01 00:00:00 1970 ("epoch" UNIX)
+   >>> vendredi_precedent = datetime.date.today()
+   >>> un_jour = datetime.timedelta(days=1)
+   >>> while vendredi_precedent.weekday() != calendar.FRIDAY:
+   ...     vendredi_precedent -= un_jour
+   >>> print(vendredi_precedent.strftime("%A, %d-%b-%Y"))
+   Friday, 09-Oct-2009
+
+.. rubric:: Algorithmes et types de données collection
+
+Le module :mod:`bisect` fournit des fonctions de recherche de séquences triées.
+Le module :mod:`array` propose un type semblable à la liste, mais plus rapide
+car de contenu homogène.  Le module :mod:`heapq` gère des tas dans lesquels
+l'élément d'indice 0 est toujours le plus petit :
+
+.. code-block:: pycon
+
+   >>> import heapq
+   >>> import random
+   >>> heap = []
+   >>> for i in range(10):
+   ...     heapq.heappush(heap, random.randint(2, 9))
+   >>> print(heap)
+   [2, 3, 5, 4, 6, 6, 7, 8, 7, 8]
+
+À l'instar des structures C, Python propose désormais, via le module
+:mod:`collections`, la notion de type tuple nommé :
+
+.. code-block:: pycon
+
+   >>> import collections
+   >>> # description du type :
+   >>> Point = collections.namedtuple("Point", "x y z")
+   >>> # on instancie un point :
+   >>> point = Point(1.2, 2.3, 3.4)
+   >>> # on l'affiche :
+   >>> print("point : [{}, {}, {}]".format(point.x, point.y, point.z))
+   point : [1.2, 2.3, 3.4]
+
+Il est bien sûr possible d'avoir des tuples nommés emboîtés.  Le type
+:samp:`defaultdict` permet des utilisations avancées :
+
+.. code-block:: pycon
+
+   >>> from collections import defaultdict
+   >>> s = [('y', 1), ('b', 2), ('y', 3), ('b', 4), ('r', 1)]
+   >>> d = defaultdict(list)
+   >>> for k, v in s:
+   ...     d[k].append(v)
+   >>> print(d.items())
+   dict_items([('y', [1, 3]), ('r', [1]), ('b', [2, 4])])
+
+   >>> s = 'mississippi'
+   >>> d = defaultdict(int)
+   >>> for k in s:
+   ...     d[k] += 1
+   >>> print(d.items())
+   dict_items([('i', 4), ('p', 2), ('s', 4), ('m', 1)])
+
+.. rubric:: Et tant d'autres domaines...
+
+Beaucoup d'autres domaines pourraient être explorés :
+
+* accès au système ;
+* utilitaires fichiers ;
+* programmation réseau ;
+* persistance ;
+* les fichiers XML;
+* la compression ;
+* ...
+
+Bibliothèques tierces
+=====================
+
+Une grande diversité
+--------------------
+
+Outre les modules intégrés à la distribution standard de Python, on trouve des
+bibliothèques dans tous les domaines :
+
+* scientifique ;
+* bases de données ;
+* tests fonctionnels et contrôle de qualité ;
+* 3D;
+* ...
+
+Le site http://pypi.python.org/pypi (The Python Package Index) recense des milliers de
+modules et de packages !
+
+Un exemple : la bibliothèque Unum
+---------------------------------
+
+Elle permet de calculer en tenant compte des unités du système S.I.
+Voici un exemple de session interactive :
+
+.. code-block:: pycon
+
+   -- Welcome in Unum Calculator (ver 04.00) --
+   >>> d = 1609 * M
+   >>> t = 11.7 * S
+   >>> v = d/t
+   >>> v
+   137.521367521 [m/s]
+   >>> a = v/t
+   >>> a
+   11.753963036 [m/s2]
+
+Packages
+========
+
+.. glossary::
+
+  Package
+    Un **package** est un module contenant d'autres modules. Les modules d'un
+    package peuvent être des **sous-packages**, ce qui donne une structure
+    arborescente.
+
+En résumé, un package est simplement un répertoire qui contient des modules et
+un fichier :file:`__init__.py` décrivant l'arborescence du package.

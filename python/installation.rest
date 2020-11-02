@@ -1,0 +1,19 @@
+.. -*- coding: utf-8 -*-
+
+.. _python_installation:
+
+============
+Installation
+============
+
+L'installation est simple :
+
+Si vous êtes sur Linux ou MacOSX, votre système a probablement une version de
+python déjà installée. Pour connaître sa version il vous suffit de faire python
+-V. Pour installer une autre version vous devez utiliser le gestionnaire de
+paquet de votre distribution.
+
+
+Pour Windows et autres Unix, il vous suffit d'ouvrir votre navigateur sur la
+page http://www.python.org/download et de choisir la version correspondant à
+votre choix.

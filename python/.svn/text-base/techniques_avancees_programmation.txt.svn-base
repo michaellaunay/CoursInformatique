@@ -1,0 +1,696 @@
+.. -*- coding: utf-8 -*-
+
+.. _python_techniques_avancees_programmation:
+
+=============================================
+Quelques Techniques avancées de programmation
+=============================================
+
+Ce chapitre présente quelques exemples de techniques avancées dans les trois
+paradigmes que supporte Python, les programmations procédurale, objet et
+fonctionnelle.
+
+Techniques procédurales
+=======================
+
+Améliorer la documentation
+--------------------------
+
+La fonction utilitaire :func:`printApi()` filtre les méthodes disponibles de
+element, et affiche les docstrings associés sous une forme plus lisible que
+:func:`help()` :
+
+.. code-block:: python
+
+    def printApi(element):
+        methods = [el for el in dir(element) if not el.startswith('_')]
+        for meth in methods:
+            print(getattr(element, meth).__doc__)
+
+    if __name__ == "__main__":
+        printApi([])
+
+Son exécution produit :
+
+.. code-block:: text
+
+    L.append(object) -- append object to end
+    L.count(value) -> integer -- return number of occurrences of value
+    L.extend(iterable) -- extend list by appending elements from the iterable
+    L.index(value, [start, [stop]]) -> integer -- return first index of value.
+    Raises ValueError if the value is not present.
+    L.insert(index, object) -- insert object before index
+    L.pop([index]) -> item -- remove and return item at index (default last).
+    Raises IndexError if list is empty or index is out of range.
+    L.remove(value) -- remove first occurrence of value.
+    Raises ValueError if the value is not present.
+    L.reverse() -- reverse *IN PLACE*
+    L.sort(cmp=None, key=None, reverse=False) -- stable sort *IN PLACE*;
+    cmp(x, y) -> -1, 0, 1
+
+
+Faire des menus avec un dictionnaire
+------------------------------------
+
+On peut utiliser le couple clé : valeur d'un dictionnaire pour implémenter un
+menu, de la façon suivante :
+
+ - on donne à *cle* le nom d'un élément du menu ;
+ - la valeur correspondante est une référence : l'appel à une procédure sans argument.
+
+L'exemple proposé est la programmation d'une queue FIFO, une structure de
+données illustrée par la file d'attente à un guichet : le premier arrivé est le
+premier servi.
+
+Source du module de fonctions :
+
+.. code-block:: python
+
+   """Module de gestion d'une queue FIFO."""
+
+   queue = [] # initialisation
+
+   def enQueue():
+       queue.append(int(input("Entrez un entier : ")))
+
+   def deQueue():
+       if len(queue) == 0:
+           print("\nImpossible : la queue est vide !")
+       else:
+           print("\nElément '%d' supprimé" % queue.pop(0))
+
+   def afficheQueue():
+       print("\nqueue :", queue)
+
+Source du menu de gestion :
+
+.. code-block:: python
+
+   """Implémentation d'une queue FIFO avec une liste.
+
+     Un menu (utilisant un dictionnaire)
+     appelle des procédures sans argument.
+   """
+
+   # import
+   from queue_FIFO_menu_m import enQueue, deQueue, afficheQueue
+
+   # programme principal -----------------------------------------------
+   afficheQueue()
+
+   CMDs = {'a':enQueue, 'v':afficheQueue, 's':deQueue}
+
+   menu = """
+   (A)jouter
+   (V)oir
+   (S)upprimer
+   (Q)uitter
+   Votre choix ? """
+   while True:
+       while True:
+           try:
+               choix = input(menu).strip()[0].lower()
+           except:
+               choix = 'q'
+
+       if choix not in 'avsq':
+           print("Option invalide ! Réessayez")
+       else:
+           break
+   if choix == 'q':
+       print("\nAu revoir !")
+       break
+   CMDs[choix]()
+
+Expressions régulières
+----------------------
+
+Le module :mod:`re` permet d'accéder à la richesse des expressions rationnelles
+("régulière" est une traduction malheureuse du terme anglais "regular").
+
+.. glossary::
+
+  Expression rationnelle
+    C'est une suite de caractères qui permet de décrire d'autres chaînes de
+    caractères (les motifs) afin de les retrouver dans un bloc de caractères.
+
+La construction de l'expression repose sur l'usage de caractères qui seront
+interprétés comme joker, répéteur ou groupe et des autres caractères
+interprétés comme motif.
+
+Ainsi :
+
+- :samp:`({experssion})` indique un groupe,
+- :samp:`[{caractères}]` indique un ensemble de caractère, ex :
+
+  * :samp:`[aez]` soit ``a``, soit ``e``, soit ``z``
+  * :samp:`[a-z]` tout de ``a`` à ``z``
+
+- :samp:`[^{caractères}]` indique tout caractère autres que ceux de l'ensemble, ex :samp:`[^a-c]`
+  tout sauf ``a``, ``b``, ``c``,
+
+- ``.`` tout caractère,
+- ``|`` indique une alternative,
+- ``?`` indique que le motif précédent peut être ou non présent,
+- ``*`` indique la possibilité de répéter le motif indéfiniment ou aucune fois,
+- ``+`` indique la possibilité de répéter le motif au moins une fois.
+
+Les symboles peuvent être échappés par exemple : :samp:`[[]` indique le
+caractère :samp:`[`
+
+Beaucoup d'autres symboles ont un sens. Le module :mod:`sre` plus riche en donne
+la liste.
+
+Une fois l'expression construite nous allons l'utiliser pour trouver les motifs
+d'une chaine :
+
+.. code-block:: pycon
+
+   >>> import re
+   >>> expression_rationnelle = "[a-zA-Z]*"
+   >>> phrase = "Cette phrase contient cinq motifs"
+   >>> [phrase[x.start(): x.end()] for x in
+   ... re.finditer(expression_rationnelle, phrase) if x.end() != x.start()]
+   ['Cette', 'phrase', 'contient', 'cinq', 'motifs']
+   >>> re.match(expression_rationnelle, phrase)
+   <_sre.SRE_Match object at ...>
+
+La fonction :func:`finditer` permet de retourner un liste d'objet
+:class:`Match`.
+
+Les objets :class:`Match` permettent de connaitre le début et la fin d'un motif,
+si la fin est égale au début c'est qu'il ne s'agit pas d'un motif reconnu.
+
+L'expression rationnelle est analysée à chaque demande ce qui consomme de la
+puissance pour rien. On peut alors optimiser en compilant l'expression :
+
+.. code-block:: pycon
+
+   >>> import re
+   >>> expression_rationnelle = "[a-zA-Z]*"
+   >>> phrase = "Cette phrase contient cinq motifs"
+       >>> erc = re.compile(expression_rationnelle)
+       >>> re.match(erc, phrase)
+       <_sre.SRE_Match object at ...
+
+Les fonctions récursives
+------------------------
+
+.. glossary::
+
+  Fonction récursive
+    Une fonction récursive peut s'appeler elle-même.
+
+Par exemple, trier un tableau de ``N`` éléments par ordre croissant c'est extraire
+le plus petit élément puis trier le tableau restant à ``N - 1`` éléments.
+
+Bien que cette méthode soit souvent plus difficile à comprendre et à coder que
+la méthode classique dite itérative, elle est, dans certains cas, l'application
+la plus directe de sa définition mathématique.
+
+Voici l'exemple classique de définition par récurrence de la fonction
+factorielle :
+
+.. code-block:: text
+
+   n! = | 1 si n = 0
+        | n (n - 1)! si n > 1
+
+.. note::
+
+   Son code est très exactement calqué sur sa définition mathématique :
+
+   .. code-block:: python
+
+      def factorielle(n):
+          if n == 0: # cas de base : condition terminale
+              return 1
+          else # cas récursif
+              return n*factorielle(n-1)
+
+Dans cette définition, la valeur de ``n`` n'est pas connue tant que l'on n'a pas
+atteint la condition terminale (ici ``n == 0``). Le programme empile les appels
+récursifs jusqu'à atteindre la condition terminale puis dépile les valeurs.
+
+Les générateurs et les expressions génératrices
+-----------------------------------------------
+
+.. rubric:: Les générateurs
+
+Les générateurs fournissent un moyen de générer des exécutions paresseuses
+[#lazy]_, ce qui signifie qu'elles ne calculent que les valeurs réellement
+demandées. Les générateurs s'appuient sur le mot-clé ``yield``.
+
+Cette instruction suspend l'exécution de la fonction qui l'exécute, à la façon
+de ``return`` et retourne l'argument à sa droite. Lors de l'appel suivant,
+l'exécution reprend à la suite de la ligne contenant le ``yield``.
+
+.. [#lazy] "Paresseux" est une traduction littérale du terme anglais "lazy".
+
+Ceci peut s'avérer beaucoup plus efficace (en terme de mémoire) que le calcul,
+par exemple, d'une énorme liste en une seule fois.
+
+Voici un exemple de générateur qui fournit autant de valeurs que demandées :
+
+.. code-block:: python
+
+   def quarters(next_quarter=0.0):
+       while True:
+           yield next_quarter
+           next_quarter += 0.25
+
+   if __name__ == "__main__":
+       result = []
+       for x in quarters():
+           result.append(x)
+           if x == 1.0:
+               break
+
+   print("Liste résultante : ", result)
+   # Liste résultante : [0.0, 0.25, 0.5, 0.75, 1.0]
+
+Il est aussi possible de passer une initialisation au générateur :
+
+.. code-block:: python
+
+   import sys
+
+   def quarters(next_quarter=0.0):
+       while True:
+           received = (yield next_quarter)
+           if received is None:
+               next_quarter += 0.25
+           else:
+               next_quarter += received
+
+   if __name__ == "__main__":
+       result = []
+       generator = quarters()
+       while len(result) < 5:
+           x = next(generator)
+           if abs(x - 0.5) < sys.float_info.epsilon:
+               x = generator.send(1.0) # réinitialise le générarteur
+           result.append(x)
+
+       print("Liste résultante : ", result)
+       # Liste résultante : [0.0, 0.25, 1.5, 1.75, 2.0]
+
+
+.. rubric:: Syntaxe
+
+*Une expression génératrice possède une syntaxe presque identique à celle des
+listes en intension ; la différence est qu'une expression génératrice est
+entourée de parenthèses.*
+
+.. rubric:: Utilisation
+
+Les expressions génératrices sont aux générateurs ce que les listes en
+intension sont aux fonctions.
+
+Les fonctions incluses
+----------------------
+
+La syntaxe de définition des fonctions en Python permet tout à fait d'emboîter
+leur définition. Distinguons deux cas d'emplois :
+
+* Idiome de la fonction fabrique renvoyant une fermeture :
+
+.. code-block:: python
+
+   def creer_plus(ajout):
+       """Fonction 'fabrique'."""
+       def plus(increment):
+           """Fonction 'fermeture' : utilise des noms locaux à creer_plus()."""
+           return increment + ajout
+       return plus
+
+   # Programme principal -----------------------------------------------
+   ## création de deux fabriques distinctes
+   p = creer_plus(23)
+   q = creer_plus(42)
+   ## utilisation
+   print("p(100) =", p(100))
+   print("q(100) =", q(100))
+
+Fonction fabrique renvoyant une classe :
+
+.. code-block:: python
+
+   # classes
+   class CasNormal(object):
+       def uneMethode(self):
+           print("normal")
+
+   class CasSpecial(object):
+       def uneMethode(self):
+           print("spécial")
+
+   # fonction
+   def casQuiConvient(estNormal=True):
+       """Fonction fabrique renvoyant une classe."""
+       return CasNormal() if estNormal else CasSpecial()
+
+   # Programme principal -----------------------------------------------
+   une_instance = casQuiConvient()
+   une_instance.uneMethode() # normal
+
+   autre_instance = casQuiConvient(False)
+   autre_instance.uneMethode() # spécial
+
+Les décorateurs
+---------------
+
+.. note::
+
+   On utilise un décorateur lorsqu'on a besoin d'effectuer un prétraitement lors
+   de l'appel d'une fonction ou un post-traitement à la suite de l'appel d'une
+   fonction.
+
+Soit le prétraitement suivant :
+
+.. code-block:: python
+
+   def pretraitement(fonction):
+       fonction.__doc__ += "(fonction décorée)."
+       return fonction
+
+   def traitement():
+       """ma fonction """
+       print("traitement")
+
+   traitement = pretraitement(traitement)
+   print(traitement.__doc__) # ma fonction (fonction décorée).
+
+Nous obtenons le même résultat en utilisant un décorateur :
+
+.. code-block:: python
+
+   def pretraitement(fonction):
+       fonction.__doc__ += "(fonction décorée)."
+       return fonction
+
+   @pretraitement
+   def traitement():
+       """ma fonction """
+       print("traitement")
+
+   print(traitement.__doc__) # ma fonction (fonction décorée).
+
+Enfin il est possible d'enchaîner les décorateurs (à l'image de la composition
+des fonctions en mathématique) :
+
+.. code-block:: python
+
+   @f1 @f2 @f3
+   def fonction():
+       pass
+   # Notation équivalente à : fonction = f1(f2(f3(fonction)))
+
+Techniques objets
+=================
+
+Comme nous l'avons vu lors du chapitre précédent, Python est un langage
+complètement objet.
+
+Tous les types de base ou dérivés sont en réalité des types abstrait de données
+implémentés sous forme de classe.
+
+Toutes ces classes dérivent d'une unique classe de base, ancêtre de tous les
+autres : la classe :class:`object`.
+
+:meth:`__slot__` et :meth:`__dict__`
+------------------------------------
+
+Examinons le code suivant :
+
+.. code-block:: python
+
+   >>> class Point:
+   ...    __slots__ = ("x", "y")
+   ...    def __init__(self, x=0, y=0):
+   ...        self.x = x
+   ...        self.y = y
+   >>> p=Point()
+   >>> p.v = "Interdit"
+   Traceback (most recent call last):
+   File "<stdin>", line 1, in <module>
+   AttributeError: 'Point' object has no attribute 'v'
+
+
+Quand une classe est créée sans utiliser l'attribut :attr:`__slots__`, ce que
+nous avons fait jusqu'à maintenant, Python crée de manière transparente un
+dictionnaire privé appelé :attr:`__dict__` pour chaque instance de la classe, et
+ce dictionnaire contient les attributs de l'instance.
+
+Voici pourquoi il est possible d'ajouter ou de retirer des attributs d'un objet.
+
+Mais si l'on se contente d'objets sur lesquels nous accédons aux attributs sans
+en ajouter ou en ôter, nous pouvons créer des classes sans dictionnaire privé,
+ce qui économisera de la mémoire à chaque instanciation.
+
+C'est ce qui est réalisé dans l'exemple ci-dessus en définissant un attribut de
+classe :attr:`__slots__` dont la valeur est un tuple formé des noms des
+attributs.
+
+.. warning::
+
+  Sous python 2 la classe utilisant slots doit être dérivée de object.
+
+Functor
+-------
+
+En Python un objet fonction ou fonctor est une référence à tout objet
+**appelable** (callable) : fonction, fonction lambda, méthode, classe.
+
+La fonction prédéfinie :func:`callable()` permet de tester cette propriété :
+
+.. code-block:: python
+
+   >>> def maFonction():
+   ...     print('Ceci est "appelable"')
+   ...
+   >>> callable(maFonction)
+   True
+   >>> chaine = 'Ceci est "appelable"'
+   >>> callable(chaine)
+   False
+
+Il est possible de transformer les instances d'une classe en functor si la
+méthode spéciale :meth:`__call__()` est définie dans la la classe :
+
+.. code-block:: python
+
+   >>> class A:
+   def __call__(self, un , deux):
+       return un + deux
+   >>> a = A()
+   >>> callable(a)
+   True
+   >>> a(1, 6)
+   7
+
+Les gestionnaires de contexte
+-----------------------------
+
+Les gestionnaires de contexte simplifient nos codes en assurant que certaines
+opérations sont effectuées avant et après un bloc d'instruction donné.
+
+.. rubric:: Syntaxe
+
+On utilise l'instruction ``with``.
+
+.. productionlist::
+   with_block: "with" `expression` "as" `symbol` ":" `suite`
+
+Une utilisation classique est d'assurer la fermeture d'un fichier :
+
+.. code-block:: python
+
+   with open("hello.txt") as f:
+       for line in f:
+           print line
+
+L' <expression> retourne un **gestionnaire de contexte** associé à
+<variable>. un gestionnaire de contexte est un objet quelconque fournissant les
+méthodes :meth:`__enter__` et :meth:`__exit__`.
+
+La méthode :meth:`__enter__` de l'objet retourné par l'expression est exécutée
+par le mot-clé ``with``. L'objet retourné par cette méthode est associé au
+symbole suivant le mot-clé ``as``. Généralement, il s'agit du gestionnaire de
+contexte lui-même (donc :samp:`return self`).
+
+Lors de la cloture du bloc commencé par ``with``, la méthode :meth:`__exit__` du
+gestionnaire de ocontexte est appellée, avec les informations sur une éventuelle
+exception survenue dans le bloc. Le rôle de cette méthode est d'effectuer
+l'éventuel "nettoyage" associé à la fin d'utilisation du gestionnaire de
+contexte.
+
+Techniques fonctionnelles
+=========================
+
+Directive lambda
+----------------
+
+Issue de langages fonctionnels (comme Lisp), la directive lambda permet de
+définir un objet fonction anonyme dont le retour est limité à une expression.
+
+.. rubric:: Syntaxe
+
+.. productionlist::
+   lambda_stmt : "lambda" [`parametres`] ":" `expression`
+
+Par exemple cette fonction retourne "s" si son argument est différent de 1,
+une chaîne vide sinon :
+
+.. code-block:: pycon
+
+   >>> s = lambda x: "" if x == 1 else "s"
+   >>> s(0)
+   's'
+   >>> s(1)
+   ''
+   >>>
+
+Dans la présentation des interfaces graphiques, on verra que les callbacks sont
+souvent codés ainsi :
+
+.. code-block:: python
+
+   f = lambda x=1, y=1, z=0: 3*x + 2*y - z
+   print(f()) # 5
+
+   def make_increment(n):
+       return lambda x: x + n
+
+   f2, f6 = make_increment(2), make_increment(6)
+   print(f2(42), f6(42)) # 44 48
+
+   lc = [lambda x: x**2, lambda x: x**3, lambda x: x**4]
+   for f in lc:
+       print(f(2), end=" ") # 4 8 16
+
+Les fonctions map, filter et reduce
+-----------------------------------
+
+La programmation fonctionnelle est un paradigme de programmation qui considère
+le calcul en tant qu'évaluation de fonctions mathématiques et rejette le
+changement d'état et la mutation des données.
+
+Elle souligne l'application des fonctions, contrairement au modèle de
+programmation impérative qui met en avant les changements d'état.
+
+Le paradigme fonctionnel n'utilise pas de machine d'états pour décrire un
+programme, mais un emboîtement de fonctions que l'on peut voir comme des
+"boîtes noires" que l'on peut imbriquer les unes dans les autres.
+
+Chaque boîte possédant plusieurs paramètres en entrée mais une seule sortie,
+elle ne peut sortir qu'une seule valeur possible pour chaque n-uplet de valeurs
+présentées en entrée.
+Ainsi, les fonctions n'introduisent pas d'effets de bord.
+
+Un programme est donc une application, au sens mathématique, qui ne donne
+qu'un seul résultat pour chaque ensemble de valeurs en entrée.
+
+La programmation fonctionnelle repose sur trois concepts : mapping, filtering
+et reducing qui sont implémentésen Python par trois fonctions :
+:func:`map()`, :func:`filter()` et :func:`reduce()`.
+
+.. rubric:: La fonction map()
+
+:func:`map()` applique une fonction à chaque élément d'une séquence et
+retourne un itérateur :
+
+.. code-block:: pycon
+
+    >>> def renvoiTitres(element):
+    ...     return element.title()
+
+    >>> map(renvoiTitres, ['fiat lux', "lord of the fly"])
+    ['Fiat Lux', 'Lord Of The Fly']
+    >>>
+    >>> [element.title() for element in ['fiat lux', "lord of the fly"]]
+    ['Fiat Lux', 'Lord Of The Fly']
+
+On remarque que :func:`map` peut être remplacée par une liste en intension. Voir
+:ref:`python_listes_en_intention`.
+
+.. rubric:: La fonction filter()
+
+:func:`filter` construit et renvoie un itérateur sur une liste qui contient tous
+les éléments de la séquence initiale répondant au critère ``function(element) == True`` :
+
+.. code-block:: pycon
+
+    >>> filter(lambda x: x > 0, [1, -2, 3, -4])
+    [1, 3]
+    >>>
+    >>> [x for x in [1, -2, 3, -4] if x > 0]
+    [1, 3]
+
+On remarque que :func:`filter` peut être remplacée par une liste en
+intension avec un test.
+
+.. rubric:: La fonction reduce()
+
+:func:`reduce` est une fonction du module functools.  Elle applique de façon
+cumulative une fonction de deux arguments aux éléments d'une séquence, de gauche
+à droite, de façon à réduire cette séquence à une seule valeur qu'elle renvoie :
+
+.. code-block:: python
+
+   >>> def somme(x, y):
+   ...     print x, '+', y
+   ...     return x + y
+   >>> reduce(somme, [1, 2, 3, 4])
+   1 + 2
+   3 + 3
+   6 + 4
+   10
+   >>>
+   >>> sum([1, 2, 3, 4])
+   10
+
+On remarque que :func:`reduce` peut être remplacée par une des fonctions
+suivantes : :func:`all`, :func:`any`, func:`max`, :func:`min` ou func:`sum`.
+
+Les applications partielles de fonctions
+----------------------------------------
+
+Issue de la programmation fonctionnelle, une PFA (application partielle de
+fonction) de n paramètres prend le premier argument comme paramètre fixe et
+retourne un objet fonction (ou instance) utilisant les n-1 arguments restants.
+
+Exemple simple :
+
+.. code-block:: pycon
+
+   >>> from functools import partial
+   >>> baseTwo = partial(int, base=2)
+   >>> baseTwo('10010')
+   18
+
+Les PFA sont très utiles pour fournir des modèles partiels de widgets, qui ont
+souvent de nombreux paramètres.  Dans l'exemple suivant, on redéfinie la classe
+:class:`Button` en fixant certains de ses attributs (qui peuvent toujours être
+surchargés) :
+
+.. code-block:: python
+
+   from functools import partial
+   import tkinter as tk
+
+   root = tk.Tk()
+   # instanciation partielle de classe :
+   MonBouton = partial(tk.Button, root, fg='purple', bg='green')
+   MonBouton(text="Bouton 1").pack()
+   MonBouton(text="Bouton 2").pack()
+   MonBouton(text="QUITTER", bg='red', fg='black',
+       command=root.quit).pack(fill=tk.X, expand=True)
+   root.title("PFA !")
+   root.mainloop()
+
+Exercice
+========
+
+Lecture d'un fichier, traitement avec une expression régulière et écriture des
+résultats dans un fichier.

@@ -1,0 +1,741 @@
+.. -*- coding: utf-8 -*-
+
+.. _python_conteneurs_standard:
+
+=======================
+Les conteneurs standard
+=======================
+
+Le chapitre "La console Python" a présenté les types de données simples, mais
+Python offre beaucoup plus : les conteneurs.
+
+De façon générale, un conteneur est un objet composite destiné à contenir
+d'autres objets. Ce chapitre détaille les séquences, les tableaux associatifs,
+les ensembles et les fichiers textuels.
+
+Les séquences
+=============
+
+Qu'est-ce qu'une séquence ?
+---------------------------
+
+.. glossary::
+
+  Sequence
+    Une séquence est un conteneur ordonné d'éléments indicés par des entiers.
+
+Python dispose de trois types prédéfinis de séquences :
+
+* les chaînes (vues précédemment) ;
+* les listes ;
+* les tuples.
+
+Les listes
+==========
+
+Définition, syntaxe et exemples
+-------------------------------
+
+.. glossary::
+
+  Collection
+    Collection ordonnée et modifiable d'éléments éventuellement hétérogènes.
+
+.. rubric:: Syntaxe
+
+*Éléments séparés par des virgules, et entourés de crochets.*
+
+.. code-block:: pycon
+
+   >>> couleurs = ['trèfle', 'carreau', 'coeur', 'pique']
+   >>> print(couleurs)
+   ['trèfle', 'carreau', 'coeur', 'pique']
+   >>> couleurs[1] = 14
+   >>> print(couleurs)
+   ['trèfle', 14, 'coeur', 'pique']
+   >>> list1 = ['a', 'b']
+   >>> list2 = [4, 2.718]
+   >>> list3 = [list1, list2] # liste de listes
+   >>> print(list3)
+   [['a', 'b'], [4, 2.718]]
+
+Initialisations et tests
+------------------------
+
+Utilisation de la répétition, de l'opérateur d'appartenance :command:`in` et de
+l'itérateur :command:`range()` :
+
+.. code-block:: pycon
+
+   >>> truc, machin = [], [0.0] * 3
+   >>> print(truc) # (liste vide)
+   []
+   >>> print(machin)
+   [0.0, 0.0, 0.0]
+   >>> l1 = list(range(4))
+   >>> print("l1 =", l1)
+   l1 = [0, 1, 2, 3]
+   >>> l2 = list(range(4, 8))
+   >>> print("l2 =", l2)
+   l2 = [4, 5, 6, 7]
+   >>> l3 = list(range(2, 9, 2))
+   >>> print("l3 =", l3)
+   l3 = [2, 4, 6, 8]
+   >>> print(2 in l1, 8 in l2, 6 in l3)
+   True False True
+   >>> for i in range(len(l3)):
+   ...     print(i, l3[i], sep="-", end=" ")
+   0-2 1-4 2-6 3-8
+
+Méthodes
+--------
+
+Quelques méthodes de modification des listes :
+
+.. code-block:: pycon
+
+   >>> nombres = [17, 38, 10, 25, 72]
+   >>> nombres.sort()
+   >>> print(nombres)
+   [10, 17, 25, 38, 72]
+   >>> nombres.append(12)
+   >>> nombres.reverse()
+   >>> nombres.remove(38)
+   >>> print(nombres)
+   [12, 72, 25, 17, 10]
+   >>> print(nombres.index(17))
+   3
+   >>> nombres[0] = 11
+   >>> nombres[1:3] = [14, 17, 2]
+   >>> print(nombres.pop())
+   10
+   >>> print(nombres)
+   [11, 14, 17, 2, 17]
+   >>> print(nombres.count(17))
+   2
+   >>> nombres.extend([1, 2, 3])
+   >>> print(nombres)
+   [11, 14, 17, 2, 17, 1, 2, 3]
+
+Manipulation des "tranches"
+---------------------------
+
+.. rubric:: Syntaxe
+
+*Si on veut supprimer, remplacer ou insérer plusieurs éléments d'une liste, il
+faut indiquer une tranche dans le membre de gauche d'une affectation et fournir
+une liste dans le membre de droite.*
+
+.. code-block:: pycon
+
+   >>> mots = ['jambon', 'sel', 'miel', 'confiture', 'beurre']
+   >>> mots[2:4] = [] # effacement par affectation d'une liste vide
+   >>> print(mots)
+   ['jambon', 'sel', 'beurre']
+   >>> mots[1:3] = ['salade']
+   >>> print(mots)
+   ['jambon', 'salade']
+   >>> mots[1:] = ['mayonnaise', 'poulet', 'tomate']
+   >>> print(mots)
+   ['jambon', 'mayonnaise', 'poulet', 'tomate']
+   >>> mots[2:2] = ['miel'] # insertion en 3è position
+   >>> print(mots)
+   ['jambon', 'mayonnaise', 'miel', 'poulet', 'tomate']
+
+.. _python_listes_en_intention:
+
+Les listes en intension
+=======================
+
+.. sidebar::
+   Exemple
+
+   Soit la fonction f(x) retournant l'ensemble des entiers qui à x associe x au
+   carré pour tout x compris entre 2 et 10 inclus.
+
+   En Python on écrit :
+
+   .. code-block:: pycon
+
+      >>> [x**2 for x in range(2, 11)]
+      [4, 9, 16, 25, 36, 49, 64, 81, 100]
+
+Une liste en intension est une expression qui permet de générer une liste de
+manière très compacte. Cette notation reprend la définition mathématique d'un
+ensemble en intension.
+
+.. glossary::
+
+  Liste en intension
+    Une liste en intension est équivalente à une boucle for qui construirait la
+    même liste en utilisant la méthode :command:`append()`.
+
+Les listes en intension sont utilisables sous trois formes.
+
+**Première forme** expression d'une liste simple de valeurs :
+
+.. code-block:: python
+
+   result1 = [x+1 for x in une_seq]
+   # a le même effet que :
+   result2 = []
+   for x in une_seq:
+       result2.append(x+1)
+
+**Deuxième forme** expression d'une liste de valeurs avec filtrage :
+
+.. code-block:: python
+
+   result3 = [x+1 for x in une_seq if x > 23]
+   # a le même effet que :
+   result4 = []
+   for x in une_seq:
+       if x > 23:
+           result4.append(x+1)
+
+**Troisième forme** expression d'une combinaison de listes de valeurs :
+
+.. code-block:: python
+
+   result5 = [x+y for x in une_seq for y in une_autre]
+   # a le même effet que :
+   result6 = []
+   for x in une_seq:
+       for y in une_autre:
+           result6.append(x+y)
+
+Des utilisations très pythoniques :
+
+.. code-block:: python
+
+   >>> valeurs_s = ["12", "78", "671"]
+   >>> # conversion d'une liste de chaînes en liste d'entier
+   >>> valeurs_i = [int(i) for i in valeurs_s] # [12, 78, 671]
+   >>> # calcul de la somme de la liste avec la fonction intégrée sum
+   >>> print(sum([int(i) for i in valeurs_s]))
+   761
+   >>> # a le même effet que :
+   >>> s = 0
+   >>> for i in valeurs_s:
+   ...     s = s + int(i)
+   >>> print(s)
+   761
+   >>> # Initialisation d'une liste 2D
+   >>> multi_liste = [[0]*2 for ligne in range(3)]
+   >>> print(multi_liste)
+   [[0, 0], [0, 0], [0, 0]]
+
+Les tuples
+==========
+
+.. glossary::
+
+  Tuple
+    Collection ordonnée et non modifiable d'éléments éventuellement
+    hétérogènes.
+
+.. rubric:: Syntaxe
+
+*Éléments séparés par des virgules, et entourés de parenthèses.*
+
+.. code-block:: pycon
+
+   >>> mon_tuple = ('a', 2, [1, 3])
+
+* Les tuples s'utilisent comme les listes mais leur parcours est plus rapide ;
+* Les tuples consomment moins de mémoire ;
+* Ils sont utiles pour définir des constantes.
+
+.. attention::
+
+  Comme les chaînes de caractères, les tuples ne sont pas modifiables !
+
+Retour sur les références
+=========================
+
+Nous avons déjà vu que l'opération d'affectation, apparemment innocente, est
+une réelle difficulté de Python.
+
+.. code-block:: pycon
+
+   >>> i = 1
+   >>> msg = "Quoi de neuf ?"
+   >>> e = 2.718
+
+Dans l'exemple ci-dessus, les affectations réalisent plusieurs opérations :
+
+* crée en mémoire un objet du type ad hoc (membre de droite) ;
+* stocke la donnée dans l'objet créé ;
+* crée un nom de variable (membre de gauche) ;
+* associe ce nom de variable à l'objet contenant la valeur.
+
+Une conséquence de ce mécanisme est que, si un objet modifiable est affecté,
+tout changement sur un objet modifiera l'autre :
+
+.. code-block:: pycon
+
+   >>> fable = ["Je", "plie", "mais", "ne", "romps", "point"]
+   >>> phrase = fable
+   >>> phrase[4] = "casse"
+   >>> print(fable)
+   ['Je', 'plie', 'mais', 'ne', 'casse', 'point']
+
+Si l'on désire réaliser une vraie copie d'un objet, on doit utiliser le
+module :command:`copy` :
+
+.. code-block:: pycon
+
+   >>> import copy
+   >>> a = [1, 2, 3]
+   >>> b = a # une référence
+   >>> b.append(4)
+   >>> print(a)
+   [1, 2, 3, 4]
+   >>> c = copy.copy(a) # une copie de "surface"
+   >>> c.append(5)
+   >>> print(c)
+   [1, 2, 3, 4, 5]
+   >>> print(a)
+   [1, 2, 3, 4]
+
+Dans les rares occasions où l'on veut aussi que chaque élément et attribut de
+l'objet soit copié séparément et de façon récursive, on emploie la fonction
+:command:`copy.deepcopy()`.
+
+.. rubric:: Complément graphique sur l'assignation
+
+Assignation augmentée d'un objet non modifiable (cas d'un entier).
+
+On a représenté en gris clair l'addition intermédiaire :
+
+.. figure:: AssignationDUnEntier.jpg
+   :align: center
+
+   Exemple (a) Assignation d'un entier
+
+.. figure:: AdditionIntermediaire.jpg
+   :align: center
+
+   Exemple (b) Addition intermédiaire
+
+.. figure:: AssignationAugmentee.jpg
+   :align: center
+
+   Exemple (c) Assignation augmentée
+
+
+Assignation augmentée d'un objet modifiable (cas d'une liste).
+
+On a représenté en gris clair la création de la liste intermédiaire :
+
+.. figure:: AssignationDUneListe.jpg
+   :align: center
+
+   Exemple (a) Assignation d'une liste
+
+.. figure:: CreationIntermediaireEnMemoire.jpg
+   :align: center
+
+   Exemple (b) Création intermédiaire en mémoire
+
+.. figure:: ListeAssignationAugmentee.jpg
+   :align: center
+
+   Exemple (c) Assignation augmentée
+
+Les tableaux associatifs
+========================
+
+Les types tableaux associatifs
+------------------------------
+
+.. glossary::
+
+  Tableau associatif
+    Un tableau associatif est un type de données permettant de stocker des
+    couples **cle : valeur**, avec un accès très rapide à la valeur à
+    partir de la clé, la clé ne pouvant être présente qu'une seule fois dans
+    le tableau.
+
+Il possède les caractéristiques suivantes :
+
+- l'opérateur d'appartenance d'une clé :command:`in` ;
+- la fonction taille :command:`len()` donnant le nombre de couples stockés ;
+- il est itérable (on peut le parcourir) mais n'est pas ordonné.
+
+Python propose le type standard ``dict``.
+
+Les dictionnaires (dict)
+------------------------
+
+.. rubric:: Syntaxe
+
+Collection de couples *cle: valeur* entourée d'accolades.
+
+Les dictionnaires constituent un type composite mais ils n'appartiennent pas
+aux séquences.
+
+Comme les listes, les dictionnaires sont modifiables, mais les couples
+enregistrés n'occupent pas un ordre immuable, leur emplacement est géré par un
+algorithme spécifique (Cf. les fonctions de hachage).
+
+Une clé pourra être alphabétique, numérique...en fait tout type hachable. Les
+valeurs pourront être des valeurs numériques, des séquences, des dictionnaires,
+mais aussi des fonctions, des classes ou des instances.
+
+Exemples de création :
+
+.. code-block:: pycon
+
+   >>> # insertion de clés/valeurs une à une
+   >>> d1 = {} # dictionnaire vide
+   >>> d1["nom"] = 3
+   >>> d1["taille"] = 176
+   >>> print(d1)
+   {'nom': 3, 'taille': 176}
+   >>> # définition en extension
+   >>> d2 = {"nom": 3, "taille": 176}
+   >>> print(d2)
+   {'nom': 3, 'taille': 176}
+   >>> # définition en intension
+   >>> d3 = {x: x**2 for x in (2, 4, 6)}
+   >>> print(d3)
+   {2: 4, 4: 16, 6: 36}
+   >>> # utilisation de paramètres nommés
+   >>> d4 = dict(nom=3, taille=176)
+   >>> print(d4)
+   {'taille': 176, 'nom': 3}
+   >>> # utilisation d'une liste de couples clés/valeurs
+   >>> d5 = dict([("nom", 3), ("taille", 176)])
+   >>> print(d5)
+   {'nom': 3, 'taille': 176}
+
+.. rubric:: Méthodes
+
+Quelques méthodes applicables aux dictionnaires :
+
+.. code-block:: pycon
+
+   >>> tel = {'jack': 4098, 'sape': 4139}
+   >>> tel['guido'] = 4127
+   >>> print(tel)
+   {'sape': 4139, 'jack': 4098, 'guido': 4127}
+   >>> print(tel['jack'])
+   4098
+   >>> del tel['sape']
+   >>> tel['irv'] = 4127
+   >>> print(tel)
+   {'jack': 4098, 'irv': 4127, 'guido': 4127}
+   >>> print(list(tel.keys()))
+   ['jack', 'irv', 'guido']
+   >>> print(sorted(tel.keys()))
+   ['guido', 'irv', 'jack']
+   >>> print(sorted(tel.values()))
+   [4098, 4127, 4127]
+   >>> print('guido' in tel, 'jack' not in tel)
+   True False
+
+Les ensembles (set)
+===================
+
+.. glossary::
+
+  set
+    Collection itérable non ordonnée d'éléments hachables distincts.
+
+.. figure:: OperationsSurLesEnsembles.jpg
+   :align: center
+
+   Opérations sur les ensembles
+
+.. code-block:: pycon
+
+   >>> X, Y = set('abcd'), set('sbds')
+   >>> print("X =", X)
+   X = {'a', 'c', 'b', 'd'}
+   >>> print("Y =", Y)
+   Y = {'s', 'b', 'd'} : un seul élément 's'
+   >>> print('c' in X)
+   True
+   >>> print('a' in Y)
+   False
+   >>> print(X - Y)
+   {'a', 'c'}
+   >>> print(Y - X)
+   {'s'}
+   >>> print(X | Y)
+   {'a', 'c', 'b', 'd', 's'}
+   >>> print(X & Y)
+   {'b', 'd'}
+
+.. note::
+
+   La notation d'ensembles avec des accolades est une nouveauté de Python 3. en
+   Python 2, l'affichage serait :
+
+   .. code-block:: pycon
+
+      >>> X = set('abcd')
+      >>> print X
+      set(['a', 'c', 'b', 'd'])
+
+Les fichiers textuels
+=====================
+
+Les fichiers : introduction
+---------------------------
+
+On rappelle que l'ordinateur n'exécute que les programmes présents dans sa
+mémoire volatile (la RAM).
+
+Mais, pour conserver durablement des informations, il faut utiliser une mémoire
+permanente comme par exemple le dique dur, la clé USB, le DVD...
+
+Comme la plupart des langages, Python utilise classiquement la notion de
+**fichier**.
+
+C'est un type pré-défini en Python, qui ne nessécite donc pas d'importer de
+module externe.
+
+Nous nous limiterons aux fichiers textuels (portables, lisible par un éditeur),
+mais signalons que les fichiers stockés en codage binaire sont plus compacts et
+plus rapides à gérer.
+
+Gestion des fichiers
+--------------------
+
+.. rubric:: Ouverture et fermeture des fichiers
+
+Principaux **modes** d'ouverture des fichiers textuels :
+
+.. code-block:: pycon
+
+   >>> f1 = open("monFichier_1", "r") # en lecture
+   >>> f2 = open("monFichier_2", "w") # en écriture
+   >>> f3 = open("monFichier_3", "a") # en ajout
+
+Python utilise les fichiers en mode texte par défaut (noté t) (pour les
+fichiers binaires, il faut préciser le mode b).
+
+Tant que le fichier n'est pas fermé, son contenu n'est pas garanti sur le
+disque.
+
+Une seule méthode de fermeture :
+
+.. code-block:: pycon
+
+   >>> f1.close()
+
+.. rubric:: Écriture séquentielle
+
+Méthodes d'écriture :
+
+.. code-block:: pycon
+
+   >>> f = open("truc.txt", "w")
+   >>> s = 'toto\n'
+   >>> f.write(s) # écrit la chaîne s dans f
+   >>> l = ['a', 'b', 'c']
+   >>> f.writelines(l) # écrit les chaînes de la liste l dans f
+   >>> f.close()
+   >>> # utilisation de l'option file de print
+   >>> f2 = open("truc2.txt", "w")
+   >>> print("abcd", file=f2)
+   >>> f2.close()
+
+Regardez maintenant votre fichier :file:`truc.txt` avec votre éditeur de texte favori : ::
+
+   toto
+   abc
+
+.. rubric:: Lecture séquentielle
+
+Méthodes de lecture :
+
+.. code-block:: pycon
+
+   >>> f = open("truc.txt", "r")
+   >>> s = f.read() # lit tout le fichier --> string
+   >>> s = f.read(3) # lit au plus n octets --> string
+   >>> s = f.readline() # lit la ligne suivante --> string
+   >>> s = f.readlines() # lit tout le fichier --> liste de strings
+   >>> f.close()
+   >>> # Affichage des lignes d'un fichier une à une
+   >>> f = open("truc.txt") # mode "r" par défaut
+   >>> for ligne in f:
+   ...     print(ligne[:-1]) # pour sauter le retour à la ligne
+   toto
+   abc
+   >>> f.close()
+
+Itérer sur les conteneurs
+=========================
+
+Les techniques suivantes sont classiques et très utiles.
+
+Obtenir clés et valeurs en bouclant sur un dictionnaire : ::
+
+   >>> knights = {"Gallahad": "the pure", "Robin": "the brave"}
+   >>> for k, v in knights.items():
+   ...     print(k, v)
+   Gallahad the pure
+   Robin the brave
+
+Obtenir clés et valeurs en bouclant sur une liste :
+
+.. code-block:: pycon
+
+   >>> for i, v in enumerate(["tic", "tac", "toe"]):
+   ...     print(i, v, end=" ", sep="->")
+   0->tic 1->tac 2->toe
+
+Boucler sur deux séquences (ou plus) appariées :
+
+.. code-block:: pycon
+
+   >>> question = ["name", "quest", "favorite color"]
+   >>> answers = ["Lancelot", "the Holy Grail", "blue"]
+   >>> for q, a in zip(question, answers):
+   ...     print("What is your {}? It is {}.".format(q, a))
+   What is your name? It is Lancelot.
+   What is your quest? It is the Holy Grail.
+   What is your favorite color? It is blue.
+
+Boucler sur une séquence inversée (la séquence initiale est inchangée) :
+
+.. code-block:: pycon
+
+   >>> print()
+   >>> for i in reversed(range(1, 10, 2)):
+   ...     print(i, end=" ")
+   9 7 5 3 1
+
+Boucler sur une séquence triée à éléments uniques (la séquence initiale est
+inchangée) :
+
+.. code-block:: pycon
+
+   >>> print()
+   >>> basket = ["apple", "orange", "apple", "pear", "orange", "banana"]
+   >>> for f in sorted(set(basket)):
+   ...     print(f, end=" ")
+   apple banana orange pear
+
+L'affichage formaté
+===================
+
+.. attention::
+
+   **Python 2.6** : Contrairement à Python 3, les arguments positionnels d'une
+   chaîne de formatage doit être explicite. En d'autres termes l'utilisation du
+   slot de formatage ``{}`` est sanctionné d'un message d'erreur.
+
+   .. code-block:: pycon
+
+      >>> # Python 3
+      >>> print("Je m'appelle {}".format("Bob"))
+      Je m'appelle Bob
+      >>> # Python 2.6
+      >>> print("Je m'appelle {0}".format("Bob"))
+      Je m'appelle Bob
+
+La méthode :meth:`format()` permet de contrôler finement toutes sortes d'affichages.
+
+Remplacements simples :
+
+.. code-block:: pycon
+
+   >>> print("Je m'appelle {}".format("Bob"))
+   Je m'appelle Bob
+   >>> print("Je m'appelle {{{}}}".format("Bob"))
+   Je m'appelle {Bob}
+   >>> print("{}".format("-"*10))
+   ----------
+
+Remplacements avec champs nommés :
+
+.. code-block:: pycon
+
+   >>> a, b = 5, 3
+   >>> print("The story of {c} and {d}".format(c=a+b, d=a-b))
+   The story of 8 and 2
+
+Formatages à l'aide de liste :
+
+.. code-block:: pycon
+
+   >>> stock = ['papier', 'enveloppe', 'chemise', 'encre', 'buvard']
+   >>> print("Nous avons de l'{0[3]} et du {0[0]} en stock\n".format(stock))
+   Nous avons de l'encre et du papier en stock
+
+Formatages à l'aide de dictionnaire :
+
+.. code-block:: pycon
+
+   >>> print("My name is {0[name]}".format(dict(name='Fred')))
+   >>> # My name is Fred
+   >>> d = dict(animal = 'éléphant', poids = 12000)
+   >>> print("L'{0[animal]} pèse {0[poids]} kg\n".format(d))
+   >>> # L'éléphant pèse 12000 kg
+
+Remplacement avec attributs nommés :
+
+.. code-block:: pycon
+
+   >>> import math
+   >>> import sys
+   >>> print("math.pi = {.pi}, epsilon = {.float_info.epsilon}".format(math, sys))
+   math.pi = 3.14159265359, epsilon = 2.22044604925e-16
+
+Conversions str() et repr() :
+
+.. code-block:: pycon
+
+   >>> print("{0!s} {0!r}".format("Une chaîne"))
+   Une chaîne 'Une chaîne'
+
+Formatages numériques :
+
+.. code-block:: pycon
+
+   >>> n = 100
+   >>> pi = 3.1415926535897931
+   >>> print("{0}, et {1}".format(n, pi))
+   100, et 3.14159265359
+   >>> print("{}, et {}".format(n, pi))
+   100, et 3.14159265359
+   >>> print("{0}, {1} et {0}".format(n, pi))
+   100, 3.14159265359 et 100
+   >>> print("{:.4e}".format(pi))
+   3.1416e+00
+   >>> print("{:g}".format(pi))
+   3.14159
+   >>> msg = "Résultat sur {:d} échantillons : {:.2f}".format(n, pi)
+   >>> print(msg)
+   Résultat sur 100 échantillons : 3.14
+
+Formatages divers :
+
+.. code-block:: pycon
+
+   >>> s = "The sword of truth"
+   >>> print("[{}]".format(s))
+   [The sword of truth]
+   >>> print("[{:25}]".format(s))
+   [The sword of truth ]
+   >>> print("[{:>25}]".format(s))
+   [ The sword of truth]
+   >>> print("[{:^25}]".format(s))
+   [ The sword of truth ]
+   >>> print("[{:-^25}]".format(s))
+   [---The sword of truth----]
+   >>> print("[{:.<25}]".format(s))
+   [The sword of truth.......]
+   >>> long = 12
+   >>> print("[{}]".format(s[:long]))
+   [The sword of]
+   >>> m = 123456789
+   >>> print("{:0=12}".format(m))
+   000123456789
+   >>> print("{:#=12}".format(m))
+   ###123456789

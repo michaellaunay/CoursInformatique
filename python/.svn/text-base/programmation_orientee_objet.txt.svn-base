@@ -1,0 +1,604 @@
+.. -*- coding: utf-8 -*-
+
+.. _python_programmation_orientee_objet:
+
+===============================
+La programmation Orientée Objet
+===============================
+
+La Programmation Orientée Objet :
+
+* la POO permet de mieux modéliser la réalité en concevant des ensembles
+  d'objets, les classes.
+* Ces classes permettent de construire des objets interactifs entre eux et avec
+  le monde extérieur.
+* Les objets sont créés indépendamment les uns des autres, grâce à
+  l'encapsulation, mécanisme qui permet d'embarquer leurs propriétés.
+* Les classes permettent d'éviter au maximum l'emploi des variables globales.
+* Enfin les classes offrent un moyen économique et puissant de construire de
+  nouveaux objets à partir d'objets préexistants.
+
+Insuffisance de l'approche procédurale
+======================================
+
+Un exemple : On veut représenter un cercle, ce qui nécessite au minimum trois
+informations, les coordonnées du centre et le rayon :
+
+.. code-block:: python
+
+   cercle = (11, 60, 8)
+
+Mais comment interpréter ces trois données ?
+
+.. code-block:: python
+
+   cercle = (x, y, rayon)
+
+ou bien
+
+.. code-block:: python
+
+   cercle = (rayon, x, y)
+
+Pour résoudre ce problème et améliorer la lisibilité, on peut utiliser des
+tuples nommés :
+
+.. code-block:: python
+
+   from collection import namedtuple
+   Cercle = namedtuple("Cercle", "x y rayon")
+   cercle = Cercle(11, 60, 8)
+   # exemple d'utilisation :
+   distance = distance_origine(cercle.x, cercle.y)
+
+Par contre, il reste le problème des données invalides, ici un rayon négatif :
+
+.. code-block:: python
+
+   cercle = Cercle(11, 60, -8)
+
+Si les cercles doivent changer de caractéristiques, il faut opter pour un type
+modifiable, liste ou dictionnaire ce qui ne règle toujours pas le problème des
+données invalides...
+
+On a donc besoin d'un mécanisme pour empaqueter les données nécessaires pour
+représenter un cercle et pour empaqueter les méthodes applicables à ce nouveau
+type de données (la classe), de telle sorte que seules les opérations valides
+soient utilisables.
+
+Terminologie
+============
+
+.. rubric:: Le vocabulaire de la POO
+
+Une **classe** est donc équivalente à un **nouveau type de données**.
+On connaît déjà par exemple :class:`int` ou :class:`str`.
+
+Un **objet** ou une **instance** est un exemplaire particulier d'une
+classe. Par exemple ``"truc"`` est une instance de la classe :class:`str`.
+
+La plupart des classes **encapsulent** à la fois les données et les
+méthodes applicables aux objets. Par exemple un objet str contient une chaîne
+de caractères Unicode (les données) et de nombreuses méthodes comme
+:meth:`upper()`.
+
+On pourrait définir un objet comme une capsule, à savoir un "paquet" contenant
+des attributs et des méthodes :
+
+.. code-block:: python
+
+   objet = [attributs + méthodes]
+
+Beaucoup de classes offrent des caractéristiques supplémentaires comme par
+exemple la concaténation des chaînes en utilisant simplement l'opérateur ``+``.
+Ceci est obtenu grâce aux **méthodes spéciales**. Par exemple l'opérateur ``+``
+est utilisable car on a redéfini la méthode :meth:`__add__`.
+
+Les objets ont généralement deux sortes d'attributs : les données nommées
+simplement **attributs** et les fonctions applicables appelées **méthodes**. Par
+exemple un objet de la classe complex possède :
+
+* :attr:`imag` et :attr:`real`, ses attributs ;
+* beaucoup de méthodes, comme :meth:`conjugate()` ;
+* des méthodes spéciales pour le support des opérateurs : ``+``, ``-``, ``/``
+  ...
+
+Les attributs sont normalement implémentés comme des **variables d'instance**,
+particulières à chaque instance d'objet.
+
+Le mécanisme de :func:`property` permet un accès contrôlé aux données, ce
+qui permet de les valider et de les sécuriser.
+
+Un avantage décisif de la POO est qu'une classe Python peut toujours être
+spécialisée en une classe fille qui **hérite** alors de tous les attributs
+(données et méthodes) de sa **supper classe**.  Comme tous les attributs peuvent
+être redéfinis, une méthode de la classe fille et de la classe mère peut
+posséder le même nom mais effectuer des traitements différents
+(**surcharge**) et Python s'adaptera dynamiquement, dès l'affectation.
+
+En proposant d'utiliser un même nom de méthode pour plusieurs types d'objets
+différents, le **polymorphisme** permet une programmation beaucoup plus
+générique.
+
+Le développeur n'a pas à savoir, lorsqu'il programme une méthode, le type précis
+de l'objet sur lequel la méthode va s'appliquer.  Il lui suffit de savoir que
+cet objet implémentera la méthode.
+
+Enfin Python supporte également le **duck typing** : "s'il marche comme un
+canard et cancane comme un canard, alors c'est un canard !". Ce qui signifie que
+Python ne s'intéresse qu'au comportement des objets.
+
+Par exemple un objet fichier peut être créé par :func:`open()` ou par une
+instance de :class:`io.StringIO`.
+
+Les deux approches offrent la même API (interface de programmation),
+c'est-à-dire les mêmes méthodes.
+
+Classes et instanciation d'objets
+=================================
+
+L'instruction class
+-------------------
+
+.. rubric:: Syntaxe
+
+Instruction composée : en-tête (avec docstring) + corps indenté :
+
+.. code-block:: python
+
+   class C:
+       """Documentation de la classe."""
+       x = 23
+
+Dans cet exemple, :class:`C` est le nom de la **classe** (qui commence
+conventionnellement par une majuscule), et :attr:`x` est un **attribut de
+classe**, local à :class:`C`.
+
+L'instanciation et ses attributs
+--------------------------------
+
+* Les classes sont des fabriques d'objets : on construit d'abord l'usine avant
+  de produire des objets !
+* On **instancie** un objet (i.e. création, production depuis l'usine) en
+  appelant le nom de sa classe :
+
+.. code-block:: pycon
+
+   >>> a = C() # a est un objet de la classe C
+   >>> print(dir(a)) # affiche les attributs de l'objet a
+   ['__class__', '__delattr__', '__dict__', '__doc__', '__format__', ..., 'x']
+   >>> print(a.x) # x est un attribut de classe
+   23
+   >>> a.x = 12 # modifie l'attribut d'instance (attention...)
+   >>> print(C.x) # l'attribut de classe est inchangé
+   23
+   >>> a.y = 44 # nouvel attribut d'instance
+   >>> b = C() # b est un autre objet de la classe C
+   >>> print(b.x) # b connaît son attribut de classe, mais...
+   23
+   >>> print(b.y)
+   Traceback (most recent call last):
+     File "<stdin>", line 1, in <module>
+   AttributeError: 'C' object has no attribute 'y'
+
+L’introspection.
+----------------
+
+Plusieurs commandes magiques :
+
+* :func:`dir` fonction d'affichage des membres d'un objet,
+* ``is`` opérateur testant si les deux membres sont la même instance,
+* :func:`isinstance` fonction testant si une instance est bien d'un type
+  donné,
+* :func:`help` fonction d'affichage de l'aide sur un objet,
+* :func:`globals` permet d'afficher les variables globales,
+* :func:`locals` permet d'afficher les variables locales d'une fonction ou methode.
+
+Plusieurs attributs :
+
+* :attr:`__class__` pointe vers la classe de l'objet.
+* :attr:`__dict__` si l'objet est un **mutable**, ce dictionnaire
+  contient la liste des membres de l'instance.
+
+Retour sur les espaces de noms
+------------------------------
+
+Tout comme les fonctions, les classes possèdent leurs espaces de noms :
+
+* Chaque classe possède son propre espace de noms. Les variables qui en font
+  partie sont appelées attributs de classe.
+* Chaque objet instance (créé à partir d'une classe) obtient son propre espace
+  de noms. Les variables qui en font partie sont appelées attributs d'instance.
+* Les classes peuvent utiliser (mais pas modifier) les variables définies au
+  niveau principal.
+* Les instances peuvent utiliser (mais pas modifier) les variables définies au
+  niveau de la classe et les variables définies au niveau principal.
+  Les espaces de noms sont implémentés par des dictionnaires pour les modules,
+  les classes et les instances.
+* **Noms non qualifiés** (exemple :attr:`dimension`) l'affectation crée ou
+  change le nom dans la portée locale courante. Ils sont cherchés suivant la
+  règle LGI.
+* **Noms qualifiés** (exemple :attr:`dimension.hauteur`) l'affectation crée ou
+  modifie l'attribut dans l'espace de noms de l'objet. Un attribut est cherché
+  dans l'objet, puis dans toutes les classes dont l'objet dépend (mais pas dans
+  les modules).
+
+L'exemple suivant affiche le dictionnaire lié à la classe :class:`C` puis la
+liste des attributs liés à une instance de :class:`C` :
+
+.. code-block:: pycon
+
+   >>> class C:
+   ...    x = 20
+   >>> print(C.__dict__)
+   {'__dict__': <attribute '__dict__' of 'C' objects>, 'x': 20,
+   '__module__': '__main__', '__weakref__': <attribute '__weakref__' of 'C' objects>,
+   '__doc__': None}
+   >>> a = C()
+   >>> print(dir(a))
+   ['__class__', '__delattr__', '__dict__', '__doc__', '
+   __getattribute__', '__hash__', '__init__', '__module__', '__new__', '
+   __reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__str__', '
+   __weakref__', 'x']
+
+Méthodes
+========
+
+.. rubric:: Syntaxe
+
+Une méthode s'écrit comme une fonction du corps de la classe avec un premier
+paramètre :obj:`self` obligatoire, où :obj:`self` représente l'objet sur lequel
+la méthode sera appliquée. [#self_conv]_
+
+Autrement dit :obj:`self` est la référence d'instance.
+
+.. code-block:: python
+
+   class C:
+       x = 23 # x et y : attributs de classe
+       y = x + 5
+
+       def affiche(self): # méthode affiche()
+           self.z = 42 # attribut d'instance
+           print(C.y) # dans une méthode, on qualifie un attribut de classe,
+           print(self.z) # mais pas un attribut d'instance
+
+   ob = C() # instanciation de l'objet ob
+   ob.affiche() # 28 42 (à l'appel, ob affecte self)
+
+.. [#self_conv] L'utilisation du terme :obj:`self` est une convention, contrairement à Javascript qui impose le terme :obj:`this`.
+
+
+Méthodes spéciales
+==================
+
+Les méthodes spéciales
+----------------------
+
+Ces méthodes portent des noms pré-définis, précédés et suivis de deux caractères
+de soulignement.
+
+Elles servent :
+
+* à initialiser l'objet instancié ;
+* à modifier son affichage ;
+* à surcharger ses opérateurs ;
+* ...
+
+L'initialisateur
+----------------
+
+Lors de l'instanciation d'un objet, la méthode :meth:`__init__` est
+automatiquement invoquée. Elle permet d'effectuer toutes les initialisations
+nécessaires :
+
+.. code-block:: pycon
+
+   >>> class C:
+   ...    def __init__(self, n):
+   ...        self.x = n # initialisation de l'attribut d'instance x
+   >>> une_instance = C(42) # paramètre obligatoire, affecté à n
+   >>> print(une_instance.x)
+   42
+
+C'est une **procédure** automatiquement invoquée lors de l'instanciation :
+elle ne contient **jamais** l'instruction ``return``. Le cas échéant,
+celle-ci est ignorée.
+
+Surcharge des opérateurs
+------------------------
+
+La surcharge permet à un opérateur de posséder un sens différent suivant le type
+de leurs opérandes. Par exemple, l'opérateur ``+`` permet :
+
+.. code-block:: python
+
+   x = 7 + 9 # addition entière
+   s = 'ab' + 'cd' # concaténation
+
+Python possède des méthodes de surcharge pour :
+
+* tous les types (:meth:`__call__`, :meth:`__str__`, ...) ;
+* les nombres (:meth:`__add__`, :meth:`__div__`, ...) ;
+* les séquences (:meth:`__len__`, :meth:`__iter__`, ...).
+
+Soient deux instances, :obj:`obj1` et :obj:`obj2`, les méthodes spéciales
+suivantes permettent d'effectuer les opérations arithmétiques courantes :
+
+.. list-table::
+
+   * - Nom
+     - Méthode spéciale
+     - Utilisation
+   * - opposé
+     - :meth:`__neg__`
+     - :samp:`-{obj1}`
+   * - addition
+     - :meth:`__add__`
+     - :samp:`{obj1} + {obj2}`
+   * - soustraction
+     - :meth:`__sub__`
+     - :samp:`{obj1} - {obj2}`
+   * - multiplication
+     - :meth:`__mul__`
+     - :samp:`{obj1} * {obj2}`
+   * - division
+     - :meth:`__div__`
+     - :samp:`{obj1} / {obj2}`
+
+Exemple de surcharge
+--------------------
+
+.. code-block:: python
+
+   class Vecteur2D:
+       def __init__(self, x, y):
+           self.x = x
+           self.y = y
+
+       def __add__(self, autre): # addition vectorielle
+           return Vecteur2D(self.x + autre.x, self.y + autre.y)
+
+       def __str__(self): # affichage d'un Vecteur2D
+           return "Vecteur({:g}, {:g})" % (self.x, self.y)
+
+   v1 = Vecteur2D(1.2, 2.3)
+   v2 = Vecteur2D(3.4, 4.5)
+
+   print(v1 + v2) # Vecteur(4.6, 6.8)
+
+Héritage et polymorphisme
+=========================
+
+Héritage et polymorphisme
+-------------------------
+
+.. glossary::
+
+  Héritage
+    L'**héritage** est le mécanisme qui permet de se servir d'une classe
+    préexistante pour en créer une nouvelle qui possédera des fonctionnalités
+    différentes ou supplémentaires.
+
+  Polymorphisme
+    Le **polymorphisme** est la faculté pour une méthode portant le même nom
+    mais appartenant à des classes distinctes héritées d'effectuer un travail
+    différent. Cette propriété est acquise par la technique de la surcharge.
+
+Exemple d'héritage et de polymorphisme
+--------------------------------------
+
+Dans l'exemple suivant, la classe Carre hérite de la classe Rectangle, et la
+méthode :meth:`__init__` est polymorphe :
+
+.. code-block:: python
+
+   class Rectangle:
+       def __init__(self, longueur=30, largeur=15):
+           self.L, self.l, self.nom = longueur, largeur, "rectangle"
+
+   class Carre(Rectangle):
+       def __init__(self, cote=10):
+           Rectangle.__init__(self, cote, cote)
+           self.nom = "carré"
+
+   r = Rectangle()
+   print(r.nom) # 'rectangle'
+   c = Carre()
+   print(c.nom) # 'carré'
+
+Retour sur l'exemple initial
+============================
+
+La classe Cercle : conception
+-----------------------------
+
+Nous allons tout d'abord concevoir une classe :class:`Point` héritant de la
+classe mère :class:`object`.
+
+Puis nous pourrons l'utiliser comme classe de base de la classe :class:`Cercle`.
+
+Dans les schémas UML (Unified Modeling Language ) ci-dessous, les attributs en
+italiques sont hérités, ceux en casse normale sont nouveaux et ceux en gras
+sont redéfinis (surchargés).
+
+.. figure:: ConceptionUMLDeLaClasseCercle.jpg
+   :align: center
+
+   Conception UML de la classe Cercle.
+
+La classe Cercle
+----------------
+
+Voici le code de la classe Point :
+
+.. code-block:: python
+
+   class Point:
+
+       def __init__(self, x=0, y=0):
+           self.x, self.y = x, y
+
+       @property
+       def distance_origine(self):
+           return math.hypot(self.x, self.y)
+
+       def __eq__(self, other):
+           return self.x == other.x and self.y == other.y
+
+       def __str__(self):
+           return "({0.x!s}, {0.y!s})".format(self)
+
+L'utilisation du décorateur property permet un accès en lecture seule au
+résultat de la méthode :meth:`distance_origine()` considérée alors comme un
+simple attribut (car il n'y a pas de parenthèse) :
+
+.. code-block:: python
+
+   if __name__ == "__main__":
+       p1, p2 = Point(), Point(3, 4)
+       print(p1 == p2) # False
+       print(p2, p2.distance_origine) # (3, 4) 5.0
+
+De nouveau, les méthodes renvoyant un simple flottant seront utilisées comme
+des attributs grâce à :func:`property` :
+
+.. code-block:: python
+
+   class Cercle(Point):
+
+       def __init__(self, rayon, x=0, y=0):
+           super().__init__(x, y)
+           self.rayon = rayon
+
+       @property
+       def aire(self):
+           return math.pi * (self.rayon ** 2)
+
+       @property
+       def circonference(self):
+           return 2 * math.pi * self.rayon
+
+       @property
+       def distance_bord_origine(self):
+           return abs(self.distance_origine - self.rayon)
+
+Voici la syntaxe permettant d'utiliser la méthode :meth:`rayon` comme un
+attribut en lecture-écriture.
+
+Remarquez que la méthode :meth:`rayon()` retourne l'attribut protégé :
+:attr:`__rayon` qui sera modifié par le :meth:`setter` (la méthode
+modificatrice) :
+
+.. code-block:: python
+
+   class Cercle(Cercle):
+
+       @property
+       def rayon(self):
+           return self.__rayon
+
+       @rayon.setter
+       def rayon(self, rayon):
+           assert rayon > 0, "rayon strictement positif"
+           self.__rayon = rayon
+
+Exemple d'utilisation des instances de :class:`Cercle` :
+
+.. code-block:: python
+
+   class Cercle(Cercle):
+
+       def __eq__(self, other):
+           return (self.rayon == other.rayon
+               and super().__eq__(other))
+
+       def __str__(self):
+           return ("{0.__class__.__name__}({0.rayon!s}, {0.x!s}, "
+               "{0.y!s})".format(self))
+
+   if __name__ == "__main__":
+       c1 = Cercle(2, 3, 4)
+       print(c1, c1.aire, c1.circonference)
+       # Cercle(2, 3, 4) 12.5663706144 12.5663706144
+       print(c1.distance_bord_origine, c1.rayon) # 3.0 2
+       c1.rayon = 1 # modification du rayon
+       print(c1.distance_bord_origine, c1.rayon) # 4.0 1
+
+Notion de Conception Orientée Objet
+===================================
+
+Suivant les relations que l'on va établir entre les objets de notre
+application, on peut concevoir nos classes de deux façons possibles :
+
+* la **composition** qui repose sur la relation **a-un** ou sur la
+  relation **utilise-un** ;
+* la **dérivation** qui repose sur la relation **est-un**.
+
+Bien sûr, ces deux conceptions peuvent cohabiter, et c'est souvent le cas !
+
+Composition
+-----------
+
+.. glossary::
+
+  Composition
+    La composition est la collaboration de plusieurs classes distinctes via une
+    association (utilise-un) ou une aggrégation (a-un).
+
+La classe composite bénéficie de l'ajout de fonctionnalités d'autres classes qui
+n'ont rien en commun.
+
+L'implémentation Python utilisée est généralement l'instanciation de classes
+dans le constructeur de la classe composite.
+
+Exemple :
+
+.. code-block:: python
+
+   class Point:
+       def __init__(self, x, y):
+           self.px, self.py = x, y
+
+   class Segment:
+       """Classe composite utilisant la classe distincte Point."""
+       def __init__(self, x1, y1, x2, y2):
+           self.orig = Point(x1, y1) # Segment "a-un" Point origine,
+           self.extrem = Point(x2, y2) # et "a-un" Point extrémité
+
+       def __str__(self):
+           return ("Segment : [({:g}, {:g}), ({:g}, {:g})]"
+                   .format(self.orig.px, self.orig.py,
+                   self.extrem.px, self.extrem.py))
+
+   s = Segment(1.0, 2.0, 3.0, 4.0)
+   print(s) # Segment : [(1, 2), (3, 4)]
+
+Dérivation
+==========
+
+.. glossary::
+
+  Dérivation
+    La dérivation décrit la création de sous-classes par spécialisation.
+
+On utilise dans ce cas le mécanisme de l'héritage.
+
+L'implémentation Python utilisée est généralement l'appel dans le constructeur
+de la classe dérivée du constructeur de la classe parente, soit nommément, soit
+grâce à l'instruction :func:`super`.
+
+Exemple :
+
+.. code-block:: python
+
+   class Rectangle:
+       def __init__(self, longueur=30, largeur=15):
+           self.L, self.l, self.nom = longueur, largeur, "rectangle"
+
+   class Carre(Rectangle): # héritage simple
+       """Sous-classe spécialisée de la super-classe Rectangle."""
+       def __init__(self, cote=20):
+           # appel au constructeur de la super-classe de Carre :
+           super().__init__(cote, cote)
+           self.nom = "carré" # surcharge d'attribut

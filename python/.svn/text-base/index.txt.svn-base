@@ -1,0 +1,36 @@
+.. -*- coding: utf-8 -*-
+
+.. _presentation_python:
+
+======================
+Presentation de Python
+======================
+
+Le but est de connaître le langage python, de comprendre les standards utilisés
+par la communauté Plone.
+
+Nous avons pris le parti de présenter Python 3 bien que Plone 4 soit développé
+avec Python 2.6, les différences entre les deux versions seront présentées.
+
+Ce cours est issu du cours de Robert Cordeau disponible à l'adresse
+http://www.afpy.org/Members/bcordeau/Python3v1-1.pdf/download
+
+Afin de respecter la licence initiale définie par Robert Cordeau, cette
+présentation de Python est sous les termes de la licence Paternité-Pas
+d'Utilisation Commerciale-Partage des Conditions Initiales à l'Identique 2.0
+France accessible à http://creativecommons.org/licenses/by-nc-sa/2.0/fr
+
+.. toctree::
+   :maxdepth: 2
+
+   introduction
+   installation
+   console
+   controle_flux_instructions
+   conteneurs_standard
+   fonctions_espaces_noms
+   modules_packages
+   programmation_orientee_objet
+   techniques_avancees_programmation
+
+.. todo:: Placer en un point unique les termes du glossaire Python.

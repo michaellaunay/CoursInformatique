@@ -1,0 +1,318 @@
+.. -*- coding: utf-8 -*-
+
+.. _python_controle_flux_instructions:
+
+==================================
+Le contrôle du flux d'instructions
+==================================
+
+Un script Python est formé d'une suite d'instructions exécutées en séquence de
+haut en bas.
+
+Chaque ligne d'instructions est formée d'une ou plusieurs lignes physiques qui
+peuvent être continuées par un antislash ``\\`` ou un caractère ouvrant ``[`` ou
+``(`` ou ``{`` pas encore fermé.
+
+Cette exécution en séquence peut être modifiée pour choisir ou répéter des
+portions de code. C'est l'objet principal de ce chapitre.
+
+Les instructions composées
+==========================
+
+.. glossary::
+
+   Instruction composée
+     Une instruction composée est constituée :
+       - d'une ligne d'en-tête terminée par deux-points ;
+       - d'un bloc d'instructions indenté par rapport à la ligne d'en-tête.
+
+.. important::
+
+   Toutes les instructions au même niveau d'indentation appartiennent au
+   même bloc
+
+.. figure:: LesInstructionsComposees.jpg
+   :align: center
+
+   Les instructions composées.
+
+Exemple :
+
+.. code-block:: python
+
+   somme = 0.0
+   nb_valeurs = 0
+   for v in valeurs:
+       nb_valeurs = nb_valeurs + 1
+       somme = somme + valeurs
+   moyenne = somme / nb_valeurs
+
+.. tip::
+
+   N'indentez pas avec des tabulations. Bien que Python admette les tabulations
+   pour indenter le code source, il est vivement recommandé d'utiliser 4 espaces
+   à cette fin.
+
+On a souvent besoin d'imbriquer les instructions composées :
+
+.. code-block:: python
+
+   if a == 0:
+       if b != 0:
+           print("\nx = {:.2f}".format(-c/b))
+       else:
+           print("\nPas de solution.")
+   else:
+       delta = b**2 - 4*a*c
+       if delta > 0.0:
+           rac_delta = sqrt(delta)
+           print("\nx1 = {:.2f} \t x2 = {:.2f}"
+             .format((-b-rac_delta)/(2*a), (-b+rac_delta)/(2*a)))
+       elif delta < 0.0:
+           print("\nPas de racine réelle.")
+       else:
+           print("\nx = {:.2f}".format(-b/(2*a)))
+
+Choisir
+=======
+
+Choisir : if - [elif] - [else]
+------------------------------
+
+Contrôler une alternative :
+
+.. code-block:: python
+
+   if x < 0:
+       print("x est négatif")
+   elif x % 2:
+       print("x est positif et impair")
+   else:
+       print("x n'est pas négatif et est pair")
+
+Test d'une valeur booléenne :
+
+.. code-block:: python
+
+   if x: # mieux que (if x is True:) ou que (if x == True:)
+       pass
+
+Syntaxe compacte d'une alternative
+----------------------------------
+
+Pour trouver, par exemple, le minimum de deux nombres, on peut utiliser
+l'opérateur ternaire (repris du C) :
+
+.. code-block:: python
+
+   x, y = 4, 3
+   # Ecriture classique :
+   if x < y:
+       plus_petit = x
+   else:
+       plus_petit = y
+   # Utilisation de l'opérateur ternaire :
+   plus_petit = x if x < y else y
+   print("Plus petit : ", plus_petit) # 3
+
+Boucler
+=======
+
+Boucler : while
+---------------
+
+Répéter une portion de code :
+
+.. code-block:: python
+
+   x, cpt = 257, 0
+   print("L'approximation de log2 de", x, "est", end=" ")
+   while x > 1:
+       x //= 2 # division avec troncature
+       cpt += 1 # incrémentation
+   print(cpt, "\n") # 8
+
+Utilisation classique : la saisie filtrée d'une valeur numérique (on doit
+préciser le type car :command:`input()` saisit une chaîne) :
+
+.. code-block:: python
+
+    n = int(input('Entrez un entier [1 .. 10] : '))
+    while not(1 <= n <= 10):
+        n = int(input('Entrez un entier [1 .. 10], S.V.P. : '))
+
+Parcourir : for
+---------------
+
+Parcourir un itérable (tout conteneur que l'on peut parcourir élément par
+élément, dans l'ordre ou non, suivant son type) :
+
+.. code-block:: python
+
+   for lettre in "ciao":
+       print(lettre, end=" ") # c i a o
+   for x in [2, 'a', 3.14]:
+       print(x, end=" ") # 2 a 3.14
+   for i in range(5):
+       print(i, end=" ") # 0 1 2 3 4
+
+Ruptures de séquences
+=====================
+
+Interrompre une boucle : break
+------------------------------
+
+Sort immédiatement de la boucle :command:`for` ou :command:`while` en cours
+contenant l'instruction :
+
+.. code-block:: python
+
+   for x in range(1, 11): # 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+       if x == 5:
+           break
+       print(x, end=" ")
+   print("\nBoucle interrompue pour x =", x)
+   # affiche :
+   # 1 2 3 4
+   # Boucle interrompue pour x = 5
+
+Court-circuiter une boucle : continue
+-------------------------------------
+
+Passe immédiatement à l'itération suivante de la boucle :command:`for` ou
+:command:`while` en cours contenant l'instruction ; reprend à la ligne de
+l'en-tête de la boucle :
+
+.. code-block:: python
+
+   for x in range(1, 11): # 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+       if x == 5:
+           continue
+       print(x, end=" ")
+   print("\nLa boucle a sauté la valeur 5")
+   # affiche :
+   # 1 2 3 4 6 7 8 9 10
+   # La boucle a sauté la valeur 5
+
+Syntaxe complète des boucles
+----------------------------
+
+**while - else**
+
+Les boucles :command:`while` et :command:`for` peuvent posséder une clause
+:command:`else` qui ne s'exécute que si la boucle se termine normalement,
+c'est-à-dire sans interruption :
+
+.. code-block:: python
+
+   y = int(input("Entrez un entier positif : "))
+   while not(y > 0):
+       y = int(input('Entrez un entier positif, S.V.P. : '))
+   x = y // 2
+   while x > 1:
+       if y % x == 0:
+           print("{} a pour facteur {}".format(y, x))
+           break # voici l'interruption !
+       x -= 1
+   else:
+       print(y, "est premier.")
+
+**for - else**
+
+Un exemple avec le parcours d'une liste :
+
+.. code-block:: python
+
+   une_sequence = [2, 5, 9, 7, 11]
+   cible = int(input("Entrez un entier : "))
+   for i in une_sequence:
+       if i == cible:
+           sauve = i
+           break # voici l'interruption !
+   else:
+       print(cible, "n'est pas dans", une_sequence)
+       sauve = None
+   # sauve vaut donc cible ou None :
+   print("On obtient sauve =", sauve)
+
+Exceptions
+----------
+
+Afin de rendre les applications plus robustes, il est nécessaire de gérer les
+erreurs d'exécution des parties sensibles du code.
+
+Le mécanisme des **exceptions** sépare d'un côté la séquence d'instructions
+à exécuter lorsque tout se passe bien, et d'un autre côté, une ou plusieurs
+séquences d'instructions à exécuter en cas d'erreur.
+
+Lorsqu'une erreur survient, un **objet exception** est passé au mécanisme
+de propagation des exceptions, et l'exécution est transférée à la séquence de
+traitement ad doc.
+
+Le mécanisme s'effectue en deux phases :
+
+ * la levée d'exception lors de la détection d'erreur ;
+ * le traitement approprié.
+
+.. rubric:: Syntaxe
+
+La séquence normale d'instructions est placée dans un bloc :command:`try`.
+
+Si une erreur est détectée (levée d'exception), elle est traitée dans le bloc
+:command:`except` approprié (le gestionnaire d'exception).
+
+.. code-block:: python
+
+   from math import sin
+   for x in range(-4, 5): # -4, -3, -2, -1, 0, 1, 2, 3, 4
+       try:
+           print('{:.3f}'.format(sin(x)/x), end=" ")
+       except ZeroDivisionError: # toujours fournir une exception
+           print(1.0, end=" ") # gère l'exception en 0
+   # -0.189 0.047 0.455 0.841 1.0 0.841 0.455 0.047 -0.189
+
+Toutes les exceptions levées par Python sont des instances de sous-classe de la
+classe :class:`Exception`.
+
+La hiérarchie des sous-classes offre une vingtaine d'exceptions standard.
+
+L'instruction :command:`raise` permet de lever volontairement une exception :
+
+.. code-block:: python
+
+   x = 2
+   if not(0 <= x <= 1):
+       raise ValueError("x n'est pas dans [0 .. 1]")
+
+Syntaxe complète d'une exception :
+
+.. code-block:: python
+
+   try:
+       ... # séquence normale d'exécution
+   except <exception_1>:
+       ... # traitement de l'exception 1
+   except <exception_2>:
+       ... # traitement de l'exception 2
+   ...
+   else:
+       ... # clause exécutée en l'absence d'erreur
+   finally:
+       ... # clause toujours exécutée
+
+.. note::
+
+   En python 2.6, il est encore possible de lever une exception avec une simple
+   chaîne
+
+   .. code-block:: python
+
+      >>> raise "Une exception"
+      Traceback (most recent call last):
+        File ...
+      Une exception
+
+   Contrairement à Python 3, où il faut impérativement une instance dérivée de
+   :class:`BaseException`.
+
+

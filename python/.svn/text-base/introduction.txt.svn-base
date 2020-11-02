@@ -1,0 +1,259 @@
+.. -*- coding: utf-8 -*-
+
+.. _python_introduction:
+
+============
+Introduction
+============
+
+Ce premier chapitre introduit les grandes caractéristiques du langage Python,
+replace Python dans l'histoire des langages, donne les particularités de
+production des scripts, défini la notion si importante d'algorithme et conclut
+sur les divers implémentations disponibles.
+
+Principales caractéristiques du langage Python
+==============================================
+
+Historique
+----------
+
+- 1991 : Guido van Rossum publie Python au CWI (Pays-Bas) à partir du langage
+  ABC et du projet AMOEBA (système d'exploitation distribué)
+- 1996 : sortie de Numerical Python
+- 2001 : naissance de de la PSF (Python Software Fundation)
+- Les versions se succèdent... Un grand choix de modules disponibles, des
+  colloques annuels sont organisés, Python est enseigné dans plusieurs
+  universités et est utilisé en entreprise...
+- Fin 2008 : sorties simultanées de Python 2.6 et de Python 3
+
+Langage Open Source
+-------------------
+
+- Licence Open Source CNRI, compatible GPL, mais sans la restriction copyleft.
+  Python est libre et gratuit même pour les usages commerciaux
+- GvR (Guido van Rossum) est le "BDFL" (dictateur bénévole à vie !)
+- Importante communauté de développeurs
+- Nombreux outils standard disponibles : Batteries included
+
+Travail interactif
+------------------
+
+- Nombreux interpréteurs interactifs disponibles
+- Importantes documentations en ligne
+- Développement rapide et incrémentiel
+- Tests et débogage faciles
+- Analyse interactive de données
+
+Langage interprété rapide
+-------------------------
+
+- Interprétation du bytecode compilé
+- De nombreux modules sont disponibles à partir de bibliothèques optimisées
+  écrites en C, C++ ou FORTRAN
+
+Simplicité du langage (cf. Zen of Python p. 101)
+------------------------------------------------
+
+- Syntaxe claire et cohérente
+- Indentation significative
+- Gestion automatique de la mémoire (garbage collecteur)
+- Typage dynamique fort : pas de déclaration
+
+Orientation objet
+-----------------
+
+- Modèle objet puissant mais pas obligatoire
+- Structuration multifichier très facile des applications : facilite les
+  modifications et les extensions
+- Les classes, les fonctions et les méthodes sont des objets dits de première
+  classe. Ces objets sont traités comme tous les autres (on peut les affecter,
+  les passer en paramètre)
+
+Ouverture au monde
+------------------
+
+- Interfaçable avec C/C++/FORTRAN
+- Langage de script de plusieurs applications importantes
+- Excellente portabilité
+
+Disponibilité de bibliothèques
+------------------------------
+
+ - Plusieurs milliers de packages sont disponibles dans tous les domaines
+
+Environnements matériel et logiciel
+===================================
+
+L'ordinateur
+------------
+
+On peut simplifier la définition de l'ordinateur de la façon suivante :
+
+L'ordinateur comprend entre autres :
+
+* un microprocesseur avec une UC (Unité de Contrôle), une UAL (Unité
+  Arithmétique et Logique), une horloge, une mémoire cache rapide ;
+* de la mémoire volatile (dite vive ou RAM), contenant les instructions et les
+  données nécessaires à l'exécution des programmes.
+  La RAM est formée de cellules binaires (bits) organisées en mots de 8 bits
+  (octets) ;
+* des périphériques : entrées/sorties, mémoires permanentes (dite mortes :
+  disque dur, clé USB, CD-ROM...), réseau...
+
+Deux sortes de programmes
+-------------------------
+
+On distingue, pour faire rapide :
+
+* Le système d'exploitation : ensemble des programmes qui gèrent les
+  ressources matérielles et logicielles. Il propose une aide au dialogue entre
+  l'utilisateur et l'ordinateur : l'interface textuelle (interprèteur de
+  commande) ou graphique (gestionnaire de fenêtres). Il est souvent multitâche
+  et parfois multiutilisateur ;
+* les programmes applicatifs sont dédiés à des tâches particulières. Ils sont
+  formés d'une série de commandes contenues dans un programme source qui est
+  transformé pour être exécuté par l'ordinateur.
+
+Les langages
+============
+
+Des langages de différents niveaux
+----------------------------------
+
+* Chaque processeur possède un langage propre, directement exécutable : le
+  langage machine. Il est formé de 0 et de 1 et n'est pas portable, mais c'est
+  le seul que l'ordinateur puisse utiliser ;
+* le langage d'assemblage est un codage alphanumérique du langage machine.
+  Il est plus lisible que le langage machine, mais n'est toujours pas portable.
+  On le traduit en langage machine par un assembleur ;
+* les langages de haut niveau. Souvent normalisés, ils permettent le portage
+  d'une machine à l'autre. Ils sont traduits en langage machine par un
+  compilateur ou un interpréteur.
+
+Bref historique des langages
+----------------------------
+
+* Années 50 (approches expérimentales) : FORTRAN, LISP, COBOL, ALGOL...
+* Années 60 (langages universels) : PL/1, Simula, Smalltalk, Basic...
+* Années 70 (génie logiciel) : C, PASCAL, ADA, MODULA-2...
+* Années 80 (programmation objet) : C++, LabView, Eiffel, Perl, VisualBasic...
+* Années 90 (langages interprétés objet) : Java, tcl/Tk, Ruby, Python...
+* Années 2000 (langages commerciaux propriétaires) : C#, VB.NET...
+
+Des centaines de langages ont été créés, mais l'industrie n'en utilise qu'une
+minorité.
+
+Production des programmes
+=========================
+
+Deux techniques de production des programmes
+--------------------------------------------
+
+La compilation est la traduction du source en langage objet. Elle comprend au
+moins quatre phases (trois phases d'analyse | lexicale, syntaxique et
+sémantique | et une phase de production de code objet). Pour générer le langage
+machine il faut encore une phase particulière : l'édition de liens. La
+compilation est contraignante mais offre au final une grande vitesse
+d'exécution.
+
+.. figure:: ChaineDeCompilation.jpg
+   :align: center
+
+   Chaîne de compilation
+
+Dans la technique de l'interprétation chaque ligne du source analysé est
+traduite au fur et à mesure en instructions directement exécutées. Aucun
+programme objet n'est généré. Cette technique est très souple mais les codes
+générés sont peu performants : l'interpréteur doit être utilisé à chaque
+exécution...
+
+.. figure:: TechniqueDeLInterpretation.jpg
+   :align: center
+
+   Technique de l'interprétation
+
+Technique de production de Python
+---------------------------------
+
+* Technique mixte : l'interprétation du bytecode compilé. Bon compromis entre
+  la facilité de développement et la rapidité d'exécution ;
+* le bytecode (forme intermédiaire) est portable sur tout ordinateur muni de
+  la machine virtuelle Python.
+
+.. figure:: InterpretationDuBytecodeCompile.jpg
+   :align: center
+
+   Interprétation du bytecode compilé
+
+La construction des programmes
+------------------------------
+
+Le génie logiciel étudie les méthodes de construction des programmes.
+Plusieurs modèles sont envisageables, entre autres :
+
+* la méthodologie **procédurale**. On emploie l'analyse descendante (division
+  des problèmes) et remontante (réutilisation d'un maximum de sous
+  algorithmes). On s'efforce ainsi de décomposer un problème complexe en sous-
+  programmes plus simples. Ce modèle structure d'abord les actions ;
+* la méthodologie **objet**. On conçoit des fabriques (classes) qui servent à
+  produire des composants (objets) qui contiennent des données (attributs) et
+  des actions (méthodes). Les classes dérivent (héritage et polymorphisme) de
+  classes de base dans une construction hiérarchique.
+
+Python offre les deux techniques.
+
+Algorithme et programme
+=======================
+
+Définitions
+-----------
+
+.. todo:: Déplacer les entrées "glossary" de la présentattion Python à l'mplacement ad hoc
+
+.. glossary::
+
+    Algorithme
+        Ensemble des étapes permettant d'atteindre un but en répétant un
+        nombre fini de fois un nombre fini d'instructions. Un algorithme se
+        termine en un **temps fini**.
+
+    Programme
+        un programme est la **traduction d'un algorithme** en un langage
+        compilable ou interprétable par un ordinateur.
+        Il est souvent écrit en plusieurs parties dont une qui pilote les
+        autres : le **programme principal**.
+
+La présentation des programmes
+------------------------------
+
+Un programme source est destiné à l'être humain. Pour en faciliter la lecture,
+il doit être judicieusement commenté.
+
+La signification de parties non triviales (et uniquement celles-là) doit être
+expliquée par un commentaire.
+
+Un commentaire commence par le caractère # et s'étend jusqu'à la fin de la
+ligne :
+
+.. code-block:: python
+
+  #---------------------
+  # Voici un commentaire
+  #---------------------
+
+  x = 9 + 2 # En voici un autre
+
+Les implémentations de Python
+=============================
+
+* CPython : Classic Python, codé en C, portable sur différents systèmes
+* Python3000 : Python 3, la nouvelle implémentation de CPython
+* Jython : ciblé pour la JVM (utilise le bytecode de JAVA)
+* IronPython : Python.NET, écrit en C#, utilise le MSIL (MicroSoft Intermediate
+  Language)
+* Stackless Python : élimine l'utilisation de la pile du langage C (permet de
+  récurser tant que l'on veut)
+* Pypy : projet de recherche européen d'un interpréteur Python écrit en Python
+* Unladen Swallow est un nouveau projet de Google utilisant les techniques de
+  compilation JIT de Java. Ce projet, encore au stade de développement
+  multipliera par 5 la vitesse d'exécution de Python.

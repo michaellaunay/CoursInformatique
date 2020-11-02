@@ -1,0 +1,57 @@
+L'association CultureDiffusion souhaite réaliser une bibliothèque numérique à gestion décentralisée.
+Le principe est de permettre à chaque membre de numériser les oeuvres et aux bibliothécaires de les proposer à l'emprunt selon deux modalités.
+Toutes les oeuvres du domaine publique sont accessibles gratuitement, toutes les oeuvres sous droits sont proposées en location pour une période de 2 semaines.
+Lorsqu'une oeuvre passe dans le domaine public, elle devient accessible gratuitement et est diffusée aux membres ayant accordé à l'application suffisamment d'espace disque.
+Chaque membre de la bibliothèque peut emprunter ou louer une oeuvre.
+Chaque membre peut proposer une oeuvre et ainsi enrichir la bibliothèque.
+Chaque oeuvre est constituée d'un fichier contenant l'oeuvre et d'un fichier au format json contenant les informations sur l'oeuvre.
+L'application bibliothèque possède un index des oeuvres qui est mis à jour à chaque ajout ou suppression d'oeuvre.
+L'application possède quatre rubriques proposées sous forme de répertoires.
+Un répertoire "fond_commun" avec une partie des oeuvres libres de droits de l'association.
+Un répertoire "emprunts" avec les oeuvres sous droit empruntées par le membre qui sont chiffrées avec sa clé.
+Un répertoire "séquestre" avec une partie des oeuvres sous droit gérée par l'association, tous les fichiers y sont chiffrés, l'index n'y est pas accessible de façon directe.
+Un répertoire "à modérer" avec les oeuvres que le membres a proposées.
+Lorsqu'une oeuvre est proposée par un membre, elle est soumise à modération.
+Les bibliothècaires voient les oeuvres soumises, vérifient et complètent les données telles que les auteurs, éditeur, langue, pays d'origine, date de publication, droits, catégorie de l'oeuvre, format du support, puis ils décident du statut de l'oeuvre et donc si elle est dans le domaine public ou non, ou si elle est rejetée.
+Selon le statut de l'oeuvre modérée, l'application range dans la bonne rubrique et gère les droits d'accès.
+Si l'oeuvre est dans le domaine public il peut y en avoir autant de copie qu'il y a de membre.
+Si l'oeuvre est protégée alors il ne peut y avoir que 3 fois plus de copies que de licence d'exploitation, et chaque oeuvre est chiffrée par une clé différente ayant une date de validité.
+À la fin de la validité d'un emprunt, l'application bibliothèque supprime automatiquement l'oeuvre du répertoire du membre.
+Les oeuvres sont classées selon les types et sous-types suivants :
+Article
+Livre :
+    BD
+    Enfants
+    Romans
+    Livre technique
+    Education
+    Loisir
+    Culture
+    Sante
+    etc
+Musique :
+    Classique
+    Jazz/Funk/Soul
+    Pop
+    Metal
+    etc
+Vidéos :
+    SF
+    Histoire
+    Série
+    Documentaire
+    etc
+
+Certaines oeuvres appartiennent à plusieurs catégories en même temps.
+
+On utilisera PlantUML.
+Réalisez le glossaire.
+Réalisez le diagramme de cas d'utilisations.
+Listez les scénarios de l'application, ajouter ceux fondamentaux n'apparaissant pas dans le cahier des charges.
+Triez les scénarios par ordre d'importance.
+Réalisez les 4 diagrammes de séquence système les plus importants.
+Réalisez les 5 diagrammes de classes des scénarios les plus importants.
+Faites un choix d'architecture et justifiez le.
+Quels design pattern utilisez vous et pourquoi ?
+Réalisez le diagramme de classe détaillant les associations et leur cardinalité.
+

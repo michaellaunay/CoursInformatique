@@ -1,0 +1,303 @@
+.. -*- coding: utf-8 -*-
+
+.. _python_fonctions_espaces_noms:
+
+============================
+Fonctions et espaces de noms
+============================
+
+.. note::
+
+   Les fonctions sont les éléments structurants de base de tout langage
+   procédural.
+
+Elles offrent différents avantages :
+
+- **Évite la répétition** : on peut < factoriser > une portion de code qui
+  se répète lors de l'exécution en séquence d'un script ;
+- **Met en relief les données et les résultats** : entrées et sorties de la
+  fonction ;
+- **Permet la réutilisation** : mécanisme de l'import ;
+- **Décompose une tâche complexe en tâches plus simples** : conception de
+  l'application.
+
+Ces avantages sont illustrés ci-dessous :
+
+.. figure:: EviteLaDuplicationDeCode.jpg
+   :align: center
+
+   Exemple (a) Évite la duplication de code.
+
+------------
+
+.. figure:: MetEnReliefEntreesEtSorties.jpg
+   :align: center
+
+   Exemple (b) Met en relief entrées et sorties.
+
+------------
+
+.. figure:: LImportPermetLaReutilisation.jpg
+   :align: center
+
+   Exemple (c) L'import permet la réutilisation.
+
+------------
+
+.. figure:: AmelioreLaConception.jpg
+   :align: center
+   :scale: 50
+
+   Exemple (d) Améliore la conception.
+
+Définition et syntaxe
+=====================
+
+.. glossary::
+
+  Fonction
+    Groupe d'instructions regroupé sous un nom (définition) et s'exécutant à
+    la demande (appel).
+
+.. rubric:: Syntaxe
+
+C'est une instruction composée :
+
+.. code-block:: python
+
+   def nomFonction(parametre_1, ...):
+       """Documentation de la fonction."""
+       # <bloc_instructions>*
+
+Le bloc d'instructions est obligatoire. S'il est vide, on emploie l'instruction
+:samp:`pass`.
+
+La documentation (facultative) est fortement conseillée.
+
+Passage des arguments
+=====================
+
+Mécanisme général
+-----------------
+
+.. note::
+
+   Passage par affectation : chaque argument de la définition de la fonction
+   correspond, dans l'ordre, à un paramètre de l'appel. La correspondance se
+   fait par affectation.
+
+.. figure:: PassageDesArgumentsParAffectation.jpg
+   :align: center
+
+   Passage des arguments par affectation.
+
+Un ou plusieurs paramètres, pas de retour
+-----------------------------------------
+
+Exemple sans l'instruction return, ce qu'on appelle souvent une procédure.
+
+Dans ce cas la fonction renvoie implicitement la valeur :samp:`None` :
+
+.. code-block:: python
+
+   def table(base, debut, fin):
+       """Affiche la table des <base> de <debut> à <fin>."""
+       n = debut
+       while n <= fin:
+           print(n, 'x', base, '=', n * base, end=" ")
+           n += 1
+   # exemple d'appel :
+   table(7, 2, 11)
+   # 2 x 7 = 14 3 x 7 = 21 4 x 7 = 28 5 x 7 = 35 6 x 7 = 42
+   # 7 x 7 = 49 8 x 7 = 56 9 x 7 = 63 10 x 7 = 70 11 x 7 = 77
+
+Un ou plusieurs paramètres, utilisation du retour
+-------------------------------------------------
+
+Exemple avec utilisation d'un return unique :
+
+.. code-block:: python
+
+   from math import pi
+   def cube(x):
+       return x**3
+
+   def volumeSphere(r):
+       return 4.0 * pi * cube(r) / 3.0
+
+   # Saisie du rayon et affichage du volume
+   rayon = float(input('Rayon : '))
+   print("Volume de la sphère =", volumeSphere(rayon))
+
+Exemple avec utilisation d'un return multiple :
+
+.. code-block:: python
+
+   import math
+   def surfaceVolumeSphere(r):
+       surf = 4.0 * math.pi * r**2
+       vol = surf * r/3
+       return surf, vol
+
+   # programme principal
+   rayon = float(input('Rayon : '))
+   s, v = surfaceVolumeSphere(rayon)
+   print("Sphère de surface {:g} et de volume {:g}".format(s, v))
+
+Passage d'une fonction en paramètre
+-----------------------------------
+
+.. code-block:: python
+
+   def tabuler(fonction, borneInf, borneSup, nbPas):
+       """Affichage des valeurs de <fonction>.
+       On doit avoir (borneInf < borneSup) et (nbPas > 0)"""
+       h, x = (borneSup - borneInf) / float(nbPas), borneInf
+       while x <= borneSup:
+       y = fonction(x)
+       print("f({:.2f}) = {:.2f}".format(x, y))
+       x += h
+   # ...
+   def maFonction(x):
+       return 2*x**3 + x - 5
+   tabuler(maFonction, -5, 5, 10)
+   # f(-5.00) = -260.00
+   # f(-4.00) = -137.00
+   # ...
+   # f(5.00) = 250.00
+
+Paramètres avec valeur par défaut
+---------------------------------
+
+On utilise de préférence des valeurs par défaut non modifiables car la
+modification d'un paramètre par un premier appel est visible les fois suivantes
+:
+
+.. code-block:: python
+
+   def initPort(speed=9600, parity="paire", data=8, stops=1):
+       print("Init. à", speed, "bits/s", "parité :", parity)
+       print(data, "bits de données", stops, "bits d'arrêt")
+
+   # Appels possibles :
+   initPort()
+   # Init. à 9600 bits/s parité : paire
+   # 8 bits de données 1 bits d'arrêt
+   initPort(parity="nulle")
+   # Init. à 9600 bits/s parité : nulle
+   # 8 bits de données 1 bits d'arrêt
+   initPort(2400, "paire", 7, 2)
+   # Init. à 2400 bits/s parité : paire
+   # 7 bits de données 2 bits d'arrêt
+
+Nombre d'arguments arbitraire : passage d'un tuple
+--------------------------------------------------
+
+.. code-block:: python
+
+   def somme(*args):
+       """Renvoie la somme de <tuple>."""
+       resultat = 0
+       for nombre in args:
+           resultat += nombre
+       return resultat
+   # Exemples d'appel :
+   print(somme(23)) # 23
+   print(somme(23, 42, 13)) # 78
+
+.. note::
+
+   Si la fonction possède plusieurs arguments, le tuple est en dernière
+   position.
+
+Il est aussi possible de passer un tuple (en fait une séquence) à l'appel qui
+sera décompressé en une liste de paramètres d'une fonction < classique > :
+
+.. code-block:: python
+
+   def somme(a, b, c):
+       return a+b+c
+   # Exemple d'appel :
+   elements = (2, 4, 6)
+   print(somme(*elements)) # 12
+
+Nombre d'arguments arbitraire : passage d'un dictionnaire
+
+.. code-block:: python
+
+   def unDict(**kargs):
+       return kargs
+   # Exemples d'appels
+   ## par des paramètres nommés :
+   print(unDict(a=23, b=42)) # {'a': 23, 'b': 42}
+   ## en fournissant un dictionnaire :
+   mots = {'d': 85, 'e': 14, 'f':9}
+   print(unDict(**mots)) # {'e': 14, 'd': 85, 'f': 9}
+
+.. note::
+
+   Si la fonction possède plusieurs arguments, le dictionnaire est en toute
+   dernière position (après un éventuel tuple).
+
+Espaces de noms
+===============
+
+Portée des objets
+-----------------
+
+.. note::
+
+   Portée : les noms des objets sont créés lors de leur première affectation,
+   mais ne sont visibles que dans certaines régions de la mémoire.
+
+On distingue :
+
+- **La portée globale** : celle du module __main__. Un dictionnaire gère les
+  objets globaux : l'instruction :command:`globals()` fournit les couples
+  *variable:valeur* ;
+- **La portée locale** : les objets internes aux fonctions (et aux classes)
+  sont locaux.
+  Les objets globaux ne sont pas *modifiables* dans les portées locales.
+  L'instruction :command:`locals()` fournit les couples variable:valeur.
+
+Résolution des noms : règle LGI
+-------------------------------
+
+La recherche des noms est d'abord locale (L), puis globale (G), enfin interne
+(I) (cf. Figure ci-dessous) :
+
+.. figure:: RegleLGI.jpg
+   :align: center
+
+   Règle LGI
+
+Exemples de portée :
+
+.. code-block:: python
+
+   # x et fonc sont affectés dans le module : globaux
+   def fonc(y): # y et z sont affectés dans fonc : locaux
+       global x # permet de modifier x ligne suivante
+       x += 2
+       z = x + y
+       return z
+
+   x = 99
+   print(fonc(1)) # 102
+   # x et fonc sont affectés dans le module : globaux
+
+   def fonc(y): # y et z sont affectés dans fonc : locaux
+       # dans fonc : portée locale
+       z = x + y
+       return z
+
+   x = 99
+   print(fonc(1)) # 100
+   # x et fonc sont affectés dans le module : globaux
+   def fonc(y): # y, x et z sont affectés dans fonc : locaux
+       x = 3 # ce nouvel x est local et masque le x global
+       z = x + y
+       return z
+
+   x = 99
+   print(fonc(1)) # 4
