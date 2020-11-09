@@ -41,7 +41,7 @@ UML est la fusion de différentes notations issues des méthodes de génie
 logiciel orienté objet antérieures aux années 1995. La version 1.0 a
 officiellement été publiée en 1997 par l'OMG (Object Management Group) qui est
 l'organisme responsable de sa standardisation. Depuis 2007, la version
-officielle est la 2.1.2.
+officielle est la 2.5.
 
 Historiquement, son usage intervenait dans la phase de conception pour permettre
 de "visualiser" ce que sera et fera le logiciel. Comme les feuillets des plans
