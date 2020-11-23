@@ -1,0 +1,34 @@
+
+@startuml
+class Member
+class UIManager {
+    FileShareForm getFileShareForm()
+}
+class FileShareForm {
+    String nom_document
+    String[] authors
+    Date creation
+    Date publication
+    String document_ISBN
+    File document_file
+}
+class Application {
+
+}
+class Server {
+    Int transmit()
+}
+class Librarian
+
+Member <-o Application : manage
+
+Librarian -|> Member
+
+Application -> UIManager
+
+UIManager --> FileShareForm
+
+Application -> Server : connection
+
+
+@enduml

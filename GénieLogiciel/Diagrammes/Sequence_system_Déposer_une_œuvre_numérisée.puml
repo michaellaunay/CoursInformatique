@@ -1,0 +1,22 @@
+@startuml
+actor Membre
+Membre -> Application : Partager œuvre
+create Formulaire
+Application -> Formulaire
+Application -> Membre : Afficher formulaire
+Membre -> Formulaire : Saisir données
+Membre -> Formulaire : Ajouter fichier
+Membre -> Application : Envoyer formulaire
+Application -> Application : Analyse fichier
+Application -> Membre : Afficher résultat analyse fichier
+Application -> Membre : Demander confirmation envoi
+Membre -> Application : Valider envoi
+Application -> Application : Copier fichier dans répertoire "À modérer"
+Application -> Application : Créer numéro transaction
+Application -> Application : Enregistrer transaction dans fichier de log
+Application -> Formulaire
+destroy Formulaire
+Application -> Serveur : Transmettre transaction et fichier 
+Serveur -> Bibliothécaire : Notifier de la soumission d'une œuvre
+Application -> Membre : Notifier de l'attente de modération
+@enduml
