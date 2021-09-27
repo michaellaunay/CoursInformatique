@@ -1,3 +1,9 @@
+Génie Logiciel
+==============
+
+Présentation
+------------
+
 L'Ingénierie logicielle repose sur l'art de concevoir des logiciels et
 d'améliorer la façon de les concevoir (l'ingénieur cherche à optimiser
 ses processus de travail).
@@ -50,7 +56,7 @@ Il est du rôle de l'ingénieur d'interroger ses clients pour trouver le
 besoin derrière l'envie, mais également de rapidement comprendre le
 contexte et pour cela d'interroger un échantillon représentatif des
 différents rôles tenus par les futurs utilisateurs, car comme dans le
-film « [Répétition
+film « [Répétition 
 d'orchestre](https://fr.wikipedia.org/wiki/Répétition_d%27orchestre) »
 de Fellini, chaque protagoniste ne voit que son travail et n'a pas la
 vue d'ensemble permettant de comprendre le processus que viendra aider
