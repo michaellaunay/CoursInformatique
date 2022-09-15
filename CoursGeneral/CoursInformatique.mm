@@ -2,7 +2,7 @@
 <!--To view this file, download free mind mapping software Freeplane from http://freeplane.sourceforge.net -->
 <node TEXT="L&apos;informatique" FOLDED="false" ID="ID_719241929" CREATED="1564937450148" MODIFIED="1601216047256" STYLE="oval">
 <font SIZE="18"/>
-<hook NAME="MapStyle" zoom="2.0">
+<hook NAME="MapStyle" zoom="0.701">
     <properties edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_note_icons="true" fit_to_viewport="false"/>
 
 <map_styles>
@@ -67,6 +67,14 @@
 <node TEXT="Histoire" POSITION="left" ID="ID_37301723" CREATED="1566462935618" MODIFIED="1566462942415">
 <edge COLOR="#ff00ff"/>
 <node TEXT="Histoire de l&apos;Informatique" ID="ID_1170894378" CREATED="1564937600061" MODIFIED="1601282558893">
+<node TEXT="00 L&apos;&#xe9;volution de l&apos;&#xe9;criture" ID="ID_1302630743" CREATED="1662667466565" MODIFIED="1662667576841">
+<node TEXT="" ID="ID_522739483" CREATED="1662667500525" MODIFIED="1662667512812">
+<hook URI="&#xc9;volutionDeLAphabet.jpeg" SIZE="0.5" NAME="ExternalObject"/>
+</node>
+<node TEXT="https://youtu.be/3kGuN8WIGNc" ID="ID_286365932" CREATED="1662667517860" MODIFIED="1662668002213" LINK="https://youtu.be/3kGuN8WIGNc"/>
+<node TEXT="https://fr.wikipedia.org/wiki/Cun%C3%A9iforme" ID="ID_509495226" CREATED="1662667921384" MODIFIED="1662667921384" LINK="https://fr.wikipedia.org/wiki/Cun%C3%A9iforme"/>
+<node TEXT="https://fr.wikipedia.org/wiki/%C3%89criture_hi%C3%A9roglyphique_%C3%A9gyptienne" ID="ID_1104650867" CREATED="1662667767282" MODIFIED="1662667993854" LINK="https://fr.wikipedia.org/wiki/%C3%89criture_hi%C3%A9roglyphique_%C3%A9gyptienne"/>
+</node>
 <node TEXT="01 Les calculis" FOLDED="true" ID="ID_1076017481" CREATED="1600636094092" MODIFIED="1601215747737">
 <node TEXT="Syst&#xe8;me d&apos;enregistrement de l&apos;information" ID="ID_1030371806" CREATED="1600636466807" MODIFIED="1600636506461"/>
 <node TEXT="IV Mil&#xe9;naire av JV" ID="ID_194349015" CREATED="1600636513598" MODIFIED="1600636535172"/>
@@ -77,7 +85,7 @@
 </node>
 <node TEXT="https://fr.wikipedia.org/wiki/Bulle-enveloppe" ID="ID_1657523549" CREATED="1600638431920" MODIFIED="1600638440639"/>
 </node>
-<node TEXT="02 La machine Anticyth&#xe8;re" FOLDED="true" ID="ID_786524013" CREATED="1564937669991" MODIFIED="1601215753503">
+<node TEXT="02 La machine Anticyth&#xe8;re" ID="ID_786524013" CREATED="1564937669991" MODIFIED="1601215753503">
 <node TEXT="Premier calculateur &quot;Analogique&quot;" ID="ID_1684279275" CREATED="1564937927913" MODIFIED="1564939817172"/>
 <node TEXT="Pr&#xe9;diction des &#xe9;clipses" ID="ID_1795749182" CREATED="1564938170605" MODIFIED="1564939824864"/>
 <node TEXT="Gr&#xe8;ce" ID="ID_583972907" CREATED="1564938178985" MODIFIED="1564939831965"/>
@@ -89,6 +97,7 @@
 <node TEXT="liens" ID="ID_1201733449" CREATED="1564941887388" MODIFIED="1564941938808">
 <node TEXT="https://fr.wikipedia.org/wiki/Machine_d%27Anticyth%C3%A8re" ID="ID_167959178" CREATED="1564941912218" MODIFIED="1564941912218" LINK="https://fr.wikipedia.org/wiki/Machine_d%27Anticyth%C3%A8re"/>
 <node TEXT="https://youtu.be/BG-YxFV8wE8" ID="ID_1373617792" CREATED="1564942044579" MODIFIED="1564942903416" LINK="https://youtu.be/BG-YxFV8wE8"/>
+<node TEXT="https://vimeo.com/518734183" ID="ID_670980979" CREATED="1615892415629" MODIFIED="1615892420556"/>
 </node>
 </node>
 <node TEXT="03 La machine de Blaise Pascal" FOLDED="true" ID="ID_1431347576" CREATED="1564938244810" MODIFIED="1601215759088">
@@ -181,8 +190,9 @@
 <hook URI="IBM_PC_5150.jpg" SIZE="0.5859375" NAME="ExternalObject"/>
 </node>
 </node>
+<node TEXT="https://www.youtube.com/watch?v=_uFXt4SMJfs" ID="ID_1025831191" CREATED="1642342794587" MODIFIED="1642342831647"/>
 </node>
-<node TEXT="Histoire de la programmation" FOLDED="true" ID="ID_937687351" CREATED="1566462865606" MODIFIED="1601216008622">
+<node TEXT="Histoire de la programmation" ID="ID_937687351" CREATED="1566462865606" MODIFIED="1601216008622">
 <node TEXT="Ada Lovelace" ID="ID_17570159" CREATED="1566462884739" MODIFIED="1566462892410">
 <node TEXT="1842" OBJECT="java.lang.Long|1842" ID="ID_1633594781" CREATED="1600640510367" MODIFIED="1600640528845"/>
 <node TEXT="Note G" ID="ID_109662498" CREATED="1600640530676" MODIFIED="1600640537882"/>
@@ -258,6 +268,30 @@
 <node TEXT="2003" OBJECT="java.lang.Long|2003" ID="ID_384310122" CREATED="1600641608458" MODIFIED="1600641610821"/>
 </node>
 </node>
+<node TEXT="Les paradigmes en programmation" ID="ID_1299527084" CREATED="1619512489937" MODIFIED="1619512530769">
+<node TEXT="Type de programmation imp&#xe9;rative" ID="ID_41447669" CREATED="1619512539777" MODIFIED="1619512726921">
+<node TEXT="Programmation imp&#xe9;rative" ID="ID_346719494" CREATED="1619512758492" MODIFIED="1619512768669"/>
+<node TEXT="Programmation structur&#xe9;e" ID="ID_1279374271" CREATED="1619512772721" MODIFIED="1619512782699"/>
+<node TEXT="Programmation proc&#xe9;durale" ID="ID_869000658" CREATED="1619512786900" MODIFIED="1619512798762"/>
+</node>
+<node TEXT="Type de programation orienti&#xe9;e objets" ID="ID_485975066" CREATED="1619512574377" MODIFIED="1619512743957">
+<node TEXT="Programmation orient&#xe9;e objet" ID="ID_1380107171" CREATED="1619512941251" MODIFIED="1619512960600"/>
+<node TEXT="Prgrammation orient&#xe9;e prototype" ID="ID_409596101" CREATED="1619512969515" MODIFIED="1619512984130"/>
+<node TEXT="Programmation orient&#xe9;e classe" ID="ID_1390276103" CREATED="1619512985547" MODIFIED="1619513056598"/>
+<node TEXT="Programmation orient&#xe9;e composant" ID="ID_1591614695" CREATED="1619513057486" MODIFIED="1619513075299"/>
+</node>
+<node TEXT="Type de programmation d&#xe9;clarayive" ID="ID_649243247" CREATED="1619513086691" MODIFIED="1619513103475">
+<node TEXT="Programmation d&#xe9;clarative" ID="ID_1598637462" CREATED="1619513105827" MODIFIED="1619513126091"/>
+<node TEXT="Programmation fonctionelle au sens math&#xe9;matique" ID="ID_471056788" CREATED="1619513126844" MODIFIED="1619513157731"/>
+<node TEXT="Programmation logique" ID="ID_1743032829" CREATED="1619513159716" MODIFIED="1619513167911"/>
+<node TEXT="Programmation par contraintes" ID="ID_1638119046" CREATED="1619513169357" MODIFIED="1619513186283"/>
+</node>
+<node TEXT="Autres" ID="ID_501329723" CREATED="1619512849347" MODIFIED="1619512854945"/>
+<node TEXT="liens" ID="ID_1706402518" CREATED="1619512593659" MODIFIED="1619512596292">
+<node TEXT="https://fr.wikipedia.org/wiki/Paradigme_(programmation)" ID="ID_1014353760" CREATED="1619512598676" MODIFIED="1619512602828"/>
+</node>
+</node>
+<node TEXT="Les m&#xe9;thodes" ID="ID_705041555" CREATED="1619513221028" MODIFIED="1619513226091"/>
 <node TEXT="Histoire de Python" ID="ID_983160907" CREATED="1566462917810" MODIFIED="1566462978468"/>
 </node>
 <node TEXT="G&#xe9;nie Logiciel" POSITION="left" ID="ID_667751224" CREATED="1601215919580" MODIFIED="1601215926536">
