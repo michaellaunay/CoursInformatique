@@ -2,7 +2,7 @@
 <!--To view this file, download free mind mapping software Freeplane from http://freeplane.sourceforge.net -->
 <node TEXT="L&apos;informatique" FOLDED="false" ID="ID_719241929" CREATED="1564937450148" MODIFIED="1601216047256" STYLE="oval">
 <font SIZE="18"/>
-<hook NAME="MapStyle" zoom="0.701">
+<hook NAME="MapStyle" zoom="1.129">
     <properties edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_note_icons="true" fit_to_viewport="false"/>
 
 <map_styles>
@@ -63,7 +63,7 @@
 </stylenode>
 </map_styles>
 </hook>
-<hook NAME="AutomaticEdgeColor" COUNTER="8" RULE="ON_BRANCH_CREATION"/>
+<hook NAME="AutomaticEdgeColor" COUNTER="9" RULE="ON_BRANCH_CREATION"/>
 <node TEXT="Histoire" POSITION="left" ID="ID_37301723" CREATED="1566462935618" MODIFIED="1566462942415">
 <edge COLOR="#ff00ff"/>
 <node TEXT="Histoire de l&apos;Informatique" ID="ID_1170894378" CREATED="1564937600061" MODIFIED="1601282558893">
@@ -74,8 +74,9 @@
 <node TEXT="https://youtu.be/3kGuN8WIGNc" ID="ID_286365932" CREATED="1662667517860" MODIFIED="1662668002213" LINK="https://youtu.be/3kGuN8WIGNc"/>
 <node TEXT="https://fr.wikipedia.org/wiki/Cun%C3%A9iforme" ID="ID_509495226" CREATED="1662667921384" MODIFIED="1662667921384" LINK="https://fr.wikipedia.org/wiki/Cun%C3%A9iforme"/>
 <node TEXT="https://fr.wikipedia.org/wiki/%C3%89criture_hi%C3%A9roglyphique_%C3%A9gyptienne" ID="ID_1104650867" CREATED="1662667767282" MODIFIED="1662667993854" LINK="https://fr.wikipedia.org/wiki/%C3%89criture_hi%C3%A9roglyphique_%C3%A9gyptienne"/>
+<node TEXT="Simultan&#xe9;it&#xe9; du Cun&#xe9;iforme d&apos;Uruk et du Hi&#xe9;roglyphique &#xe9;gyptien vers -3200 AV JC" ID="ID_1720907304" CREATED="1664139159045" MODIFIED="1664139294442"/>
 </node>
-<node TEXT="01 Les calculis" FOLDED="true" ID="ID_1076017481" CREATED="1600636094092" MODIFIED="1601215747737">
+<node TEXT="01 Les calculis" ID="ID_1076017481" CREATED="1600636094092" MODIFIED="1601215747737">
 <node TEXT="Syst&#xe8;me d&apos;enregistrement de l&apos;information" ID="ID_1030371806" CREATED="1600636466807" MODIFIED="1600636506461"/>
 <node TEXT="IV Mil&#xe9;naire av JV" ID="ID_194349015" CREATED="1600636513598" MODIFIED="1600636535172"/>
 <node TEXT="M&#xe9;sopotamie" ID="ID_1895950393" CREATED="1600636540670" MODIFIED="1600636560436"/>
@@ -83,7 +84,9 @@
 <node TEXT="Source wikipedia" ID="ID_515765922" CREATED="1600638347968" MODIFIED="1600638473582">
 <hook URI="Calculis.jpg" SIZE="1.0" NAME="ExternalObject"/>
 </node>
-<node TEXT="https://fr.wikipedia.org/wiki/Bulle-enveloppe" ID="ID_1657523549" CREATED="1600638431920" MODIFIED="1600638440639"/>
+<node TEXT="https://fr.wikipedia.org/wiki/Bulle-enveloppe" ID="ID_1657523549" CREATED="1600638431920" MODIFIED="1664138843441" LINK="https://fr.wikipedia.org/wiki/Bulle-enveloppe"/>
+<node TEXT="https://fr.wikipedia.org/wiki/Sceau-cylindre" ID="ID_1470563026" CREATED="1664138820989" MODIFIED="1664138820989" LINK="https://fr.wikipedia.org/wiki/Sceau-cylindre"/>
+<node TEXT="https://fr.wikipedia.org/wiki/P%C3%A9riode_d%27Uruk" ID="ID_870033448" CREATED="1664138939079" MODIFIED="1664138973303" LINK="https://fr.wikipedia.org/wiki/P%C3%A9riode_d%27Uruk"/>
 </node>
 <node TEXT="02 La machine Anticyth&#xe8;re" ID="ID_786524013" CREATED="1564937669991" MODIFIED="1601215753503">
 <node TEXT="Premier calculateur &quot;Analogique&quot;" ID="ID_1684279275" CREATED="1564937927913" MODIFIED="1564939817172"/>
@@ -97,7 +100,7 @@
 <node TEXT="liens" ID="ID_1201733449" CREATED="1564941887388" MODIFIED="1564941938808">
 <node TEXT="https://fr.wikipedia.org/wiki/Machine_d%27Anticyth%C3%A8re" ID="ID_167959178" CREATED="1564941912218" MODIFIED="1564941912218" LINK="https://fr.wikipedia.org/wiki/Machine_d%27Anticyth%C3%A8re"/>
 <node TEXT="https://youtu.be/BG-YxFV8wE8" ID="ID_1373617792" CREATED="1564942044579" MODIFIED="1564942903416" LINK="https://youtu.be/BG-YxFV8wE8"/>
-<node TEXT="https://vimeo.com/518734183" ID="ID_670980979" CREATED="1615892415629" MODIFIED="1615892420556"/>
+<node TEXT="https://vimeo.com/518734183" ID="ID_670980979" CREATED="1615892415629" MODIFIED="1664139357933" LINK="https://vimeo.com/518734183"/>
 </node>
 </node>
 <node TEXT="03 La machine de Blaise Pascal" FOLDED="true" ID="ID_1431347576" CREATED="1564938244810" MODIFIED="1601215759088">
@@ -124,7 +127,7 @@
 <node TEXT="https://fr.wikipedia.org/wiki/M%C3%A9tier_Jacquard" ID="ID_501364997" CREATED="1564949856253" MODIFIED="1564949856253" LINK="https://fr.wikipedia.org/wiki/M%C3%A9tier_Jacquard"/>
 </node>
 </node>
-<node TEXT="05 La Machine analytique de Charles Babbage" FOLDED="true" ID="ID_698535602" CREATED="1564939904838" MODIFIED="1601215794047">
+<node TEXT="05 La Machine analytique de Charles Babbage" ID="ID_698535602" CREATED="1564939904838" MODIFIED="1601215794047">
 <node TEXT="Premier ordinateur &quot;M&#xe9;canique&quot;" ID="ID_805850136" CREATED="1564940699153" MODIFIED="1564941360550"/>
 <node TEXT="M&#xe9;moire, Calaculateur, Imprimante" ID="ID_26103140" CREATED="1564940802045" MODIFIED="1564941368251"/>
 <node TEXT="Angleterre" ID="ID_290920683" CREATED="1564940957969" MODIFIED="1564941373680"/>
@@ -133,7 +136,7 @@
 <node TEXT="(Source wikipedia)" ID="ID_1285585567" CREATED="1564941652482" MODIFIED="1564954477747">
 <hook URI="Babbage_Difference_Engine.jpg" SIZE="0.234375" NAME="ExternalObject"/>
 </node>
-<node TEXT="liens" FOLDED="true" ID="ID_828660593" CREATED="1564941715312" MODIFIED="1564942921815">
+<node TEXT="liens" ID="ID_828660593" CREATED="1564941715312" MODIFIED="1564942921815">
 <node ID="ID_406019302" CREATED="1564942874159" MODIFIED="1564942874159" LINK="https://fr.wikipedia.org/wiki/Machine_analytique"><richcontent TYPE="NODE">
 
 <html>
@@ -148,6 +151,7 @@
 </html>
 </richcontent>
 </node>
+<node TEXT="https://youtu.be/BlbQsKpq3Ak" ID="ID_1749354803" CREATED="1664142631113" MODIFIED="1664142643876" LINK="https://youtu.be/BlbQsKpq3Ak"/>
 </node>
 </node>
 <node TEXT="06 Premier Programme &quot;informatique&quot; Ada Lovelace" FOLDED="true" ID="ID_176576653" CREATED="1564942096670" MODIFIED="1601215808568">
@@ -190,7 +194,7 @@
 <hook URI="IBM_PC_5150.jpg" SIZE="0.5859375" NAME="ExternalObject"/>
 </node>
 </node>
-<node TEXT="https://www.youtube.com/watch?v=_uFXt4SMJfs" ID="ID_1025831191" CREATED="1642342794587" MODIFIED="1642342831647"/>
+<node TEXT="https://youtu.be/4APvCcFRkxc" ID="ID_945923735" CREATED="1664141303738" MODIFIED="1664141331149" LINK="https://youtu.be/4APvCcFRkxc"/>
 </node>
 <node TEXT="Histoire de la programmation" ID="ID_937687351" CREATED="1566462865606" MODIFIED="1601216008622">
 <node TEXT="Ada Lovelace" ID="ID_17570159" CREATED="1566462884739" MODIFIED="1566462892410">
@@ -288,7 +292,7 @@
 </node>
 <node TEXT="Autres" ID="ID_501329723" CREATED="1619512849347" MODIFIED="1619512854945"/>
 <node TEXT="liens" ID="ID_1706402518" CREATED="1619512593659" MODIFIED="1619512596292">
-<node TEXT="https://fr.wikipedia.org/wiki/Paradigme_(programmation)" ID="ID_1014353760" CREATED="1619512598676" MODIFIED="1619512602828"/>
+<node TEXT="https://fr.wikipedia.org/wiki/Paradigme_(programmation)" ID="ID_1014353760" CREATED="1619512598676" MODIFIED="1664139382139" LINK="https://fr.wikipedia.org/wiki/Paradigme_(programmation)"/>
 </node>
 </node>
 <node TEXT="Les m&#xe9;thodes" ID="ID_705041555" CREATED="1619513221028" MODIFIED="1619513226091"/>
@@ -325,11 +329,11 @@
 <node TEXT="Les normes" ID="ID_658319821" CREATED="1600643048337" MODIFIED="1600643063051">
 <node TEXT="IEEE" ID="ID_1798921398" CREATED="1600643067858" MODIFIED="1600643072378">
 <node TEXT="Institute of Electrical and Electronics Engineers" ID="ID_58286288" CREATED="1601216951136" MODIFIED="1601216972485"/>
-<node TEXT="https://fr.wikipedia.org/wiki/Institute_of_Electrical_and_Electronics_Engineers" ID="ID_1186479958" CREATED="1601216938763" MODIFIED="1601216942609"/>
+<node TEXT="https://fr.wikipedia.org/wiki/Institute_of_Electrical_and_Electronics_Engineers" ID="ID_1186479958" CREATED="1601216938763" MODIFIED="1664139392300" LINK="https://fr.wikipedia.org/wiki/Institute_of_Electrical_and_Electronics_Engineers"/>
 </node>
 <node TEXT="IETF" ID="ID_1263592112" CREATED="1600643073146" MODIFIED="1600643076355">
 <node TEXT="Internet Engineering Task Force" ID="ID_151391375" CREATED="1601217002713" MODIFIED="1601217006283"/>
-<node TEXT="https://fr.wikipedia.org/wiki/Internet_Engineering_Task_Force" ID="ID_1175826698" CREATED="1601217024160" MODIFIED="1601217027119"/>
+<node TEXT="https://fr.wikipedia.org/wiki/Internet_Engineering_Task_Force" ID="ID_1175826698" CREATED="1601217024160" MODIFIED="1664139399531" LINK="https://fr.wikipedia.org/wiki/Internet_Engineering_Task_Force"/>
 </node>
 <node TEXT="Communaut&#xe9;s" ID="ID_1552819635" CREATED="1600643076986" MODIFIED="1600643083171"/>
 </node>
@@ -355,7 +359,7 @@
 </html>
 </richcontent>
 </node>
-<node TEXT="https://wikiagile.cesi.fr/index.php?title=Qu%27est-ce_qu%27un_Produit_Minimum_Viable_%3F" ID="ID_1933071550" CREATED="1601842738961" MODIFIED="1601842744511"/>
+<node TEXT="https://wikiagile.cesi.fr/index.php?title=Qu%27est-ce_qu%27un_Produit_Minimum_Viable_%3F" ID="ID_1933071550" CREATED="1601842738961" MODIFIED="1664139428523" LINK="https://wikiagile.cesi.fr/index.php?title=Qu%27est-ce_qu%27un_Produit_Minimum_Viable_%3F"/>
 </node>
 </node>
 <node TEXT="M&#xe9;thode Rache" ID="ID_1340943587" CREATED="1600643170266" MODIFIED="1600643177156"/>
@@ -399,12 +403,12 @@
   </body>
 </html>
 </richcontent>
-<node TEXT="https://fr.wikipedia.org/wiki/Bo%C3%AEte_blanche" ID="ID_1602035904" CREATED="1601238254123" MODIFIED="1601238262572"/>
+<node TEXT="https://fr.wikipedia.org/wiki/Bo%C3%AEte_blanche" ID="ID_1602035904" CREATED="1601238254123" MODIFIED="1664139444580" LINK="https://fr.wikipedia.org/wiki/Bo%C3%AEte_blanche"/>
 <node TEXT="Boite blanche : connue" ID="ID_1443444752" CREATED="1601238745206" MODIFIED="1601238758517"/>
 <node TEXT="Boite noire : inconnu sauf de l&apos;ext&#xe9;rieur" ID="ID_1275776836" CREATED="1601238763718" MODIFIED="1601238788088"/>
 </node>
 <node TEXT="sous syst&#xe8;mes" ID="ID_1324412913" CREATED="1601238416260" MODIFIED="1601238438112"/>
-<node TEXT="https://fr.wikipedia.org/wiki/Syst%C3%A9mique" ID="ID_1862780134" CREATED="1601238459448" MODIFIED="1601238463420"/>
+<node TEXT="https://fr.wikipedia.org/wiki/Syst%C3%A9mique" ID="ID_1862780134" CREATED="1601238459448" MODIFIED="1664139450915" LINK="https://fr.wikipedia.org/wiki/Syst%C3%A9mique"/>
 <node TEXT="1749 &#xc9;tienne Bonnot de Condillac" ID="ID_1897385566" CREATED="1601238519812" MODIFIED="1601238550857"/>
 <node TEXT="1948 Norbert Wiener Cybern&#xe9;tique" ID="ID_306504722" CREATED="1601238669805" MODIFIED="1601238696643">
 <node TEXT="Affectateurs ou Capteurs" ID="ID_1026263039" CREATED="1601238869719" MODIFIED="1601238904783"/>
@@ -424,7 +428,7 @@
 <node TEXT="Comment" ID="ID_1952457069" CREATED="1600643740997" MODIFIED="1600643781802"/>
 <node TEXT="Combien" ID="ID_1488082495" CREATED="1600643765941" MODIFIED="1600643772073"/>
 <node TEXT="Pourquoi" ID="ID_606038489" CREATED="1600643784125" MODIFIED="1600643800770"/>
-<node TEXT="https://fr.wikipedia.org/wiki/QQOQCCP" ID="ID_1252775200" CREATED="1601846564936" MODIFIED="1601846569397"/>
+<node TEXT="https://fr.wikipedia.org/wiki/QQOQCCP" ID="ID_1252775200" CREATED="1601846564936" MODIFIED="1664139471835" LINK="https://fr.wikipedia.org/wiki/QQOQCCP"/>
 </node>
 <node TEXT="CRUD" ID="ID_334592213" CREATED="1600643838302" MODIFIED="1600643846345">
 <node TEXT="Create" ID="ID_996470868" CREATED="1600643897062" MODIFIED="1600643902265"/>
@@ -499,7 +503,7 @@
 <node TEXT="Identification des mots cl&#xe9;s" ID="ID_464481320" CREATED="1601844155873" MODIFIED="1601844165354"/>
 </node>
 <node TEXT="&#xc9;licitation du besoin" ID="ID_1301006612" CREATED="1603199511762" MODIFIED="1603199533638">
-<node TEXT="https://hal.inria.fr/inria-00098954/" ID="ID_1275037194" CREATED="1603199548180" MODIFIED="1603199551495"/>
+<node TEXT="https://hal.inria.fr/inria-00098954/" ID="ID_1275037194" CREATED="1603199548180" MODIFIED="1664139489707" LINK="https://hal.inria.fr/inria-00098954/"/>
 <node TEXT="Inciter le client &#xe0; expliciter ses connaissances du domaine" ID="ID_1232465816" CREATED="1603199565183" MODIFIED="1603199743773"/>
 </node>
 <node TEXT="Glossaire du domaine" ID="ID_1268471685" CREATED="1601844169641" MODIFIED="1601844177309">
@@ -555,7 +559,7 @@
 <node TEXT="Tests d&apos;int&#xe9;gration" ID="ID_1962381923" CREATED="1601845867675" MODIFIED="1601845870926"/>
 <node TEXT="Tests de validation" ID="ID_88097344" CREATED="1601845849059" MODIFIED="1601845857110"/>
 </node>
-<node TEXT="https://fr.wikipedia.org/wiki/Processus_unifi%C3%A9" ID="ID_1144387901" CREATED="1601841837749" MODIFIED="1601841842228"/>
+<node TEXT="https://fr.wikipedia.org/wiki/Processus_unifi%C3%A9" ID="ID_1144387901" CREATED="1601841837749" MODIFIED="1664139499955" LINK="https://fr.wikipedia.org/wiki/Processus_unifi%C3%A9"/>
 </node>
 </node>
 </node>
@@ -563,17 +567,57 @@
 <edge COLOR="#007c00"/>
 <node TEXT="01 Qu&apos;est ce qu&apos;un ordinateur ?" ID="ID_221913434" CREATED="1564937637158" MODIFIED="1601215988216">
 <node TEXT="Arhitecture de Von Neumann" ID="ID_563296765" CREATED="1564941515336" MODIFIED="1600638746630">
-<node TEXT="https://fr.wikipedia.org/wiki/Architecture_de_von_Neumann" ID="ID_1020502145" CREATED="1600638750346" MODIFIED="1600638756789"/>
+<node TEXT="https://fr.wikipedia.org/wiki/Architecture_de_von_Neumann" ID="ID_1020502145" CREATED="1600638750346" MODIFIED="1664139526810" LINK="https://fr.wikipedia.org/wiki/Architecture_de_von_Neumann"/>
 <node TEXT="" ID="ID_763070126" CREATED="1600638860347" MODIFIED="1600638898548">
 <hook URI="VonNeumannArchitectureWikip&#xe9;dia_fichiers/800px-Von_Neumann_architecture_fr.png" SIZE="0.75" NAME="ExternalObject"/>
 </node>
 </node>
-<node TEXT="Limite de Moore" ID="ID_1473042183" CREATED="1600638684810" MODIFIED="1600639101650"/>
-<node TEXT="Calculateur Quantique" ID="ID_484653981" CREATED="1600638923571" MODIFIED="1600638936645"/>
-<node TEXT="Machine&#xe0; base de physique topologique" ID="ID_707673194" CREATED="1600639124300" MODIFIED="1602497323474"/>
-<node TEXT="Machine &#xe0; base de nanotubes de carbone" ID="ID_226288275" CREATED="1600639165908" MODIFIED="1602497280882"/>
-<node TEXT="Machine &#xe0; base d&apos;onde de spin (magnonique et spinotronique" ID="ID_1267573566" CREATED="1602497282304" MODIFIED="1602497482301"/>
-<node TEXT="Machine photonique" ID="ID_593936684" CREATED="1602497490153" MODIFIED="1602497508329"/>
+<node TEXT="Limite de Moore" ID="ID_1473042183" CREATED="1600638684810" MODIFIED="1600639101650">
+<node TEXT="https://fr.wikipedia.org/wiki/Loi_de_Moore" ID="ID_1406714320" CREATED="1664139573832" MODIFIED="1664139573832" LINK="https://fr.wikipedia.org/wiki/Loi_de_Moore"/>
+<node TEXT="2 nanom&#xe8;tres" ID="ID_1482004063" CREATED="1664139569161" MODIFIED="1664139616270"/>
+</node>
+<node TEXT="Calculateur Quantique" ID="ID_484653981" CREATED="1600638923571" MODIFIED="1600638936645">
+<node TEXT="https://youtu.be/mtxneYO4dHE" ID="ID_1332599042" CREATED="1664139681824" MODIFIED="1664139696657" LINK="https://youtu.be/mtxneYO4dHE"/>
+</node>
+<node TEXT="Machine&#xe0; base de physique topologique" ID="ID_707673194" CREATED="1600639124300" MODIFIED="1602497323474">
+<node TEXT="https://youtu.be/iHPZ7TL9npU" ID="ID_711324171" CREATED="1664139825534" MODIFIED="1664139840992" LINK="https://youtu.be/iHPZ7TL9npU"/>
+</node>
+<node TEXT="Machine &#xe0; base de nanotubes de carbone" ID="ID_226288275" CREATED="1600639165908" MODIFIED="1602497280882">
+<node TEXT="https://fr.wikipedia.org/wiki/Carbon_Nanotube_Field_Effect_Transistor" ID="ID_1817633377" CREATED="1664140052100" MODIFIED="1664140065715" LINK="https://fr.wikipedia.org/wiki/Carbon_Nanotube_Field_Effect_Transistor"/>
+</node>
+<node TEXT="Machine &#xe0; base d&apos;onde de spin (magnonique et spinotronique" ID="ID_1267573566" CREATED="1602497282304" MODIFIED="1602497482301">
+<node TEXT="https://youtu.be/6vtztA43i_Y" ID="ID_1103030613" CREATED="1664140139419" MODIFIED="1664140150109" LINK="https://youtu.be/6vtztA43i_Y"/>
+<node TEXT="https://youtu.be/L9eUoObVwGM" ID="ID_1036661659" CREATED="1664142318267" MODIFIED="1664142329230" LINK="https://youtu.be/L9eUoObVwGM"/>
+</node>
+<node TEXT="Machine photonique" ID="ID_593936684" CREATED="1602497490153" MODIFIED="1602497508329">
+<node TEXT="https://www.insis.cnrs.fr/fr/cnrsinfo/le-cerveau-et-la-lumiere-au-centre-dune-nouvelle-architecture-des-ordinateurs" ID="ID_99432024" CREATED="1664141849463" MODIFIED="1664141866890" LINK="https://www.insis.cnrs.fr/fr/cnrsinfo/le-cerveau-et-la-lumiere-au-centre-dune-nouvelle-architecture-des-ordinateurs"/>
+</node>
+</node>
+</node>
+<node TEXT="Liens" POSITION="right" ID="ID_1117488504" CREATED="1664141419762" MODIFIED="1664141423582">
+<edge COLOR="#7c007c"/>
+<node TEXT="Incompl&#xe9;tude" ID="ID_524353956" CREATED="1664141647409" MODIFIED="1664141652396">
+<node TEXT="https://youtu.be/82jOF4Q6gBU" ID="ID_1203577429" CREATED="1664141668609" MODIFIED="1664141687179" LINK="https://youtu.be/82jOF4Q6gBU"/>
+<node TEXT="https://youtu.be/SBwupYwDgHg" ID="ID_825925707" CREATED="1664141560986" MODIFIED="1664141619147" LINK="https://youtu.be/SBwupYwDgHg"/>
+<node TEXT="https://youtu.be/Brj1LC42vLM" ID="ID_1664794285" CREATED="1664141566040" MODIFIED="1664141566040" LINK="https://youtu.be/Brj1LC42vLM"/>
+</node>
+<node TEXT="Th&#xe9;orie de l&apos;information" ID="ID_1375990206" CREATED="1664141778455" MODIFIED="1664141787227">
+<node TEXT="https://youtu.be/kD5DHGbkYz0" ID="ID_1411780867" CREATED="1664141433618" MODIFIED="1664141451637" LINK="https://youtu.be/kD5DHGbkYz0"/>
+</node>
+<node TEXT="bitcoin" ID="ID_1280174491" CREATED="1664141999670" MODIFIED="1664142003857">
+<node TEXT="https://youtu.be/0ETcLj5jBy4" ID="ID_1944505405" CREATED="1664142006742" MODIFIED="1664142019680" LINK="https://youtu.be/0ETcLj5jBy4"/>
+</node>
+<node TEXT="Jeu de la vie" ID="ID_1834404798" CREATED="1664142083693" MODIFIED="1664142089352">
+<node TEXT="https://youtu.be/gKgAaZ7a5Bs" ID="ID_1493834991" CREATED="1664142093653" MODIFIED="1664142336734" LINK="https://youtu.be/gKgAaZ7a5Bs"/>
+</node>
+<node TEXT="Administration syst&#xe8;me" ID="ID_344866304" CREATED="1664142090701" MODIFIED="1664142389959">
+<node TEXT="https://www.youtube.com/c/xavki-linux" ID="ID_875543394" CREATED="1664142367115" MODIFIED="1664142398150" LINK="https://www.youtube.com/c/xavki-linux"/>
+</node>
+<node TEXT="R&#xe9;seau de neurones" ID="ID_129768506" CREATED="1664142447194" MODIFIED="1664142455085">
+<node TEXT="https://youtu.be/zG_5OtgxfAg" ID="ID_802406647" CREATED="1664142456635" MODIFIED="1664142466445" LINK="https://youtu.be/zG_5OtgxfAg"/>
+</node>
+<node TEXT="Ada Lovelace" ID="ID_1852821300" CREATED="1664142661689" MODIFIED="1664142684684">
+<node TEXT="https://youtu.be/3jqgVOQfFgo" ID="ID_1123747280" CREATED="1664142698776" MODIFIED="1664142708803" LINK="https://youtu.be/3jqgVOQfFgo"/>
 </node>
 </node>
 </node>
