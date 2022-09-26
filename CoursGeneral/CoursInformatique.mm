@@ -2,7 +2,7 @@
 <!--To view this file, download free mind mapping software Freeplane from http://freeplane.sourceforge.net -->
 <node TEXT="L&apos;informatique" FOLDED="false" ID="ID_719241929" CREATED="1564937450148" MODIFIED="1601216047256" STYLE="oval">
 <font SIZE="18"/>
-<hook NAME="MapStyle" zoom="1.129">
+<hook NAME="MapStyle" zoom="1.824">
     <properties edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_note_icons="true" fit_to_viewport="false"/>
 
 <map_styles>
@@ -103,7 +103,7 @@
 <node TEXT="https://vimeo.com/518734183" ID="ID_670980979" CREATED="1615892415629" MODIFIED="1664139357933" LINK="https://vimeo.com/518734183"/>
 </node>
 </node>
-<node TEXT="03 La machine de Blaise Pascal" FOLDED="true" ID="ID_1431347576" CREATED="1564938244810" MODIFIED="1601215759088">
+<node TEXT="03 La machine de Blaise Pascal" ID="ID_1431347576" CREATED="1564938244810" MODIFIED="1601215759088">
 <node TEXT="La Pascaline" ID="ID_1299791136" CREATED="1564941520273" MODIFIED="1564942389445"/>
 <node TEXT="Premi&#xe8;re machine &#xe0; calculer" ID="ID_314078983" CREATED="1564942373693" MODIFIED="1564942417592"/>
 <node TEXT="France" ID="ID_1420692746" CREATED="1564942419380" MODIFIED="1564942427397"/>
@@ -115,7 +115,7 @@
 <node TEXT="https://fr.wikipedia.org/wiki/Pascaline" ID="ID_690354767" CREATED="1564942826109" MODIFIED="1564942826109" LINK="https://fr.wikipedia.org/wiki/Pascaline"/>
 </node>
 </node>
-<node TEXT="04 Le m&#xe9;tier Jacquard" FOLDED="true" ID="ID_1761363742" CREATED="1564949191966" MODIFIED="1601215766631">
+<node TEXT="04 Le m&#xe9;tier Jacquard" ID="ID_1761363742" CREATED="1564949191966" MODIFIED="1601215766631">
 <node TEXT="M&#xe9;tier &#xe0; tisser m&#xe9;canique programmable" ID="ID_1849291757" CREATED="1564949243631" MODIFIED="1564949308344"/>
 <node TEXT="Programmation par cartes perfor&#xe9;es" ID="ID_580976678" CREATED="1564949322235" MODIFIED="1564949668704"/>
 <node TEXT="France" ID="ID_1358055021" CREATED="1564949672675" MODIFIED="1564949688310"/>
@@ -154,11 +154,11 @@
 <node TEXT="https://youtu.be/BlbQsKpq3Ak" ID="ID_1749354803" CREATED="1664142631113" MODIFIED="1664142643876" LINK="https://youtu.be/BlbQsKpq3Ak"/>
 </node>
 </node>
-<node TEXT="06 Premier Programme &quot;informatique&quot; Ada Lovelace" FOLDED="true" ID="ID_176576653" CREATED="1564942096670" MODIFIED="1601215808568">
-<node TEXT="https://youtu.be/_eUOuQ5lp_0" ID="ID_1631224792" CREATED="1564942220612" MODIFIED="1564942224844"/>
+<node TEXT="06 Premier Programme &quot;informatique&quot; Ada Lovelace" ID="ID_176576653" CREATED="1564942096670" MODIFIED="1601215808568">
+<node TEXT="https://youtu.be/_eUOuQ5lp_0" ID="ID_1631224792" CREATED="1564942220612" MODIFIED="1664175671865" LINK="https://youtu.be/_eUOuQ5lp_0"/>
 <node TEXT="https://fr.wikipedia.org/wiki/Ada_Lovelace" ID="ID_1671034965" CREATED="1564942234646" MODIFIED="1564942257177"/>
 </node>
-<node TEXT="07 Trieuse d&apos;Hollerith" FOLDED="true" ID="ID_994298775" CREATED="1564953985269" MODIFIED="1601215817207">
+<node TEXT="07 Trieuse d&apos;Hollerith" ID="ID_994298775" CREATED="1564953985269" MODIFIED="1601215817207">
 <node TEXT="Automatisation des &#xe9;tudes d&#xe9;mographiques" ID="ID_1142644513" CREATED="1564954060133" MODIFIED="1564954460018"/>
 <node TEXT="D&#xe9;pouillement des recensements" ID="ID_933016899" CREATED="1564954525611" MODIFIED="1564954564538"/>
 <node TEXT="&#xc9;tats Unis" ID="ID_1050914902" CREATED="1564954606640" MODIFIED="1564954625887"/>
@@ -171,7 +171,7 @@
 <node TEXT="https://interstices.info/machines-a-calculer/" ID="ID_1045475711" CREATED="1564983952815" MODIFIED="1564983952815" LINK="https://interstices.info/machines-a-calculer/"/>
 </node>
 </node>
-<node TEXT="08 Eniac" FOLDED="true" ID="ID_718971847" CREATED="1600638669512" MODIFIED="1601215832759">
+<node TEXT="08 Eniac" ID="ID_718971847" CREATED="1600638669512" MODIFIED="1601215832759">
 <node TEXT="1945" OBJECT="java.lang.Long|1945" ID="ID_544647803" CREATED="1600639357261" MODIFIED="1600639493254"/>
 <node TEXT="" ID="ID_1604961188" CREATED="1600639498294" MODIFIED="1600639515724">
 <hook URI="Eniac.jpg" SIZE="0.5" NAME="ExternalObject"/>
