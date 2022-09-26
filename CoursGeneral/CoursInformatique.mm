@@ -619,6 +619,9 @@
 <node TEXT="Ada Lovelace" ID="ID_1852821300" CREATED="1664142661689" MODIFIED="1664142684684">
 <node TEXT="https://youtu.be/3jqgVOQfFgo" ID="ID_1123747280" CREATED="1664142698776" MODIFIED="1664142708803" LINK="https://youtu.be/3jqgVOQfFgo"/>
 </node>
+<node TEXT="Les puces &#xe9;lectroniques" ID="ID_1184338647" CREATED="1664183491720" MODIFIED="1664183505699">
+<node TEXT="https://youtu.be/JXQHgeYL60E" ID="ID_1380564339" CREATED="1664183511158" MODIFIED="1664183537904" LINK="https://youtu.be/JXQHgeYL60E"/>
+</node>
 </node>
 </node>
 </map>
