@@ -2,7 +2,7 @@
 <!--To view this file, download free mind mapping software Freeplane from http://freeplane.sourceforge.net -->
 <node TEXT="L&apos;informatique" FOLDED="false" ID="ID_719241929" CREATED="1564937450148" MODIFIED="1601216047256" STYLE="oval">
 <font SIZE="18"/>
-<hook NAME="MapStyle" zoom="0.639">
+<hook NAME="MapStyle" zoom="1.132">
     <properties edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" show_note_icons="true" fit_to_viewport="false"/>
 
 <map_styles>
@@ -67,17 +67,7 @@
 <node TEXT="Histoire" POSITION="left" ID="ID_37301723" CREATED="1566462935618" MODIFIED="1566462942415">
 <edge COLOR="#ff00ff"/>
 <node TEXT="Histoire de l&apos;Informatique" ID="ID_1170894378" CREATED="1564937600061" MODIFIED="1601282558893">
-<node TEXT="01 L&apos;&#xe9;volution de l&apos;&#xe9;criture" ID="ID_1302630743" CREATED="1662667466565" MODIFIED="1664464132015">
-<node TEXT="3200 av JC" ID="ID_147316533" CREATED="1664463525587" MODIFIED="1664463543013"/>
-<node TEXT="" ID="ID_522739483" CREATED="1662667500525" MODIFIED="1662667512812">
-<hook URI="&#xc9;volutionDeLAphabet.jpeg" SIZE="0.5" NAME="ExternalObject"/>
-</node>
-<node TEXT="https://youtu.be/3kGuN8WIGNc" ID="ID_286365932" CREATED="1662667517860" MODIFIED="1662668002213" LINK="https://youtu.be/3kGuN8WIGNc"/>
-<node TEXT="https://fr.wikipedia.org/wiki/Cun%C3%A9iforme" ID="ID_509495226" CREATED="1662667921384" MODIFIED="1662667921384" LINK="https://fr.wikipedia.org/wiki/Cun%C3%A9iforme"/>
-<node TEXT="https://fr.wikipedia.org/wiki/%C3%89criture_hi%C3%A9roglyphique_%C3%A9gyptienne" ID="ID_1104650867" CREATED="1662667767282" MODIFIED="1662667993854" LINK="https://fr.wikipedia.org/wiki/%C3%89criture_hi%C3%A9roglyphique_%C3%A9gyptienne"/>
-<node TEXT="Simultan&#xe9;it&#xe9; du Cun&#xe9;iforme d&apos;Uruk et du Hi&#xe9;roglyphique &#xe9;gyptien vers -3200 AV JC" ID="ID_1720907304" CREATED="1664139159045" MODIFIED="1664139294442"/>
-</node>
-<node TEXT="00 Les calculis" ID="ID_1076017481" CREATED="1600636094092" MODIFIED="1664464138507">
+<node TEXT="00 Les calculis" FOLDED="true" ID="ID_1076017481" CREATED="1600636094092" MODIFIED="1664464138507">
 <node TEXT="IV Mil&#xe9;naire av JV" ID="ID_194349015" CREATED="1600636513598" MODIFIED="1600636535172"/>
 <node TEXT="Syst&#xe8;me d&apos;enregistrement de l&apos;information" ID="ID_1030371806" CREATED="1600636466807" MODIFIED="1600636506461"/>
 <node TEXT="M&#xe9;sopotamie" ID="ID_1895950393" CREATED="1600636540670" MODIFIED="1600636560436"/>
@@ -89,7 +79,17 @@
 <node TEXT="https://fr.wikipedia.org/wiki/Sceau-cylindre" ID="ID_1470563026" CREATED="1664138820989" MODIFIED="1664138820989" LINK="https://fr.wikipedia.org/wiki/Sceau-cylindre"/>
 <node TEXT="https://fr.wikipedia.org/wiki/P%C3%A9riode_d%27Uruk" ID="ID_870033448" CREATED="1664138939079" MODIFIED="1664138973303" LINK="https://fr.wikipedia.org/wiki/P%C3%A9riode_d%27Uruk"/>
 </node>
-<node TEXT="02 La machine Anticyth&#xe8;re" ID="ID_786524013" CREATED="1564937669991" MODIFIED="1601215753503">
+<node TEXT="01 L&apos;&#xe9;volution de l&apos;&#xe9;criture" FOLDED="true" ID="ID_1302630743" CREATED="1662667466565" MODIFIED="1664464132015">
+<node TEXT="3200 av JC" ID="ID_147316533" CREATED="1664463525587" MODIFIED="1664463543013"/>
+<node TEXT="" ID="ID_522739483" CREATED="1662667500525" MODIFIED="1662667512812">
+<hook URI="&#xc9;volutionDeLAphabet.jpeg" SIZE="0.5" NAME="ExternalObject"/>
+</node>
+<node TEXT="https://youtu.be/3kGuN8WIGNc" ID="ID_286365932" CREATED="1662667517860" MODIFIED="1662668002213" LINK="https://youtu.be/3kGuN8WIGNc"/>
+<node TEXT="https://fr.wikipedia.org/wiki/Cun%C3%A9iforme" ID="ID_509495226" CREATED="1662667921384" MODIFIED="1662667921384" LINK="https://fr.wikipedia.org/wiki/Cun%C3%A9iforme"/>
+<node TEXT="https://fr.wikipedia.org/wiki/%C3%89criture_hi%C3%A9roglyphique_%C3%A9gyptienne" ID="ID_1104650867" CREATED="1662667767282" MODIFIED="1662667993854" LINK="https://fr.wikipedia.org/wiki/%C3%89criture_hi%C3%A9roglyphique_%C3%A9gyptienne"/>
+<node TEXT="Simultan&#xe9;it&#xe9; du Cun&#xe9;iforme d&apos;Uruk et du Hi&#xe9;roglyphique &#xe9;gyptien vers -3200 AV JC" ID="ID_1720907304" CREATED="1664139159045" MODIFIED="1664139294442"/>
+</node>
+<node TEXT="02 La machine Anticyth&#xe8;re" FOLDED="true" ID="ID_786524013" CREATED="1564937669991" MODIFIED="1601215753503">
 <node TEXT="II si&#xe8;cle av JC" ID="ID_1931945989" CREATED="1564938012102" MODIFIED="1564939846122"/>
 <node TEXT="Premier calculateur &quot;Analogique&quot;" ID="ID_1684279275" CREATED="1564937927913" MODIFIED="1564939817172"/>
 <node TEXT="Pr&#xe9;diction des &#xe9;clipses" ID="ID_1795749182" CREATED="1564938170605" MODIFIED="1564939824864"/>
@@ -104,7 +104,7 @@
 <node TEXT="https://vimeo.com/518734183" ID="ID_670980979" CREATED="1615892415629" MODIFIED="1664139357933" LINK="https://vimeo.com/518734183"/>
 </node>
 </node>
-<node TEXT="03 La machine de Blaise Pascal" ID="ID_1431347576" CREATED="1564938244810" MODIFIED="1601215759088">
+<node TEXT="03 La machine de Blaise Pascal" FOLDED="true" ID="ID_1431347576" CREATED="1564938244810" MODIFIED="1601215759088">
 <node TEXT="1645" OBJECT="java.lang.Long|1645" ID="ID_1791314953" CREATED="1664463392577" MODIFIED="1664463397232"/>
 <node TEXT="La Pascaline" ID="ID_1299791136" CREATED="1564941520273" MODIFIED="1564942389445"/>
 <node TEXT="Premi&#xe8;re machine &#xe0; calculer" ID="ID_314078983" CREATED="1564942373693" MODIFIED="1564942417592"/>
@@ -115,10 +115,10 @@
 </node>
 <node TEXT="liens" ID="ID_1350158090" CREATED="1564942807491" MODIFIED="1564942888715">
 <node TEXT="https://fr.wikipedia.org/wiki/Pascaline" ID="ID_690354767" CREATED="1564942826109" MODIFIED="1564942826109" LINK="https://fr.wikipedia.org/wiki/Pascaline"/>
-<node TEXT="https://youtu.be/KfHD30OQqOo" ID="ID_1904568928" CREATED="1664463739238" MODIFIED="1664463751781" LINK="https://youtu.be/KfHD30OQqOo"/>
+<node TEXT="https://youtu.be/GX4RQK__fQc" ID="ID_1433885831" CREATED="1665399668844" MODIFIED="1665399678740" LINK="https://youtu.be/GX4RQK__fQc"/>
 </node>
 </node>
-<node TEXT="04 Le m&#xe9;tier Jacquard" ID="ID_1761363742" CREATED="1564949191966" MODIFIED="1601215766631">
+<node TEXT="04 Le m&#xe9;tier Jacquard" FOLDED="true" ID="ID_1761363742" CREATED="1564949191966" MODIFIED="1601215766631">
 <node TEXT="1801" OBJECT="java.lang.Long|1801" ID="ID_1892340036" CREATED="1564949693139" MODIFIED="1564949704368"/>
 <node TEXT="M&#xe9;tier &#xe0; tisser m&#xe9;canique programmable" ID="ID_1849291757" CREATED="1564949243631" MODIFIED="1564949308344"/>
 <node TEXT="Programmation par cartes perfor&#xe9;es" ID="ID_580976678" CREATED="1564949322235" MODIFIED="1564949668704"/>
@@ -132,7 +132,7 @@
 <node TEXT="https://youtu.be/KfHD30OQqOo" ID="ID_933871800" CREATED="1664463285954" MODIFIED="1664463298408" LINK="https://youtu.be/KfHD30OQqOo"/>
 </node>
 </node>
-<node TEXT="05 La Machine analytique de Charles Babbage" ID="ID_698535602" CREATED="1564939904838" MODIFIED="1601215794047">
+<node TEXT="05 La Machine analytique de Charles Babbage" FOLDED="true" ID="ID_698535602" CREATED="1564939904838" MODIFIED="1601215794047">
 <node TEXT="1834" OBJECT="java.lang.Long|1834" ID="ID_250034742" CREATED="1564940981039" MODIFIED="1564941381954"/>
 <node TEXT="Premier ordinateur &quot;M&#xe9;canique&quot;" ID="ID_805850136" CREATED="1564940699153" MODIFIED="1564941360550"/>
 <node TEXT="M&#xe9;moire, Calaculateur, Imprimante" ID="ID_26103140" CREATED="1564940802045" MODIFIED="1564941368251"/>
@@ -161,9 +161,9 @@
 </node>
 <node TEXT="06 Premier Programme &quot;informatique&quot; Ada Lovelace" ID="ID_176576653" CREATED="1564942096670" MODIFIED="1601215808568">
 <node TEXT="https://youtu.be/_eUOuQ5lp_0" ID="ID_1631224792" CREATED="1564942220612" MODIFIED="1664175671865" LINK="https://youtu.be/_eUOuQ5lp_0"/>
-<node TEXT="https://fr.wikipedia.org/wiki/Ada_Lovelace" ID="ID_1671034965" CREATED="1564942234646" MODIFIED="1564942257177"/>
+<node TEXT="https://fr.wikipedia.org/wiki/Ada_Lovelace" ID="ID_1671034965" CREATED="1564942234646" MODIFIED="1665392059239" LINK="https://fr.wikipedia.org/wiki/Ada_Lovelace"/>
 </node>
-<node TEXT="07 Trieuse d&apos;Hollerith" ID="ID_994298775" CREATED="1564953985269" MODIFIED="1601215817207">
+<node TEXT="07 Trieuse d&apos;Hollerith" FOLDED="true" ID="ID_994298775" CREATED="1564953985269" MODIFIED="1601215817207">
 <node TEXT="1890" OBJECT="java.lang.Long|1890" ID="ID_1330438065" CREATED="1564954627674" MODIFIED="1564954646286"/>
 <node TEXT="Automatisation des &#xe9;tudes d&#xe9;mographiques" ID="ID_1142644513" CREATED="1564954060133" MODIFIED="1564954460018"/>
 <node TEXT="D&#xe9;pouillement des recensements" ID="ID_933016899" CREATED="1564954525611" MODIFIED="1564954564538"/>
@@ -176,13 +176,13 @@
 <node TEXT="https://interstices.info/machines-a-calculer/" ID="ID_1045475711" CREATED="1564983952815" MODIFIED="1564983952815" LINK="https://interstices.info/machines-a-calculer/"/>
 </node>
 </node>
-<node TEXT="08 Eniac" ID="ID_718971847" CREATED="1600638669512" MODIFIED="1601215832759">
+<node TEXT="08 Eniac" FOLDED="true" ID="ID_718971847" CREATED="1600638669512" MODIFIED="1601215832759">
 <node TEXT="1945" OBJECT="java.lang.Long|1945" ID="ID_544647803" CREATED="1600639357261" MODIFIED="1600639493254"/>
 <node TEXT="" ID="ID_1604961188" CREATED="1600639498294" MODIFIED="1600639515724">
 <hook URI="Eniac.jpg" SIZE="0.5" NAME="ExternalObject"/>
 </node>
 </node>
-<node TEXT="09 PDP-11" ID="ID_1009212950" CREATED="1600639055916" MODIFIED="1601215846775">
+<node TEXT="09 PDP-11" FOLDED="true" ID="ID_1009212950" CREATED="1600639055916" MODIFIED="1601215846775">
 <node TEXT="01/10/1971" OBJECT="org.freeplane.features.format.FormattedDate|1971-10-01T00:00+0100|date" ID="ID_1568411674" CREATED="1601214777360" MODIFIED="1601214785534"/>
 <node TEXT="16 bits" ID="ID_1618730342" CREATED="1601214765719" MODIFIED="1601214772984"/>
 <node TEXT="Digital Equipement Corporation" ID="ID_1989715032" CREATED="1601214793922" MODIFIED="1601214811185"/>
@@ -192,12 +192,15 @@
 </node>
 <node TEXT="Espace d&apos;adressage 16, 18 ou 22 bits selon version" ID="ID_1692361383" CREATED="1601215049512" MODIFIED="1601215071956"/>
 </node>
-<node TEXT="10 Le PC" ID="ID_1957228454" CREATED="1601215174656" MODIFIED="1601282408752">
+<node TEXT="10 Le PC" FOLDED="true" ID="ID_1957228454" CREATED="1601215174656" MODIFIED="1601282408752">
 <node TEXT="1981" OBJECT="java.lang.Long|1981" ID="ID_468784578" CREATED="1601215185459" MODIFIED="1601215189556"/>
 <node TEXT="&#xb5; intel 8088, 1,77Mhz RAM 16ko" ID="ID_165455660" CREATED="1601215230370" MODIFIED="1601215346524"/>
 <node TEXT="" ID="ID_1791667859" CREATED="1601215369714" MODIFIED="1601215380647">
 <hook URI="IBM_PC_5150.jpg" SIZE="0.5859375" NAME="ExternalObject"/>
 </node>
+</node>
+<node TEXT="11 Le smartphone" ID="ID_466860542" CREATED="1665400577942" MODIFIED="1665400590019">
+<node TEXT="https://youtu.be/VQKMoT-6XSg" ID="ID_637832733" CREATED="1665400624383" MODIFIED="1665400694920" LINK="https://youtu.be/VQKMoT-6XSg"/>
 </node>
 <node TEXT="https://youtu.be/4APvCcFRkxc" ID="ID_945923735" CREATED="1664141303738" MODIFIED="1664141331149" LINK="https://youtu.be/4APvCcFRkxc"/>
 </node>
@@ -629,6 +632,10 @@
 </node>
 <node TEXT="Mus&#xe9;e des Arts et M&#xe9;tiers" ID="ID_116980703" CREATED="1664464215946" MODIFIED="1664464231439">
 <node TEXT="https://www.youtube.com/c/Mus%C3%A9edesArtsetM%C3%A9tiersParis/videos" ID="ID_1036809743" CREATED="1664464233970" MODIFIED="1664464245009" LINK="https://www.youtube.com/c/Mus%C3%A9edesArtsetM%C3%A9tiersParis/videos"/>
+</node>
+<node TEXT="Administration Syst&#xe8;me" ID="ID_1210887987" CREATED="1665400759768" MODIFIED="1665400797907">
+<node TEXT="https://github.com/michaellaunay/CoursGNULinux" ID="ID_397581466" CREATED="1665400807424" MODIFIED="1665400852145" LINK="https://github.com/michaellaunay/CoursGNULinux"/>
+<node TEXT="https://www.youtube.com/c/xavki-linux" ID="ID_465596666" CREATED="1665400864458" MODIFIED="1665400935370" LINK="https://www.youtube.com/c/xavki-linux"/>
 </node>
 </node>
 </node>
